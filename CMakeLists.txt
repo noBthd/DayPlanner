@@ -4,7 +4,7 @@ project(DayPlanner)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_PREFIX_PATH "/opt/homebrew/opt/qt/lib/cmake/Qt6")  
-set(nlohmann_json_DIR "/.vcpkg/vcpkg/installed/arm64-osx/share/nlohmann_json/nlohmann_jsonConfig.cmake")
+# set(nlohmann_json_DIR "/.vcpkg/vcpkg/installed/arm64-osx/share/nlohmann_json/nlohmann_jsonConfig.cmake")
 
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Qml QmlIntegration)
 # find_package(fmt CONFIG REQUIRED)
@@ -25,7 +25,7 @@ add_executable(DayPlanner
 )
 
 qt_add_resources(RESOURCES 
-    ui/dayPlanner.qrc
+    ui/main.qrc
 )
 
 target_sources(DayPlanner PRIVATE ${RESOURCES})
@@ -34,6 +34,8 @@ target_include_directories(DayPlanner PRIVATE inc)
 
 target_link_libraries(DayPlanner 
     PRIVATE 
+        Qt6::Core
+        Qt6::Gui
         Qt6::Widgets 
         Qt6::Qml 
         Qt6::QmlIntegration

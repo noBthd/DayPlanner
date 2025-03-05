@@ -1,8 +1,13 @@
-#include <iostream>
 #include <QApplication>
+#include <QQmlApplicationEngine>
 
-int main() {
-    std::cout << "test";
+int main(int argc, char *argv[]) {
+    // init application with graph engine
+    QApplication app(argc, argv);
 
-    return 0;
+    QQmlApplicationEngine engine;
+    engine.load(QUrl(QStringLiteral("qrc:/ui/main.qml")));
+    
+
+    return app.exec();
 }
