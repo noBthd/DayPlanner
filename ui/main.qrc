@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/ui">
         <file>main.qml</file>
-        <file>components/reg.qml</file>
+        <file>components/Reg.qml</file>
     </qresource>
 </RCC>
