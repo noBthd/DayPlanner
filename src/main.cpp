@@ -18,20 +18,20 @@ int main(int argc, char *argv[]) {
         PGConnection db;
 
         if (db.connection()) {
-            qDebug() << "db connected succesfully";
+            qDebug() << "db connected succesfully\n";
         } else {
-            qDebug() << "failed to connect db";
+            qDebug() << "failed to connect db\n";
             return 1;
         }
 
         PGresult* res = PQexec(db.connection().get(), "SELECT version();") ;
         if (PQresultStatus(res) == PGRES_TUPLES_OK) {
-            qDebug() << "PostgreSQL version: " << PQgetvalue(res, 0, 0);
+            qDebug() << "PostgreSQL version: " << PQgetvalue(res, 0, 0) << "\n";
         } else {
-            qDebug() << "Query failed: " << PQerrorMessage(db.connection().get());
+            qDebug() << "Query failed: " << PQerrorMessage(db.connection().get()) << "\n";
         }
     } catch (const std::exception& e){
-        qDebug() << "Exception: " << e.what();
+        qDebug() << "Exception: " << e.what() << "\n";
         return 1;
     }
 
