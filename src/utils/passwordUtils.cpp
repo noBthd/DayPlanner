@@ -2,16 +2,17 @@
 #include <cctype>
 #include <string>
 
-Password::Password(std::string password) {
-    m_password = password;
+Password::Password(std::string password) 
+    : m_password(password) {
+
     hashPassword(password);
 }
 
 // password strongness checker
-bool Password::isStrong(std::string password) {
+bool Password::isStrong() {
     if (
-        password.length() > 8 &&
-        hasDigit(password) > 4
+        m_password.length() > 8 &&
+        hasDigit(m_password) > 4
     ) {
         return true;
     }
@@ -34,5 +35,5 @@ int Password::hasDigit(std::string password) {
 // password hash func
 void Password::hashPassword(std::string password) {
     // hashing and returning password with Md5 method
-    password = QCryptographicHash::hash(password, QCryptographicHash::Md5);
+    hashed_password = QCryptographicHash::hash(QByteArray::fromStdString(password), QCryptographicHash::Md5);
 } 

@@ -5,6 +5,8 @@
 
 // #include "libpq-fe.h"
 #include "sql/pgconn.h"
+#include "sql/user_query.h"
+#include "user.h"
 
 
 int main(int argc, char *argv[]) {
@@ -24,19 +26,17 @@ int main(int argc, char *argv[]) {
             qDebug() << "failed to connect db\n";
             return 1;
         }
-
-        // PGresult* res = PQexec(db.connection().get(), "SELECT version();") ;
-        // if (PQresultStatus(res) == PGRES_TUPLES_OK) {
-        //     qDebug() << "PostgreSQL version: " << PQgetvalue(res, 0, 0) << "\n";
-        // } else {
-        //     qDebug() << "Query failed: " << PQerrorMessage(db.connection().get()) << "\n";
-        // }
     } catch (const std::exception& e){
         qDebug() << "Exception: " << e.what() << "\n";
         return 1;
     }
 
-    
+    Query query(db.connection().get());
+    User user("admin", "admin", &query);
+    // user.getHash();
+    user.login();
+
+    // qDebug() << user.isAdmin();
 
     return app.exec();
 }

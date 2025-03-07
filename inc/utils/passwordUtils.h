@@ -8,13 +8,15 @@
 class Password {
     public:
         Password(std::string);
-        const QByteArray password;
-        bool isStrong(std::string);
+
+        QByteArray hashed_password;
+
+        bool isStrong();
 
     private:
-        void hashPassword(std::string);
-        int hasDigit(std::string);
         std::string m_password;
+        int hasDigit(std::string);
+        void hashPassword(std::string);
 };
 
 #endif
