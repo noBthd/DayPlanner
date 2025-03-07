@@ -1,9 +1,10 @@
-#include "passwordUtils.h"
+#include "utils/passwordUtils.h"
 #include <cctype>
 #include <string>
 
 Password::Password(std::string password) {
-     m_password = this->password;
+    m_password = password;
+    hashPassword(password);
 }
 
 // password strongness checker

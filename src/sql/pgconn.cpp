@@ -1,4 +1,4 @@
-#include "pgconn.h"
+#include "sql/pgconn.h"
 
 PGConnection::PGConnection() {
     m_connection.reset( PQsetdbLogin(m_dbhost.c_str(), std::to_string(m_dbport).c_str(), nullptr, nullptr, m_dbname.c_str(), m_dbuser.c_str(), m_dbpass.c_str()), &PQfinish );

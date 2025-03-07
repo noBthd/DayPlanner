@@ -13,15 +13,17 @@ find_package(PostgreSQL REQUIRED)
 
 set(SOURCES
     src/main.cpp
-    src/reg.cpp
-    src/passwordUtils.cpp
-    src/pgconn.cpp
+    src/reg_log/reg.cpp
+    src/reg_log/log.cpp
+    src/utils/passwordUtils.cpp
+    src/sql/pgconn.cpp
 )
 
 set(INCLUDES
-    inc/reg.h
-    inc/passwordUtils.h
-    inc/pgconn.h
+    inc/reg_log/reg.h
+    inc/reg_log/log.h
+    inc/utils/passwordUtils.h
+    inc/sql/pgconn.h
 )
 
 add_executable(DayPlanner 

@@ -3,8 +3,9 @@
 #include <QDebug>
 #include <exception>
 
-#include "libpq-fe.h"
-#include "pgconn.h"
+// #include "libpq-fe.h"
+#include "sql/pgconn.h"
+
 
 int main(int argc, char *argv[]) {
     // init application with graph engine
@@ -14,9 +15,9 @@ int main(int argc, char *argv[]) {
     engine.load(QUrl(QStringLiteral("qrc:/ui/main.qml"))); 
 
     // db conn
-    try {
-        PGConnection db;
+    PGConnection db;
 
+    try {
         if (db.connection()) {
             qDebug() << "db connected succesfully\n";
         } else {
@@ -24,16 +25,18 @@ int main(int argc, char *argv[]) {
             return 1;
         }
 
-        PGresult* res = PQexec(db.connection().get(), "SELECT version();") ;
-        if (PQresultStatus(res) == PGRES_TUPLES_OK) {
-            qDebug() << "PostgreSQL version: " << PQgetvalue(res, 0, 0) << "\n";
-        } else {
-            qDebug() << "Query failed: " << PQerrorMessage(db.connection().get()) << "\n";
-        }
+        // PGresult* res = PQexec(db.connection().get(), "SELECT version();") ;
+        // if (PQresultStatus(res) == PGRES_TUPLES_OK) {
+        //     qDebug() << "PostgreSQL version: " << PQgetvalue(res, 0, 0) << "\n";
+        // } else {
+        //     qDebug() << "Query failed: " << PQerrorMessage(db.connection().get()) << "\n";
+        // }
     } catch (const std::exception& e){
         qDebug() << "Exception: " << e.what() << "\n";
         return 1;
     }
+
+    
 
     return app.exec();
 }
