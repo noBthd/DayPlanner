@@ -3,8 +3,18 @@
 
 #include <string>
 #include <QCryptographicHash>
+#include <string>
 
-bool isStrong(std::string);
-QByteArray hashPassword(std::string);
+class Password {
+    public:
+        Password(std::string);
+        const QByteArray password;
+        void hashPassword(std::string);
+        bool isStrong(std::string);
+
+    private:
+        int hasDigit(std::string);
+        std::string m_password;
+};
 
 #endif
