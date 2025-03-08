@@ -17,6 +17,7 @@ User::User (std::string username, std::string str_password, Query* query)
 }
 
 bool User::regUser() {
+    m_query->createUser(m_username, m_password, m_admin);
     return false;
 }
 

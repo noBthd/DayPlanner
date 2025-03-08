@@ -1,10 +1,29 @@
 #include "sql/user_query.h"
 #include "libpq-fe.h"
+#include "utils/passwordUtils.h"
 #include <string>
 
 Query::Query(PGconn* conn) {
     m_conn = conn;
 };
+
+void Query::createUser(std::string username, Password password, bool admin) {
+    // std::string query = "INSERT INTO users(username, password, is_admin) VALUES ($1, $2, $3)";
+
+    // const char* params[3];
+    // params[0] = username.c_str();
+    // params[1] = password.hashed_password.toStdString().c_str();
+    // params[2] = admin ? "true" : "false";
+
+    // PGresult* res = PQexecParams(m_conn, query.c_str(), 3, nullptr, params, nullptr, nullptr, 0);
+    // if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+    //     qDebug() << "Query failed: " << PQerrorMessage(m_conn) << "\n";
+    //     PQclear(res);
+    //     return;
+    // }
+
+    // PQclear(res);
+}
 
 QByteArray Query::getUserPassword(std::string username) {
     std::string query = "SELECT password FROM users WHERE username = '" + username + "';";

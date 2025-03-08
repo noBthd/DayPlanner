@@ -2,6 +2,7 @@
 #define USER_QUERY_H
 
 #include "libpq-fe.h"
+#include "utils/passwordUtils.h"
 #include <libpq-fe.h>
 #include <QDebug>
 #include <string>
@@ -13,6 +14,7 @@ class Query {
         std::string getUserID(std::string);
         QByteArray getUserPassword(std::string);
         PGresult* getUserByID(int);
+        void createUser(std::string, Password, bool);
         bool userExist(std::string);
         bool isAdmin(std::string);
     private:
