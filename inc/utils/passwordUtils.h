@@ -9,12 +9,12 @@ class Password {
     public:
         Password(std::string);
 
-        QByteArray hashed_password;
+        std::string hashed_password;
+        std::string m_password;
 
         bool isStrong();
 
     private:
-        std::string m_password;
         int hasDigit(std::string);
         void hashPassword(std::string);
 };

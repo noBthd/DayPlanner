@@ -12,7 +12,7 @@ class Query {
         Query(PGconn*);
 
         std::string getUserID(std::string);
-        QByteArray getUserPassword(std::string);
+        std::string getUserPassword(std::string);
         PGresult* getUserByID(int);
         void createUser(std::string, Password, bool);
         bool userExist(std::string);

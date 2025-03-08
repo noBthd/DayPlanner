@@ -35,5 +35,5 @@ int Password::hasDigit(std::string password) {
 // password hash func
 void Password::hashPassword(std::string password) {
     // hashing and returning password with Md5 method
-    hashed_password = QCryptographicHash::hash(QByteArray::fromStdString(password), QCryptographicHash::Md5);
+    hashed_password = QCryptographicHash::hash(QByteArray::fromStdString(password), QCryptographicHash::Md5).toHex();
 } 

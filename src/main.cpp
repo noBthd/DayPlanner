@@ -33,8 +33,9 @@ int main(int argc, char *argv[]) {
 
     Query query(db.connection().get());
     User user("admin", "admin", &query);
-    // user.getHash();
     user.login();
+    // user.getHash();
+    // user.regUser();
 
     // qDebug() << user.isAdmin();
 

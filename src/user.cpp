@@ -31,7 +31,7 @@ bool User::login() {
         return false;
     }
 
-    QByteArray storedHash = m_query->getUserPassword(m_username);
+    std::string storedHash = m_query->getUserPassword(m_username);
     qDebug() << "STORED HASH: " << storedHash << "\n";
     qDebug() << "PASSWORD HASH: " << m_password.hashed_password << "\n";
 
