@@ -32,10 +32,10 @@ int main(int argc, char *argv[]) {
     }
 
     Query query(db.connection().get());
-    User user("admin", "admin", &query);
+    User user("vlad", "vlad13373", &query);
+    // user.regUser();
     user.login();
     // user.getHash();
-    // user.regUser();
 
     // qDebug() << user.isAdmin();
 

@@ -11,8 +11,8 @@ Password::Password(std::string password)
 // password strongness checker
 bool Password::isStrong() {
     if (
-        m_password.length() > 8 &&
-        hasDigit(m_password) > 4
+        m_password.length() >= 8 &&
+        hasDigit(m_password) >= 4
     ) {
         return true;
     }
