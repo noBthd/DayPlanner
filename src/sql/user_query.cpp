@@ -11,7 +11,10 @@ void Query::createUser(std::string username, Password password, bool admin) {
     std::string str_admin = admin ? "true" : "false";
     std::string query = "INSERT INTO users(username, password, is_admin) VALUES ('" + username + "', '" + password.hashed_password + "', '" + str_admin + "')";
 
-    //! ADD USER EXISTENCE CHECK
+    if (userExist(username)) {
+        qDebug() << "User already exists";
+        return;
+    }
 
     if (!password.isStrong()) {
         qDebug() << "Password isn't strong enough";
@@ -47,12 +50,6 @@ std::string Query::getUserPassword(std::string username) {
     }
 
     std::string hash = PQgetvalue(res, 0, 0);
-    // std::string hashstr = (PQgetvalue(res, 0, 0));
-    // qDebug() << "HASH FROM DB STR: " << hashstr << "\n";
-
-    // QString hashStr = QString::fromUtf8(PQgetvalue(res, 0, 0)); // Получаем строку хеша
-    // QByteArray hash = hashStr.toUtf8();
-    // qDebug() << "HEX HASH DB: " << hash.toHex();
     PQclear(res);
 
     return hash;

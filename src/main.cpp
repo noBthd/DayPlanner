@@ -2,6 +2,9 @@
 #include <QQmlApplicationEngine>
 #include <QDebug>
 #include <exception>
+#include <QObject>
+#include <QQuickView>
+#include <QQuickItem>
 
 // #include "libpq-fe.h"
 #include "sql/pgconn.h"
@@ -35,9 +38,16 @@ int main(int argc, char *argv[]) {
     User user("vlad", "vlad13373", &query);
     // user.regUser();
     user.login();
-    // user.getHash();
 
-    // qDebug() << user.isAdmin();
+    // QQuickView* myObject;
+    // QQuickItem* object = myObject->rootObject();
+    // QObject textin = object->findChild<QObject>("loginInput");
+
+
+    // QString input = textin.property("text").toString();
+    // qDebug() << "LOGIN INPUT: " << input << " \n";
+    
+
 
     return app.exec();
 }
