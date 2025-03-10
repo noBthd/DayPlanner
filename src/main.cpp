@@ -39,15 +39,6 @@ int main(int argc, char *argv[]) {
     // user.regUser();
     user.login();
 
-    // QQuickView* myObject;
-    // QQuickItem* object = myObject->rootObject();
-    // QObject textin = object->findChild<QObject>("loginInput");
-
-
-    // QString input = textin.property("text").toString();
-    // qDebug() << "LOGIN INPUT: " << input << " \n";
-    
-
 
     return app.exec();
 }
