@@ -5,6 +5,7 @@
 #include <QObject>
 #include <QQuickView>
 #include <QQuickItem>
+#include <QQmlProperty>
 
 // #include "libpq-fe.h"
 #include "sql/pgconn.h"
@@ -37,7 +38,16 @@ int main(int argc, char *argv[]) {
     Query query(db.connection().get());
     User user("vlad", "vlad13373", &query);
     // user.regUser();
-    user.login();
+    // user.login();
+
+    QQuickView view;
+    view.setSource(QUrl(QStringLiteral("qrc:/ui/components/Reg.qml")));
+    // view.show();
+    QObject *object = view.rootObject();
+    auto* reg = object->findChild<QObject*>("loginInput");
+    if (reg) {
+        qDebug() << "REG: " << reg->property("width");
+    }
 
 
     return app.exec();

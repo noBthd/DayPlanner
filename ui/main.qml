@@ -12,7 +12,7 @@ ApplicationWindow {
     height: 750
 
     color: "#15191E"
-    
+
     Reg {
         anchors.centerIn: parent
     }
