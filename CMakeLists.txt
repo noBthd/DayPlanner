@@ -26,6 +26,7 @@ set(SOURCES
     src/sql/pgconn.cpp
     src/sql/user_query.cpp
     src/user.cpp
+    src/reg_handler.cpp
 )
 
 set(INCLUDES
@@ -33,6 +34,7 @@ set(INCLUDES
     inc/sql/pgconn.h
     inc/sql/user_query.h
     inc/user.h
+    inc/reg_handler.h
 )
 
 add_executable(DayPlanner 

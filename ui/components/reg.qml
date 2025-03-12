@@ -60,6 +60,7 @@ Rectangle {
 
             TextInput {
                 id: passwordInput
+                objectName: "passwordInput"
                 anchors.centerIn: parent
 
                 height: 20
