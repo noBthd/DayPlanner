@@ -1,39 +1,31 @@
 #include "reg_handler.h"
+#include "sql/pgconn.h"
+#include "sql/user_query.h"
 
-RegistrationHandler::RegistrationHandler(QObject* parent, Query* query) 
-    : QObject(parent), m_query(query) {
-
-}
-
-void RegistrationHandler::getLoginAndPassword() {
-    QQuickView view;
-    view.setSource(QUrl(QStringLiteral("qrc:/ui/components/Reg.qml")));
-    QObject* object = view.rootObject();
-    
-    QObject* obj_login = object->findChild<QObject*>("loginInput");
-    QObject* obj_password = object->findChild<QObject*>("passwordInput");
-    if (!obj_login || !obj_password) {
-        qDebug() << "Failed to find object";
-        return;
+RegHandler::RegHandler(QObject* parent) 
+    : QObject(parent) {
+    try {
+        m_db = std::make_unique<PGConnection>(); 
+        if (m_db->connection()) {
+            qDebug() << "m_db connected successfully";
+        } else {
+            qDebug() << "Failed to connect m_db";
+        }
+    } catch (const std::exception& e) {
+        qDebug() << "Exception: " << e.what();
     }
-    
-    
-    m_login = obj_login->property("text").toString().toStdString();
-    m_password = obj_password->property("text").toString().toStdString();  
+
+    m_query = std::make_unique<Query>(m_db->connection().get());
 }
 
-User* RegistrationHandler::registrationClick() {
-    getLoginAndPassword();
-    User* user = new User(m_login, m_password, m_query);
-    user->login();
+RegHandler::~RegHandler() {}
 
-    return user;
+void RegHandler::regUser(const QString& login, const QString& password) {
+    m_user = std::make_unique<User>(login.toStdString(), password.toStdString(), m_query.get());
+    m_user->regUser();
 }
 
-User* RegistrationHandler::loginClick() {
-    getLoginAndPassword();
-    User* user = new User(m_login, m_password, m_query);
-    user->regUser();
-
-    return user;
+void RegHandler::loginUser(const QString& login, const QString& password) {
+    m_user = std::make_unique<User>(login.toStdString(), password.toStdString(), m_query.get());
+    m_user->login();
 }

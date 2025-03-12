@@ -6,25 +6,24 @@
 #include <QQuickView>
 #include <QQuickItem>
 #include <QQmlProperty>
-#include <string>
+#include <QQmlApplicationEngine>
 
-#include "user.h"
 #include "sql/user_query.h"
+#include "user.h"
+#include "sql/pgconn.h"
 
-class RegistrationHandler : public QObject {
+class RegHandler : public QObject {
         Q_OBJECT
     public:
-        explicit RegistrationHandler(QObject* parent = nullptr, Query* = nullptr);
+        explicit RegHandler(QObject* parent = nullptr); 
+        ~RegHandler();
 
-        Q_INVOKABLE User* registrationClick();
-        Q_INVOKABLE User* loginClick();
-
+        Q_INVOKABLE void regUser(const QString&, const QString&);
+        Q_INVOKABLE void loginUser(const QString&, const QString&);
     private:
-        std::string m_login;
-        std::string m_password;
-        Query* m_query;
-
-        void getLoginAndPassword();
+        std::unique_ptr<User> m_user;
+        std::unique_ptr<Query> m_query;
+        std::unique_ptr<PGConnection> m_db;
 };
 
 #endif
