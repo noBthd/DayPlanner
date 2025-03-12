@@ -22,13 +22,14 @@ void Query::createUser(std::string username, Password password, bool admin) {
     }
 
     PGresult* res = PQexec(m_conn, query.c_str());
-    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+    if (PQresultStatus(res) == PGRES_TUPLES_OK) {
         qDebug() << "Query failed: " << PQerrorMessage(m_conn);
         PQclear(res);
         return;
     }
 
     qDebug() << "User created succesfully";
+    PQclear(res);
 
     return;
 }

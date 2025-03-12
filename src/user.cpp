@@ -16,13 +16,13 @@ User::User (std::string username, std::string str_password, Query* query)
     }
 }
 
+void User::getHash() {
+    qDebug() << m_password.hashed_password << "\n";
+}
+
 bool User::regUser() {
     m_query->createUser(m_username, m_password, m_admin);
     return false;
-}
-
-void User::getHash() {
-    qDebug() << m_password.hashed_password << "\n";
 }
 
 bool User::login() {
@@ -32,8 +32,8 @@ bool User::login() {
     }
 
     std::string storedHash = m_query->getUserPassword(m_username);
-    qDebug() << "STORED HASH: " << storedHash << "\n";
-    qDebug() << "PASSWORD HASH: " << m_password.hashed_password << "\n";
+    // qDebug() << "STORED HASH: " << storedHash << "\n";
+    // qDebug() << "PASSWORD HASH: " << m_password.hashed_password << "\n";
 
     if (m_password.hashed_password != storedHash) {
         qDebug() << "Password isn't right\n";

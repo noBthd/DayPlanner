@@ -37,7 +37,10 @@ set(INCLUDES
     inc/reg_handler.h
 )
 
+qt_wrap_cpp(MOC_SOURCES ${INCLUDES})
+
 add_executable(DayPlanner 
+    ${MOC_SOURCES}
     ${SOURCES}
     ${INCLUDES}
 )

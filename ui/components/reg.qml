@@ -92,8 +92,7 @@ Rectangle {
             Button {
                 id: logBtn
                 text: "Login"
-                // onClicked: 
-            
+                onClicked: regHandler.loginUser(loginInput.text, passwordInput.text)
                 height: 50
                 width: 120
             }
