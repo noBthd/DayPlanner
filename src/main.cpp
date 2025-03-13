@@ -40,9 +40,6 @@ int main(int argc, char *argv[]) {
         qDebug() << "Exception: " << e.what() << "\n";
         return 1;
     }
-    
-    // Query query(db.connection().get());
-    // User user("vlad", "vlad13373", &query);
 
     return app.exec();
 }
