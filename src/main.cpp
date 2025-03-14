@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
     } catch (const std::exception& e){
         qDebug() << "Exception: " << e.what() << "\n";
         return 1;
-    }
+    } //
 
     return app.exec();
 }
