@@ -22,16 +22,28 @@ RegHandler::~RegHandler() {}
 
 void RegHandler::regUser(const QString& login, const QString& password) {
     m_user = std::make_unique<User>(login.toStdString(), password.toStdString(), m_query.get());
+
     if (m_user->regUser()) {
-        // m_engine->load(QUrl(QStringLiteral("qrc:/ui/newwin.qml")));
-        emit changePage("qrc:/ui/newwin.qml");
+        QObject *rootObject = m_engine->rootObjects().first();
+        QQuickWindow *window = qobject_cast<QQuickWindow *>(rootObject);
+
+        if (window) {
+            window->close();
+        }
+        m_engine->load(QUrl(QStringLiteral("qrc:/ui/newwin.qml")));
     }
 }
 
 void RegHandler::loginUser(const QString& login, const QString& password) {
     m_user = std::make_unique<User>(login.toStdString(), password.toStdString(), m_query.get());
+
     if (m_user->login()) {
-        // m_engine->load(QUrl(QStringLiteral("qrc:/ui/newwin.qml")));
-        emit changePage("qrc:/ui/newwin.qml");
+        QObject *rootObject = m_engine->rootObjects().first();
+        QQuickWindow *window = qobject_cast<QQuickWindow *>(rootObject);
+
+        if (window) {
+            window->close();
+        }
+        m_engine->load(QUrl(QStringLiteral("qrc:/ui/newwin.qml")));
     }
 }

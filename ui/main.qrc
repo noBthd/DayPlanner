@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/ui">
-        <file>main.qml</file>
+        <file>login.qml</file>
         <file>newwin.qml</file>
         <file>components/Reg.qml</file>
     </qresource>

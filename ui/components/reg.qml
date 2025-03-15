@@ -84,17 +84,20 @@ Rectangle {
             Button {
                 id: regBtn
                 text: "Registrate"
-                onClicked: regHandler.regUser(loginInput.text, passwordInput.text)
-
                 height: 50
                 width: 120
+                onClicked: {
+                    regHandler.regUser(loginInput.text, passwordInput.text)
+                }
             }
             Button {
                 id: logBtn
                 text: "Login"
-                onClicked: regHandler.loginUser(loginInput.text, passwordInput.text)
                 height: 50
                 width: 120
+                onClicked: {
+                    regHandler.loginUser(loginInput.text, passwordInput.text)
+                }
             }
         }
     }
