@@ -22,7 +22,7 @@ ApplicationWindow {
     Connections {
         target: regHandler
         function onChangePage(url) {
-            pageLoader.source = url;
+            pl.source = url;
         }
     }
 
