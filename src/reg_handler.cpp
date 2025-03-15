@@ -27,5 +27,8 @@ void RegHandler::regUser(const QString& login, const QString& password) {
 
 void RegHandler::loginUser(const QString& login, const QString& password) {
     m_user = std::make_unique<User>(login.toStdString(), password.toStdString(), m_query.get());
-    m_user->login();
+    if (m_user->login()) {
+        QQmlApplicationEngine *engine = new QQmlApplicationEngine;
+        engine->load(QUrl(QStringLiteral("qrc:/ui/newwin.qml")));
+    }
 }
