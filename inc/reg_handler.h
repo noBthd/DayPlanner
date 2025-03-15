@@ -7,6 +7,7 @@
 #include <QQuickItem>
 #include <QQmlProperty>
 #include <QQmlApplicationEngine>
+#include <memory>
 
 #include "sql/user_query.h"
 #include "user.h"
@@ -14,13 +15,17 @@
 
 class RegHandler : public QObject {
         Q_OBJECT
+    signals:
+        void changePage(const QString& url);
+        
     public:
-        explicit RegHandler(QObject* parent = nullptr); 
+        explicit RegHandler(QQmlApplicationEngine* = nullptr, QObject* parent = nullptr); 
         ~RegHandler();
 
         Q_INVOKABLE void regUser(const QString&, const QString&);
         Q_INVOKABLE void loginUser(const QString&, const QString&);
     private:
+        QQmlApplicationEngine* m_engine;
         std::unique_ptr<User> m_user;
         std::unique_ptr<Query> m_query;
         std::unique_ptr<PGConnection> m_db;

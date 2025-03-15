@@ -2,8 +2,8 @@
 #include "sql/pgconn.h"
 #include "sql/user_query.h"
 
-RegHandler::RegHandler(QObject* parent) 
-    : QObject(parent) {
+RegHandler::RegHandler(QQmlApplicationEngine* engine, QObject* parent) 
+    : QObject(parent), m_engine(engine) {
     try {
         m_db = std::make_unique<PGConnection>(); 
         if (m_db->connection()) {
@@ -22,13 +22,16 @@ RegHandler::~RegHandler() {}
 
 void RegHandler::regUser(const QString& login, const QString& password) {
     m_user = std::make_unique<User>(login.toStdString(), password.toStdString(), m_query.get());
-    m_user->regUser();
+    if (m_user->regUser()) {
+        // m_engine->load(QUrl(QStringLiteral("qrc:/ui/newwin.qml")));
+        emit changePage("qrc:/ui/newwin.qml");
+    }
 }
 
 void RegHandler::loginUser(const QString& login, const QString& password) {
     m_user = std::make_unique<User>(login.toStdString(), password.toStdString(), m_query.get());
     if (m_user->login()) {
-        QQmlApplicationEngine *engine = new QQmlApplicationEngine;
-        engine->load(QUrl(QStringLiteral("qrc:/ui/newwin.qml")));
+        // m_engine->load(QUrl(QStringLiteral("qrc:/ui/newwin.qml")));
+        emit changePage("qrc:/ui/newwin.qml");
     }
 }

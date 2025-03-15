@@ -19,12 +19,12 @@ int main(int argc, char *argv[]) {
     // init application with graph engine
     QApplication app(argc, argv);
     
-    QQmlApplicationEngine engine;
+    QQmlApplicationEngine* engine;
 
-    RegHandler regHandler;
-    engine.rootContext()->setContextProperty("regHandler", &regHandler);
+    RegHandler regHandler(engine);
+    engine->rootContext()->setContextProperty("regHandler", &regHandler);
 
-    engine.load(QUrl(QStringLiteral("qrc:/ui/main.qml"))); 
+    engine->load(QUrl(QStringLiteral("qrc:/ui/main.qml"))); 
     
     // db conn
     PGConnection db;

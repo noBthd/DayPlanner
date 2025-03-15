@@ -13,6 +13,19 @@ ApplicationWindow {
 
     color: "#15191E"
 
+    Loader {
+        id: pl
+        source: "qrc:/ui/main.qml"
+        anchors.fill: parent
+    }
+
+    Connections {
+        target: regHandler
+        function onChangePage(url) {
+            pageLoader.source = url;
+        }
+    }
+
     Reg {
         anchors.centerIn: parent
     }
