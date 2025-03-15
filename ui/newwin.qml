@@ -9,5 +9,5 @@ ApplicationWindow {
     width: 750
     height: 750
 
-    color: "#fffff"
+    color: "#ffffff"
 }
