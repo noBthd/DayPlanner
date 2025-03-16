@@ -46,7 +46,7 @@ add_executable(DayPlanner
 )
 
 qt_add_resources(RESOURCES 
-    ui/main.qrc
+    ui/resources.qrc
 )
 
 target_sources(DayPlanner PRIVATE ${RESOURCES})
