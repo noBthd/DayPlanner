@@ -29,6 +29,7 @@ class RegHandler : public QObject {
         QString test = "test";
     private:
         QQmlApplicationEngine* m_engine;
+        QQuickWindow* m_profileWindow;
         std::unique_ptr<User> m_user;
         std::unique_ptr<Query> m_query;
         std::unique_ptr<PGConnection> m_db;

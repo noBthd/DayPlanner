@@ -6,6 +6,7 @@ import "components"
 ApplicationWindow {
     id: win
     title: "Profile"
+    objectName: "ets"
 
     visible: true
     width: 1500

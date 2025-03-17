@@ -38,40 +38,33 @@ void RegHandler::loginUser(const QString& login, const QString& password) {
     m_user = std::make_unique<User>(login.toStdString(), password.toStdString(), m_query.get());
 
     if (m_user->login()) {
-        QObject *rootObject = m_engine->rootObjects().first();
-        qDebug() << rootObject;
-        QQuickWindow *window = qobject_cast<QQuickWindow *>(rootObject);
-
+        QObject* rootObject = m_engine->rootObjects().first();
+        QQuickWindow* window = qobject_cast<QQuickWindow *>(rootObject);
         if (window) {
-            window->close();
+            window->hide();
         }
 
-        m_engine->load(QUrl(QStringLiteral("qrc:/ui/profile.qml")));
-
-        rootObject = m_engine->rootObjects().first();
-        window = qobject_cast<QQuickWindow *>(rootObject);
-
-        if (window) {
-            qDebug() << rootObject;
+        QQmlComponent component(m_engine, QUrl(QStringLiteral("qrc:/ui/profile.qml")));
+        QObject* profileObject = component.create();
+        m_profileWindow = qobject_cast<QQuickWindow*>(profileObject);
+        if (m_profileWindow) {
+            m_profileWindow->show(); 
         }
     }
 }
 
 void RegHandler::logoutUser() {
     if (m_user != nullptr) {
-        QObject *rootObject = m_engine->rootObjects().first();
-        qDebug() << rootObject;
-        QQuickWindow *window = qobject_cast<QQuickWindow *>(rootObject);
-        
-        if (window) {
-            window->close();
-            qDebug() << "Window closed!";
+        if (m_profileWindow) {
+            m_profileWindow->hide();
         }
         
-        m_engine->load(QUrl(QStringLiteral("qrc:/ui/login.qml")));
-
-        qDebug() << m_user->getUsername() << "\n" << m_user->isAdmin() << "\n";
-
+        QObject* rootObject = m_engine->rootObjects().first();
+        QQuickWindow* window = qobject_cast<QQuickWindow *>(rootObject);
+        if (window) {
+            window->show();
+        }
+        
         m_user = nullptr;
     }
 }
