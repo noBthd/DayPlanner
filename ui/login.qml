@@ -16,4 +16,8 @@ ApplicationWindow {
     Reg {
         anchors.centerIn: parent
     }
+
+    ProfileButton {
+        anchors.horizontalCenter: parent.horizontalCenter
+    }
 }

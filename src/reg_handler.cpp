@@ -30,7 +30,7 @@ void RegHandler::regUser(const QString& login, const QString& password) {
         if (window) {
             window->close();
         }
-        m_engine->load(QUrl(QStringLiteral("qrc:/ui/newwin.qml")));
+        m_engine->load(QUrl(QStringLiteral("qrc:/ui/profile.qml")));
     }
 }
 
@@ -44,6 +44,6 @@ void RegHandler::loginUser(const QString& login, const QString& password) {
         if (window) {
             window->close();
         }
-        m_engine->load(QUrl(QStringLiteral("qrc:/ui/newwin.qml")));
+        m_engine->load(QUrl(QStringLiteral("qrc:/ui/profile.qml")));
     }
 }

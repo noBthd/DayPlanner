@@ -1,7 +1,11 @@
 <RCC>
     <qresource prefix="/ui">
         <file>login.qml</file>
-        <file>newwin.qml</file>
+        <file>profile.qml</file>
+
+        <file>components/ProfileButton.qml</file>
         <file>components/Reg.qml</file>
+
+        <file>assets/icons/profile.png</file>
     </qresource>
 </RCC>

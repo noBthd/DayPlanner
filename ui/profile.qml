@@ -5,15 +5,13 @@ import "components"
 
 ApplicationWindow {
     id: win
-    title: "TEST"
+    title: "Profile"
 
     visible: true
-    width: 750
+    width: 1500
     height: 750
 
-    color: "#ffffff"
+    color: "#15191E"
 
-    Reg {
-        anchors.centerIn: parent
-    }
+    
 }
