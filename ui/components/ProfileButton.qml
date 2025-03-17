@@ -47,6 +47,7 @@ Rectangle {
 
                     text: "Username"
 
+                    color: "#ffffff"
                     font: {
                         pixelSize: 12
                     }
@@ -67,22 +68,32 @@ Rectangle {
                     anchors.centerIn: parent
 
                     Text {
+                        height: 20
                         anchors.verticalCenter: parent.verticalCenter
 
                         text: "logout"
                         
+                        color: "#ffffff"
                         font {
                             pixelSize: 12
                         }
                     }
 
-                    Image {
+                    Rectangle {
                         width: 20
                         height: 20
 
-                        anchors.verticalCenter: parent.verticalCenter
+                        radius: 5
+                        color: "#ffffff"
 
-                        source: "qrc:/ui/assets/images/leave.png"
+                        Image {
+                            width: 20
+                            height: 20
+
+                            anchors.verticalCenter: parent.verticalCenter
+
+                            source: "qrc:/ui/assets/images/leave.png"
+                        }
                     }
                 }
             }
