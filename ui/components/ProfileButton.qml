@@ -3,7 +3,7 @@ import QtQuick.Controls 2.15
 
 //! remake username display
 Rectangle {
-    property string username: "Username"
+    property string username: regHandler.getQUsername()
     
     width: 130
     height: 50
@@ -49,7 +49,6 @@ Rectangle {
                     anchors.centerIn: parent
 
                     text: username
-                    objectName: "usernameLbl"
 
                     color: "#ffffff"
                     

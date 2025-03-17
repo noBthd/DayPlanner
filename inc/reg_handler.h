@@ -8,6 +8,7 @@
 #include <QQmlProperty>
 #include <QQmlApplicationEngine>
 #include <memory>
+#include <QString>
 
 #include "sql/user_query.h"
 #include "user.h"
@@ -21,7 +22,9 @@ class RegHandler : public QObject {
         
         Q_INVOKABLE void regUser(const QString&, const QString&);
         Q_INVOKABLE void loginUser(const QString&, const QString&);
+        Q_INVOKABLE QString getQUsername();
 
+        QString test = "test";
     private:
         QQmlApplicationEngine* m_engine;
         std::unique_ptr<User> m_user;
@@ -29,7 +32,7 @@ class RegHandler : public QObject {
         std::unique_ptr<PGConnection> m_db;
 
     signals:
-                
+
 };
 
 #endif

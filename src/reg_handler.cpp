@@ -47,3 +47,5 @@ void RegHandler::loginUser(const QString& login, const QString& password) {
         m_engine->load(QUrl(QStringLiteral("qrc:/ui/profile.qml")));
     }
 }
+
+QString RegHandler::getQUsername() { return m_user == nullptr ? "" : QString::fromStdString(m_user->getUsername()); }

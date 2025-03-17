@@ -13,5 +13,11 @@ ApplicationWindow {
 
     color: "#15191E"
 
-    
+    ProfileButton {
+        anchors.top: parent.top
+        anchors.topMargin: 10
+
+        anchors.right: parent.right
+        anchors.rightMargin: 10
+    }
 }
