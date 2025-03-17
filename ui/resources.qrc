@@ -1,11 +1,15 @@
 <RCC>
     <qresource prefix="/ui">
+        <!-- main -->
         <file>login.qml</file>
         <file>profile.qml</file>
 
+        <!-- components -->
         <file>components/ProfileButton.qml</file>
         <file>components/Reg.qml</file>
 
-        <file>assets/icons/profile.png</file>
+        <!-- assets -->
+        <file>assets/images/profile.png</file>
+        <file>assets/images/leave.png</file>
     </qresource>
 </RCC>

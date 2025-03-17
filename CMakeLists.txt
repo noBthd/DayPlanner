@@ -4,7 +4,6 @@ project(DayPlanner)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_PREFIX_PATH "/opt/homebrew/opt/qt/lib/cmake/Qt6")  
-# set(nlohmann_json_DIR "/.vcpkg/vcpkg/installed/arm64-osx/share/nlohmann_json/nlohmann_jsonConfig.cmake")
 
 find_package(Qt6 REQUIRED 
     COMPONENTS 
@@ -17,8 +16,6 @@ find_package(Qt6 REQUIRED
 )
 
 find_package(PostgreSQL REQUIRED)
-# find_package(CURL REQUIRED)
-# find_package(nlohmann_json CONFIG REQUIRED)
 
 set(SOURCES
     src/main.cpp
@@ -37,16 +34,17 @@ set(INCLUDES
     inc/reg_handler.h
 )
 
+qt_add_resources(RESOURCES 
+    ui/resources.qrc
+)
+
 qt_wrap_cpp(MOC_SOURCES ${INCLUDES})
 
 add_executable(DayPlanner 
     ${MOC_SOURCES}
     ${SOURCES}
     ${INCLUDES}
-)
-
-qt_add_resources(RESOURCES 
-    ui/resources.qrc
+    ${RESOURCES}
 )
 
 target_sources(DayPlanner PRIVATE ${RESOURCES})
@@ -66,6 +64,4 @@ target_link_libraries(DayPlanner
         Qt6::QmlIntegration
         Qt6::Quick
         ${PostgreSQL_LIBRARIES}
-        # CURL::libcurl
-        # nlohmann_json::nlohmann_json
 )
