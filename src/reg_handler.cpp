@@ -39,12 +39,40 @@ void RegHandler::loginUser(const QString& login, const QString& password) {
 
     if (m_user->login()) {
         QObject *rootObject = m_engine->rootObjects().first();
+        qDebug() << rootObject;
         QQuickWindow *window = qobject_cast<QQuickWindow *>(rootObject);
 
         if (window) {
             window->close();
         }
+
         m_engine->load(QUrl(QStringLiteral("qrc:/ui/profile.qml")));
+
+        rootObject = m_engine->rootObjects().first();
+        window = qobject_cast<QQuickWindow *>(rootObject);
+
+        if (window) {
+            qDebug() << rootObject;
+        }
+    }
+}
+
+void RegHandler::logoutUser() {
+    if (m_user != nullptr) {
+        QObject *rootObject = m_engine->rootObjects().first();
+        qDebug() << rootObject;
+        QQuickWindow *window = qobject_cast<QQuickWindow *>(rootObject);
+        
+        if (window) {
+            window->close();
+            qDebug() << "Window closed!";
+        }
+        
+        m_engine->load(QUrl(QStringLiteral("qrc:/ui/login.qml")));
+
+        qDebug() << m_user->getUsername() << "\n" << m_user->isAdmin() << "\n";
+
+        m_user = nullptr;
     }
 }
 

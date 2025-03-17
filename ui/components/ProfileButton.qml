@@ -1,8 +1,8 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 
-//! remake username display
 Rectangle {
+    objectName: "profile"
     property string username: regHandler.getQUsername()
     
     width: 130
@@ -60,6 +60,15 @@ Rectangle {
             Item {
                 width: 80
                 height: 25
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        regHandler.logoutUser()
+                        username: ""
+                    }
+                }
+
 
                 Row {
                     height: parent.height 

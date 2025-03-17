@@ -9,6 +9,7 @@
 #include <QQmlApplicationEngine>
 #include <memory>
 #include <QString>
+#include <QQmlContext>
 
 #include "sql/user_query.h"
 #include "user.h"
@@ -22,6 +23,7 @@ class RegHandler : public QObject {
         
         Q_INVOKABLE void regUser(const QString&, const QString&);
         Q_INVOKABLE void loginUser(const QString&, const QString&);
+        Q_INVOKABLE void logoutUser();
         Q_INVOKABLE QString getQUsername();
 
         QString test = "test";
