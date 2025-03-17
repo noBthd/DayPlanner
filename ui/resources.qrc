@@ -8,8 +8,13 @@
         <file>components/ProfileButton.qml</file>
         <file>components/Reg.qml</file>
 
-        <!-- assets -->
+        <!-- ?assets -->
+        <!-- images -->
         <file>assets/images/profile.png</file>
         <file>assets/images/leave.png</file>
+
+        <!-- icons -->
+        <file>assets/icons/to-do.png</file>
+
     </qresource>
 </RCC>

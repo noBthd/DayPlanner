@@ -1,7 +1,10 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 
+//! remake username display
 Rectangle {
+    property string username: "Username"
+    
     width: 130
     height: 50
 
@@ -45,12 +48,13 @@ Rectangle {
                 Text {
                     anchors.centerIn: parent
 
-                    text: "Username"
+                    text: username
+                    objectName: "usernameLbl"
 
                     color: "#ffffff"
-                    font: {
-                        pixelSize: 12
-                    }
+                    
+                    font.pixelSize: 12
+                    font.bold: true
                 }
             }
 
@@ -74,9 +78,9 @@ Rectangle {
                         text: "logout"
                         
                         color: "#ffffff"
-                        font {
-                            pixelSize: 12
-                        }
+                        
+                        font.pixelSize: 12
+                        font.bold: true
                     }
 
                     Rectangle {

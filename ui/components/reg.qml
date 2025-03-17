@@ -11,13 +11,13 @@ Rectangle {
 
     Column {
         anchors.centerIn: parent
-        spacing: 30
+        spacing: 20 
 
-        // Text above the inputs
         Text {
             text: "Registration"
             anchors.horizontalCenter: parent.horizontalCenter
-            
+            y: -10  
+
             font {
                 pixelSize: 24
                 bold: true
@@ -77,15 +77,17 @@ Rectangle {
             }
         }
 
-        // regisration and login buttons
+        // registration and login buttons
         Row {
             spacing: 10
 
             Button {
                 id: regBtn
                 text: "Registrate"
+
                 height: 50
                 width: 120
+
                 onClicked: {
                     regHandler.regUser(loginInput.text, passwordInput.text)
                 }
@@ -93,8 +95,10 @@ Rectangle {
             Button {
                 id: logBtn
                 text: "Login"
+
                 height: 50
                 width: 120
+
                 onClicked: {
                     regHandler.loginUser(loginInput.text, passwordInput.text)
                 }
