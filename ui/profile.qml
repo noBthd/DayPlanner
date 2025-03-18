@@ -17,7 +17,7 @@ ApplicationWindow {
     color: "#15191E"
 
     GridLayout {
-        anchors.fill: parent  // Автоматически заполняет весь экран
+        anchors.fill: parent  
         anchors.margins: 10
 
         rows: 2
@@ -46,12 +46,29 @@ ApplicationWindow {
             Layout.alignment: Qt.AlignTop
         }
 
-        AddTask {
+        Rectangle {
             Layout.row: 1
             Layout.column: 0
+            
+            Layout.fillWidth: true
+            Layout.preferredHeight: 50 
 
-            Layout.preferredWidth: tasksBackground.width / 2
-            Layout.preferredHeight: win.height * 0.1
+            color: "transparent"
+
+            RowLayout {
+                anchors.fill: parent
+                spacing: 10
+
+                AddTask {
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: parent.height
+                }
+
+                RemTask {
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: parent.height
+                }
+            }
         }
     }
 }

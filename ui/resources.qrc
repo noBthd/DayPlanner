@@ -8,12 +8,14 @@
         <file>components/ProfileButton.qml</file>
         <file>components/Reg.qml</file>
         <file>components/AddTask.qml</file>
+        <file>components/RemTask.qml</file>
 
         <!-- ?assets -->
         <!-- images -->
         <file>assets/images/profile.png</file>
         <file>assets/images/leave.png</file>
         <file>assets/images/note.png</file>
+        <file>assets/images/backspace.png</file>
 
         <!-- icons -->
         <file>assets/icons/to-do.png</file>
