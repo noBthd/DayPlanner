@@ -7,11 +7,13 @@
         <!-- components -->
         <file>components/ProfileButton.qml</file>
         <file>components/Reg.qml</file>
+        <file>components/AddTask.qml</file>
 
         <!-- ?assets -->
         <!-- images -->
         <file>assets/images/profile.png</file>
         <file>assets/images/leave.png</file>
+        <file>assets/images/note.png</file>
 
         <!-- icons -->
         <file>assets/icons/to-do.png</file>

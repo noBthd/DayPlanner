@@ -56,7 +56,6 @@ Rectangle {
                 height: 25
 
                 Text {
-                    // anchors.centerIn: parent
                     anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
 
@@ -88,10 +87,8 @@ Rectangle {
                     width: parent.width
 
                     spacing: 5
-                    // leftPadding: 10
                     rightPadding: 5
 
-                    // anchors.centerIn: parent
                     anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
 

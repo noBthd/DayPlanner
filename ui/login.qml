@@ -11,13 +11,12 @@ ApplicationWindow {
     width: 1500
     height: 750
 
+    minimumWidth: 330
+    minimumHeight: 280
+
     color: "#15191E"
 
     Reg {
         anchors.centerIn: parent
-    }
-
-    ProfileButton {
-        anchors.horizontalCenter: parent.horizontalCenter
     }
 }
