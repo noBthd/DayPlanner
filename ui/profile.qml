@@ -35,7 +35,8 @@ ApplicationWindow {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            radius: Math.min(width, height) / 25
+            // radius: Math.min(width, height) / 25
+            radius: 12.5
             color: "#2f3842"
         }        
 
@@ -49,7 +50,7 @@ ApplicationWindow {
         Rectangle {
             Layout.row: 1
             Layout.column: 0
-            
+
             Layout.fillWidth: true
             Layout.preferredHeight: 50 
 
