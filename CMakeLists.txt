@@ -24,6 +24,7 @@ set(SOURCES
     src/sql/user_query.cpp
     src/user.cpp
     src/reg_handler.cpp
+    src/task_handler.cpp
 )
 
 set(INCLUDES
@@ -32,6 +33,7 @@ set(INCLUDES
     inc/sql/user_query.h
     inc/user.h
     inc/reg_handler.h
+    inc/task_handler.h
 )
 
 qt_add_resources(RESOURCES 
