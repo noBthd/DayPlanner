@@ -21,32 +21,44 @@ Rectangle {
 
         anchors.centerIn: parent
 
-        Rectangle {
+        //! user icon
+        Item {
             width: 40
             height: 40
-
-            radius: 40
-            color: "#ffffff"
-
+            
             anchors.verticalCenter: parent.verticalCenter
 
-            Image {
+            Rectangle {
                 width: 40
                 height: 40
 
+                radius: 40
+                color: "#ffffff"
+
                 anchors.verticalCenter: parent.verticalCenter
 
-                source: "qrc:/ui/assets/images/profile.png"
+                Image {
+                    width: 40
+                    height: 40
+
+                    anchors.verticalCenter: parent.verticalCenter
+
+                    source: "qrc:/ui/assets/images/profile.png"
+                }
             }
         }
 
         Column {
+            leftPadding: 10
+            //! username
             Item {
                 width: 80
                 height: 25
 
                 Text {
-                    anchors.centerIn: parent
+                    // anchors.centerIn: parent
+                    anchors.left: parent.left
+                    anchors.verticalCenter: parent.verticalCenter
 
                     text: username
 
@@ -57,6 +69,7 @@ Rectangle {
                 }
             }
 
+            //! logout button
             Item {
                 width: 80
                 height: 25
@@ -72,12 +85,15 @@ Rectangle {
 
                 Row {
                     height: parent.height 
+                    width: parent.width
 
                     spacing: 5
-                    leftPadding: 5
+                    // leftPadding: 10
                     rightPadding: 5
 
-                    anchors.centerIn: parent
+                    // anchors.centerIn: parent
+                    anchors.left: parent.left
+                    anchors.verticalCenter: parent.verticalCenter
 
                     Text {
                         height: 20

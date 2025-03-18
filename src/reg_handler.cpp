@@ -58,7 +58,7 @@ void RegHandler::logoutUser() {
         if (m_profileWindow) {
             m_profileWindow->hide();
         }
-        
+
         QObject* rootObject = m_engine->rootObjects().first();
         QQuickWindow* window = qobject_cast<QQuickWindow *>(rootObject);
         if (window) {
@@ -66,6 +66,8 @@ void RegHandler::logoutUser() {
         }
         
         m_user = nullptr;
+
+        qDebug() << "User logged out";
     }
 }
 
