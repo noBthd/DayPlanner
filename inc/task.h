@@ -8,14 +8,15 @@ class Task {
         Task();
         ~Task();
 
-        std::string m_task_name;
-        std::string m_task_text;
+        // addTask func
+        std::string getTaskName();
+        std::string getTaskText();
+        
+    private:
         // time
         // done/not
-
-
-        // addTask func
-    private:
+        std::string m_task_name;
+        std::string m_task_text;
 };
 
 #endif
