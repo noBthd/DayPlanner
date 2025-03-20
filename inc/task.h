@@ -17,8 +17,8 @@ class Task {
         bool getDone();
         bool getExpire();
         
-        bool setTaskName(std::string);
-        bool setTaskText(std::string);
+        void setTaskName(std::string);
+        void setTaskText(std::string);
         void done();
         void expired();
     private:

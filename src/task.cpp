@@ -3,7 +3,7 @@
 Task::Task(std::string* name, std::string* text) 
     : m_task_name(*name), m_task_text(*text)
 {
-
+    
 }
 
 Task::~Task() {} 
@@ -16,15 +16,9 @@ bool Task::getDone() { return m_done; }
 
 bool Task::getExpire() { return m_expidred; }
 
-bool Task::setTaskName(std::string name) { 
-    m_task_name = name;
-    return true;
-}
+void Task::setTaskName(std::string name) { m_task_name = name; }
 
-bool Task::setTaskText(std::string text) {
-    m_task_text = text;
-    return true;
-}
+void Task::setTaskText(std::string text) { m_task_text = text; }
 
 void Task::done() { m_done = true; }
 

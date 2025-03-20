@@ -26,6 +26,7 @@ ApplicationWindow {
         rowSpacing: 10
         columnSpacing: 10
 
+        // tasks background
         Rectangle {
             id: tasksBackground
 
@@ -45,7 +46,7 @@ ApplicationWindow {
                 spacing: 10
                 Repeater {
                     model: 5
-
+                    
                     Task {
                         Layout.fillWidth: true
                         Layout.preferredHeight: 100
@@ -54,15 +55,17 @@ ApplicationWindow {
                     }
                 }
             }
-        }        
+        } // tasks background   
 
+        // profile button
         ProfileButton {
             Layout.row: 0
             Layout.column: 1
 
             Layout.alignment: Qt.AlignTop
-        }
+        } // profile button
 
+        // task managment buttons
         Rectangle {
             Layout.row: 1
             Layout.column: 0
@@ -86,6 +89,6 @@ ApplicationWindow {
                     Layout.preferredHeight: parent.height
                 }
             }
-        }
+        } // task managment buttons
     }
 }
