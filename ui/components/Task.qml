@@ -30,6 +30,9 @@ Rectangle {
             Layout.row: 0
             Layout.column: 0
 
+            Layout.preferredWidth: 50
+            Layout.preferredHeight: 12
+
             text: taskName
 
             font.pixelSize: 12
