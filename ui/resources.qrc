@@ -9,6 +9,7 @@
         <file>components/Reg.qml</file>
         <file>components/AddTask.qml</file>
         <file>components/RemTask.qml</file>
+        <file>components/Task.qml</file>
 
         <!-- ?assets -->
         <!-- images -->

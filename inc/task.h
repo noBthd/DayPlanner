@@ -5,18 +5,32 @@
 
 class Task {
     public: 
-        Task();
+        Task(
+            std::string* name = nullptr, 
+            std::string* text = nullptr
+        );
         ~Task();
 
         // addTask func
         std::string getTaskName();
         std::string getTaskText();
+        bool getDone();
+        bool getExpire();
         
+        bool setTaskName(std::string);
+        bool setTaskText(std::string);
+        void done();
+        void expired();
     private:
+        int m_id;
         // time
-        // done/not
         std::string m_task_name;
         std::string m_task_text;
+
+        // done/not 
+        bool m_done = false; 
+        // expired/not
+        bool m_expidred = false;
 };
 
 #endif

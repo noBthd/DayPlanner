@@ -35,9 +35,25 @@ ApplicationWindow {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            // radius: Math.min(width, height) / 25
             radius: 12.5
             color: "#2f3842"
+
+            ColumnLayout {
+                anchors.fill: parent
+
+                anchors.margins: 10
+                spacing: 10
+                Repeater {
+                    model: 5
+
+                    Task {
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 100
+
+                        Layout.alignment: Qt.AlignTop
+                    }
+                }
+            }
         }        
 
         ProfileButton {
