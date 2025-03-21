@@ -39,11 +39,11 @@ ApplicationWindow {
             radius: 12.5
             color: "#2f3842"
 
-            Rectangle {
+            Item {
                 anchors.centerIn: parent
+
                 width: parent.width - 20
                 height: parent.height - 20 
-                color: "#2f3842"
 
                 clip: true
                 ListView {
@@ -51,11 +51,7 @@ ApplicationWindow {
                     model: 10 
 
                     anchors.fill: parent
-                    // anchors.margins: 10
-                    anchors.bottomMargin: 10
-                    anchors.leftMargin: 10
-                    anchors.rightMargin: 10
-
+                    anchors.bottomMargin: index == lv.model ? 0 : 10
                     spacing: 10
 
                     snapMode: ListView.SnapOneItem
@@ -65,7 +61,6 @@ ApplicationWindow {
                         height: 100
                     }
                 }
-
             }
 
         } // tasks background   
