@@ -39,20 +39,14 @@ ApplicationWindow {
             radius: 12.5
             color: "#2f3842"
 
-            ColumnLayout {
+            ListView {
                 anchors.fill: parent
-
                 anchors.margins: 10
                 spacing: 10
-                Repeater {
-                    model: 5
-                    
-                    Task {
-                        Layout.fillWidth: true
-                        Layout.preferredHeight: 100
-
-                        Layout.alignment: Qt.AlignTop
-                    }
+                model: 10 
+                delegate: Task {
+                    width: ListView.view.width
+                    height: 100
                 }
             }
         } // tasks background   
