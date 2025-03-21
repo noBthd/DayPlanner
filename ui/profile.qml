@@ -39,16 +39,35 @@ ApplicationWindow {
             radius: 12.5
             color: "#2f3842"
 
-            ListView {
-                anchors.fill: parent
-                anchors.margins: 10
-                spacing: 10
-                model: 10 
-                delegate: Task {
-                    width: ListView.view.width
-                    height: 100
+            Rectangle {
+                anchors.centerIn: parent
+                width: parent.width - 20
+                height: parent.height - 20 
+                color: "#2f3842"
+
+                clip: true
+                ListView {
+                    id: lv
+                    model: 10 
+
+                    anchors.fill: parent
+                    // anchors.margins: 10
+                    anchors.bottomMargin: 10
+                    anchors.leftMargin: 10
+                    anchors.rightMargin: 10
+
+                    spacing: 10
+
+                    snapMode: ListView.SnapOneItem
+
+                    delegate: Task {
+                        width: ListView.view.width
+                        height: 100
+                    }
                 }
+
             }
+
         } // tasks background   
 
         // profile button
