@@ -48,6 +48,7 @@ Rectangle {
             Layout.fillHeight: true
 
             text: taskText
+            
 
             font.pixelSize: 12
         } // task text
