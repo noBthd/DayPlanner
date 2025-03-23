@@ -52,6 +52,8 @@ Rectangle {
             leftPadding: 10
             //! username
             Item {
+                id: userItem
+
                 width: 80
                 height: 25
 
@@ -73,8 +75,25 @@ Rectangle {
                 width: 80
                 height: 25
 
+                Behavior on scale {
+                    NumberAnimation {
+                        duration: 200
+                        easing: Easing.In
+                    }
+                }
+
                 MouseArea {
+                    id: ma
                     anchors.fill: parent
+                    
+                    hoverEnabled: true
+                    onEntered: {
+                        parent.scale = 1.04
+                    }
+                    onExited: {
+                        parent.scale = 1.0
+                    }
+
                     onClicked: {
                         regHandler.logoutUser()
                         username: ""
@@ -93,12 +112,13 @@ Rectangle {
                     anchors.verticalCenter: parent.verticalCenter
 
                     Text {
+                        id: logoutText
                         height: 20
                         anchors.verticalCenter: parent.verticalCenter
 
                         text: "logout"
                         
-                        color: "#ffffff"
+                        color: ma.containsMouse ? "#ff5555" : "#ffffff"
                         
                         font.pixelSize: 12
                         font.bold: true

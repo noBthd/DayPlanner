@@ -21,7 +21,7 @@ Rectangle {
     Behavior on scale {
         NumberAnimation {
             duration: 200
-            easing: Easing.In
+            easing: Easing.InQuad
         }
     }
 
@@ -32,14 +32,14 @@ Rectangle {
             property: "scale"
             to: 0.995
             duration: 100
-            easing: Easing.In
+            easing: Easing.InQuad
         }
         NumberAnimation {
             target: task
             property: "scale"
             to: 1.005
             duration: 100
-            easing: Easing.In
+            easing: Easing.InQuad
         }
     }
 
@@ -64,7 +64,7 @@ Rectangle {
         anchors.fill: parent  
         anchors.margins: 10
 
-        rows: 2
+        rows: 3
         columns: 2
 
         // task name
@@ -73,25 +73,37 @@ Rectangle {
             Layout.column: 0
 
             Layout.preferredWidth: 50
-            Layout.preferredHeight: 12
+            Layout.preferredHeight: 16
 
             text: taskName
+            color: "#333333"
 
-            font.pixelSize: 12
+            font.pixelSize: 16
             font.bold: true
         } // task name
 
-        // task text
-        Text {
+        Rectangle {
             Layout.row: 1
             Layout.column: 0
 
-            Layout.preferredWidth: 50
+            Layout.preferredWidth: parent.width
+            Layout.preferredHeight: 1
+            color: "#999999"
+        }
+
+        // task text
+        Text {
+            Layout.row: 2
+            Layout.column: 0
+
+            Layout.fillWidth: true
             Layout.fillHeight: true
 
             text: taskText
+            color: "#555555"
+            wrapMode: Text.Wrap
 
-            font.pixelSize: 12
+            font.pixelSize: 14
         } // task text
     }
 }
