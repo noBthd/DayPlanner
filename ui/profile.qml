@@ -40,9 +40,10 @@ ApplicationWindow {
             color: "#2f3842"
 
             Item {
+                id: ilv
                 anchors.centerIn: parent
 
-                width: parent.width - 20
+                width: parent.width
                 height: parent.height - 20 
 
                 clip: true
@@ -57,8 +58,10 @@ ApplicationWindow {
                     snapMode: ListView.SnapOneItem
 
                     delegate: Task {
-                        width: ListView.view.width
+                        width: ListView.view.width - 20
                         height: 100
+
+                        anchors.horizontalCenter: parent.horizontalCenter
                     }
                 }
             }

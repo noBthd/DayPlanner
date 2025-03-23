@@ -1,6 +1,4 @@
 #include "reg_handler.h"
-#include "sql/pgconn.h"
-#include "sql/user_query.h"
 
 RegHandler::RegHandler(QQmlApplicationEngine* engine, QObject* parent) 
     : QObject(parent), m_engine(engine) {

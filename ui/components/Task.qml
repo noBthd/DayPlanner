@@ -13,10 +13,52 @@ Rectangle {
     property real taskHeight: 100
 
     radius: 12.5
-    color: "#c2c2c2"
+    color: ma.containsMouse ? "#ffffff" : "#c2c2c2"
 
     property string taskName: "Name"
     property string taskText: "Test textoviwy delo adasdasdasdjksl"
+
+    Behavior on scale {
+        NumberAnimation {
+            duration: 200
+            easing: Easing.In
+        }
+    }
+
+    SequentialAnimation {
+        id: scaleAnimation
+        NumberAnimation {
+            target: task
+            property: "scale"
+            to: 0.995
+            duration: 100
+            easing: Easing.In
+        }
+        NumberAnimation {
+            target: task
+            property: "scale"
+            to: 1.005
+            duration: 100
+            easing: Easing.In
+        }
+    }
+
+    MouseArea {
+        id: ma
+        anchors.fill: parent
+
+        hoverEnabled: true
+        onEntered: {
+            parent.scale = 1.005
+        }
+        onExited: {
+            parent.scale = 1.0
+        }
+
+        onClicked: {
+            scaleAnimation.start()
+        }
+    }
 
     GridLayout {
         anchors.fill: parent  
@@ -48,7 +90,6 @@ Rectangle {
             Layout.fillHeight: true
 
             text: taskText
-            
 
             font.pixelSize: 12
         } // task text
