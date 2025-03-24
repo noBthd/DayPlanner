@@ -24,6 +24,7 @@ Rectangle {
             easing: Easing.InQuad
         }
     }
+    
 
     SequentialAnimation {
         id: scaleAnimation
