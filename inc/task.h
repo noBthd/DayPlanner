@@ -2,6 +2,9 @@
 #define TASK_H
 
 #include <string>
+#include <QDebug>
+#include "libpq-fe.h"
+#include "sql/pgconn.h"
 
 class Task {
     public: 
@@ -11,7 +14,6 @@ class Task {
         );
         ~Task();
 
-        // addTask func
         std::string getTaskName();
         std::string getTaskText();
         bool getDone();
@@ -21,7 +23,9 @@ class Task {
         void setTaskText(std::string);
         void done();
         void expired();
+
     private:
+        PGConnection* m_db;
         int m_id;
         // time
         std::string m_task_name;
@@ -31,6 +35,10 @@ class Task {
         bool m_done = false; 
         // expired/not
         bool m_expidred = false;
+
+        void setNewId();
+        int getPrevId();
+        
 };
 
 #endif

@@ -18,13 +18,14 @@
 class RegHandler : public QObject {
         Q_OBJECT
     public:
-        explicit RegHandler(QQmlApplicationEngine* = nullptr, QObject* parent = nullptr); 
+        explicit RegHandler(QQmlApplicationEngine* = nullptr, PGConnection* db = nullptr, QObject* parent = nullptr); 
         ~RegHandler();
         
         Q_INVOKABLE void regUser(const QString&, const QString&);
         Q_INVOKABLE void loginUser(const QString&, const QString&);
         Q_INVOKABLE void logoutUser();
         Q_INVOKABLE QString getQUsername();
+        User* getUser();
         
     private:
         QQmlApplicationEngine* m_engine;

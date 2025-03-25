@@ -1,18 +1,9 @@
 #include "reg_handler.h"
+#include "sql/pgconn.h"
+#include "user.h"
 
-RegHandler::RegHandler(QQmlApplicationEngine* engine, QObject* parent) 
-    : QObject(parent), m_engine(engine) {
-    try {
-        m_db = std::make_unique<PGConnection>(); 
-        if (m_db->connection()) {
-            qDebug() << "m_db connected successfully";
-        } else {
-            qDebug() << "Failed to connect m_db";
-        }
-    } catch (const std::exception& e) {
-        qDebug() << "Exception: " << e.what();
-    }
-
+RegHandler::RegHandler(QQmlApplicationEngine* engine, PGConnection* db, QObject* parent) 
+    : QObject(parent), m_db(db), m_engine(engine) {
     m_query = std::make_unique<Query>(m_db->connection().get());
 }
 
@@ -70,3 +61,5 @@ void RegHandler::logoutUser() {
 }
 
 QString RegHandler::getQUsername() { return m_user == nullptr ? "" : QString::fromStdString(m_user->getUsername()); }
+
+User* RegHandler::getUser() { return m_user.get(); }

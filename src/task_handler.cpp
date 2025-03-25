@@ -7,3 +7,5 @@ TaskHandler::TaskHandler(QObject* parent)
 }
 
 TaskHandler::~TaskHandler() {};
+
+
