@@ -34,7 +34,6 @@ int main(int argc, char *argv[]) {
 
     // add task_hadeler
     Task task(db->connection().get());
-    // qDebug() << task.getPrevId();
 
     // engine.rootContext()->setContextProperty("taskHandler", &taskHandler);
 

@@ -4,7 +4,7 @@
 Task::Task(PGconn* conn, std::string* name, std::string* text) 
     : m_conn(conn), m_task_name(name), m_task_text(text)
 {
-
+    setNewId();
 }
 
 Task::~Task() {} 
