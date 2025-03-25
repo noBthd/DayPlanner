@@ -41,6 +41,7 @@ int Task::getPrevId() {
 
     if (PQntuples(res) == 0 || PQgetisnull(res, 0, 0)) {
         qDebug() << "No tasks found.";
+        m_id = 1;
         PQclear(res);
         return 0;
     }
@@ -51,3 +52,5 @@ int Task::getPrevId() {
 
     return last_id;
 }
+
+//! add task uopdating

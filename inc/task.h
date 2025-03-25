@@ -4,7 +4,6 @@
 #include <string>
 #include <QDebug>
 #include "libpq-fe.h"
-#include "sql/pgconn.h"
 
 class Task {
     public: 
