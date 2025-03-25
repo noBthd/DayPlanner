@@ -1,10 +1,8 @@
 #include "reg_handler.h"
-#include "sql/pgconn.h"
-#include "user.h"
 
-RegHandler::RegHandler(QQmlApplicationEngine* engine, PGConnection* db, QObject* parent) 
-    : QObject(parent), m_db(db), m_engine(engine) {
-    m_query = std::make_unique<Query>(m_db->connection().get());
+RegHandler::RegHandler(QQmlApplicationEngine* engine, PGconn* conn, QObject* parent) 
+    : QObject(parent), m_engine(engine) {
+    m_query = std::make_unique<Query>(conn);
 }
 
 RegHandler::~RegHandler() {}

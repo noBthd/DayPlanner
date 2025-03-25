@@ -11,14 +11,14 @@
 #include <QString>
 #include <QQmlContext>
 
+#include "libpq-fe.h"
 #include "sql/user_query.h"
 #include "user.h"
-#include "sql/pgconn.h"
 
 class RegHandler : public QObject {
         Q_OBJECT
     public:
-        explicit RegHandler(QQmlApplicationEngine* = nullptr, PGConnection* db = nullptr, QObject* parent = nullptr); 
+        explicit RegHandler(QQmlApplicationEngine* = nullptr, PGconn* conn = nullptr, QObject* parent = nullptr); 
         ~RegHandler();
         
         Q_INVOKABLE void regUser(const QString&, const QString&);
@@ -32,7 +32,6 @@ class RegHandler : public QObject {
         QQuickWindow* m_profileWindow;
         std::unique_ptr<User> m_user;
         std::unique_ptr<Query> m_query;
-        std::unique_ptr<PGConnection> m_db;
 
     signals:
 

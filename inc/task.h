@@ -9,9 +9,11 @@
 class Task {
     public: 
         Task(
+            PGconn* conn = nullptr,
             std::string* name = nullptr, 
             std::string* text = nullptr
         );
+
         ~Task();
 
         std::string getTaskName();
@@ -24,12 +26,15 @@ class Task {
         void done();
         void expired();
 
+        int getPrevId();
+
     private:
-        PGConnection* m_db;
-        int m_id;
+        PGconn* m_conn;
+
         // time
-        std::string m_task_name;
-        std::string m_task_text;
+        int m_id;
+        std::string* m_task_name;
+        std::string* m_task_text;
 
         // done/not 
         bool m_done = false; 
@@ -37,8 +42,7 @@ class Task {
         bool m_expidred = false;
 
         void setNewId();
-        int getPrevId();
-        
+
 };
 
 #endif
