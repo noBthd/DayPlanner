@@ -10,7 +10,7 @@ Rectangle {
 
     radius: 10
 
-    color: "#2f3842"
+    color: "#222B3B"
 
     Row {
         width: parent.width

@@ -7,7 +7,7 @@ Rectangle {
     height: 250
     width: 300
     radius: 30
-    color: "#2f3842"
+    color: "#222B3B"
 
     Column {
         anchors.centerIn: parent

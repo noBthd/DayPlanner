@@ -14,7 +14,7 @@ ApplicationWindow {
     minimumHeight: 250
 
     visible: true
-    color: "#15191E"
+    color: "#0C121D"
 
     GridLayout {
         anchors.fill: parent  
@@ -37,7 +37,7 @@ ApplicationWindow {
             Layout.fillHeight: true
 
             radius: 12.5
-            color: "#2f3842"
+            color: "#222B3B"
 
             Item {
                 id: ilv

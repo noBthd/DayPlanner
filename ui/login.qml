@@ -14,7 +14,7 @@ ApplicationWindow {
     minimumWidth: 330
     minimumHeight: 280
 
-    color: "#15191E"
+    color: "#0C121D"
 
     Reg {
         anchors.centerIn: parent
