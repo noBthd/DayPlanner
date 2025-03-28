@@ -47,4 +47,8 @@ Rectangle {
             color: "#000000"
         } // Save Text
     }
+
+    MouseArea {
+        anchors.fill: parent
+    }
 }
