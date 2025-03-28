@@ -39,7 +39,7 @@ set(INCLUDES
 )
 
 qt_add_resources(RESOURCES 
-    ui/resources.qrc
+    ui/_resources.qrc
 )
 
 qt_wrap_cpp(MOC_SOURCES ${INCLUDES})

@@ -40,7 +40,7 @@ int Task::getPrevId() {
     }
 
     if (PQntuples(res) == 0 || PQgetisnull(res, 0, 0)) {
-        qDebug() << "No tasks found.";
+        qDebug() << "No tasks found. TASK_ID = 1";
         m_id = 1;
         PQclear(res);
         return 0;

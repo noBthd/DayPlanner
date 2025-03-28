@@ -17,7 +17,7 @@ void RegHandler::regUser(const QString& login, const QString& password) {
         if (window) {
             window->close();
         }
-        m_engine->load(QUrl(QStringLiteral("qrc:/ui/profile.qml")));
+        m_engine->load(QUrl(QStringLiteral("qrc:/ui/tasks.qml")));
     }
 }
 
@@ -31,7 +31,7 @@ void RegHandler::loginUser(const QString& login, const QString& password) {
             window->hide();
         }
 
-        QQmlComponent component(m_engine, QUrl(QStringLiteral("qrc:/ui/profile.qml")));
+        QQmlComponent component(m_engine, QUrl(QStringLiteral("qrc:/ui/tasks.qml")));
         QObject* profileObject = component.create();
         m_profileWindow = qobject_cast<QQuickWindow*>(profileObject);
         if (m_profileWindow) {

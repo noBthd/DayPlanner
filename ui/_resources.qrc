@@ -2,7 +2,7 @@
     <qresource prefix="/ui">
         <!-- main -->
         <file>login.qml</file>
-        <file>profile.qml</file>
+        <file>tasks.qml</file>
 
         <!-- components -->
         <file>components/ProfileButton.qml</file>
@@ -10,6 +10,9 @@
         <file>components/AddTask.qml</file>
         <file>components/RemTask.qml</file>
         <file>components/Task.qml</file>
+        <file>components/SaveButton.qml</file>
+        <file>components/ExitButton.qml</file>
+        
 
         <!-- ?assets -->
         <!-- images -->

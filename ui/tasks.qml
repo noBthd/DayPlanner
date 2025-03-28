@@ -24,7 +24,6 @@ ApplicationWindow {
         columns: 2
 
         rowSpacing: 10
-        
         columnSpacing: 10
 
         // tasks background
