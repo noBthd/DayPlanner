@@ -25,7 +25,7 @@ Rectangle {
             text: "name:"
 
             font.bold: true
-            font.pixelSize: 12
+            font.pixelSize: 16
             color: "#000000"
         }
 
@@ -36,7 +36,6 @@ Rectangle {
 
             verticalAlignment: Text.AlignVCenter
             maximumLength: 8
-            leftPadding: -10
         }
     }
 }
