@@ -2,6 +2,8 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15 
 
+// import "components"
+
 Rectangle {
     id: bg
 
@@ -41,6 +43,17 @@ Rectangle {
 
             color: black
         } // Header
+
+        // Item { Layout.fillWidth: true } // spacer
+
+        // Time Date
+        TimeChoose {
+            Layout.row: 0
+            Layout.column: 1
+
+            tcWidth: 193
+            tcHeight: 29
+        } // Time Date
 
         // splitter
         Rectangle {

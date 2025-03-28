@@ -12,6 +12,8 @@
         <file>components/Task.qml</file>
         <file>components/SaveButton.qml</file>
         <file>components/ExitButton.qml</file>
+        <file>components/TimeChoose.qml</file>
+        <file>components/TextTimeInput.qml</file>
         
 
         <!-- ?assets -->
