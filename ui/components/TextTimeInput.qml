@@ -43,9 +43,7 @@ Rectangle {
 
             color: black
         } // Header
-
-        // Item { Layout.fillWidth: true } // spacer
-
+        
         // Time Date
         TimeChoose {
             Layout.row: 0
