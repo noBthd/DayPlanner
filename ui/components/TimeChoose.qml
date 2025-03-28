@@ -10,7 +10,6 @@ Rectangle {
     property real tcWidth: 193
     property real tcHeight: 29
 
-
     property string tcDate: "date: 12.12.2025"
     property string tcTime: "time: 15:23"
 

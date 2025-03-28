@@ -14,6 +14,7 @@
         <file>components/ExitButton.qml</file>
         <file>components/TimeChoose.qml</file>
         <file>components/TextTimeInput.qml</file>
+        <file>components/CompChoose.qml</file>
         
 
         <!-- ?assets -->
