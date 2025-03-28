@@ -55,6 +55,15 @@ Rectangle {
             tcHeight: 29
         } // Time Date
 
+        // Comp
+        CompChoose {
+            Layout.row: 0
+            Layout.column: 2
+
+            ccWidth: 104
+            ccHeight: 29
+        }
+
         // splitter
         Rectangle {
             Layout.row: 1
