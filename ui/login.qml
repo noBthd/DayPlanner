@@ -15,6 +15,9 @@ ApplicationWindow {
     minimumHeight: 280
 
     color: "#0C121D"
+    SaveButton {
+        anchors.horizontalCenter: parent.horizontalCenter
+    }
 
     Reg {
         anchors.centerIn: parent

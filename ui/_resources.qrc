@@ -23,6 +23,8 @@
         <file>assets/images/leave.png</file>
         <file>assets/images/note.png</file>
         <file>assets/images/backspace.png</file>
+        <file>assets/images/deleteTask.png</file>
+        <file>assets/images/saveTask.png</file>
 
         <!-- icons -->
         <file>assets/icons/to-do.png</file>
