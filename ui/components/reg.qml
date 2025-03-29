@@ -34,6 +34,7 @@ Rectangle {
             color: "#ffffff"
 
             TextInput {
+                clip: true
                 id: loginInput
                 objectName: "loginInput"
                 anchors.centerIn: parent
@@ -59,6 +60,7 @@ Rectangle {
             color: "#ffffff"
 
             TextInput {
+                clip: true
                 id: passwordInput
                 objectName: "passwordInput"
                 anchors.centerIn: parent
