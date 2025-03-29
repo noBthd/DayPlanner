@@ -15,12 +15,14 @@ Rectangle {
     RowLayout {
         anchors.fill: parent
         anchors.leftMargin: 10
+        anchors.rightMargin: 10
 
         spacing: 1
 
         Text {
             Layout.preferredWidth: 49
             Layout.alignment: Qt.AlignVCenter
+            verticalAlignment: Text.AlignVCenter
 
             text: "name:"
 
@@ -29,13 +31,15 @@ Rectangle {
             color: "#000000"
         }
 
+
         TextInput {
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.alignment: Qt.AlignVCenter
 
             verticalAlignment: Text.AlignVCenter
-            maximumLength: 8
+            clip: true
         }
+    
     }
 }
