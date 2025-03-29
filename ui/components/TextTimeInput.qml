@@ -43,7 +43,7 @@ Rectangle {
 
             color: black
         } // Header
-        
+
         // Time Date
         TimeChoose {
             Layout.row: 0
@@ -60,7 +60,7 @@ Rectangle {
 
             ccWidth: 104
             ccHeight: 29
-        }
+        } // Comp
 
         // splitter
         Rectangle {
@@ -88,19 +88,36 @@ Rectangle {
             color: "#ffffff"
             radius: 12.5
 
-            // Text holder
-            Text { 
-                anchors.margins: 10
-                anchors.top: parent.top
-                anchors.left: parent.left
+            //! fix text scroll
+            Flickable {
+                anchors.fill: parent
+                contentWidth: width
+                contentHeight: height
 
-                text: "..."
-                font.bold: true
-                font.pixelSize: 12
+                flickableDirection: Flickable.VerticalFlick
+                // task text input
+                TextInput {
+                    id: ti
 
-                color: "#000000"
-            } // Text holder
+                    anchors.margins: 10
+                    anchors.fill: parent
 
+                    clip: true
+                    readOnly: false
+                    wrapMode: TextArea.Wrap
+
+                    // placehodler
+                    property string placeholderText: "..."
+                    Text {
+                        font.pixelSize: 12
+                        font.bold: true 
+                        color: "#484f54"
+
+                        text: ti.placeholderText
+                        visible: !ti.text
+                    } // placehodler
+                } // task text input
+            }
         } // text input
     }
 }
