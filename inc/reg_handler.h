@@ -26,6 +26,7 @@ class RegHandler : public QObject {
         Q_INVOKABLE void logoutUser();
         Q_INVOKABLE QString getQUsername();
         User* getUser();
+        QQuickWindow* getWin();
         
     private:
         QQmlApplicationEngine* m_engine;

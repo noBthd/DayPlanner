@@ -39,6 +39,8 @@ ApplicationWindow {
             radius: 12.5
             color: "#222B3B"
 
+            
+
             Item {
                 id: ilv
                 anchors.centerIn: parent
@@ -49,6 +51,7 @@ ApplicationWindow {
                 clip: true
                 ListView {
                     id: lv
+                    objectName: "lv"
                     model: 10 
 
                     anchors.fill: parent
@@ -56,16 +59,23 @@ ApplicationWindow {
                     spacing: 10
 
                     snapMode: ListView.SnapOneItem
+                    property int taskIndex: -1
 
                     delegate: Task {
                         width: ListView.view.width - 20
                         height: 100
 
                         anchors.horizontalCenter: parent.horizontalCenter
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                lv.taskIndex = index
+                            }
+                        }
                     }
                 }
             }
-
         } // tasks background   
 
         // profile button
@@ -98,6 +108,14 @@ ApplicationWindow {
                 RemTask {
                     Layout.fillWidth: true
                     Layout.preferredHeight: parent.height
+
+                    MouseArea {
+                        anchors.fill: parent
+
+                        onClicked: {
+                            taskHandler.delTask(lv.taskIndex)
+                        } 
+                    }
                 }
             }
         } // task managment buttons

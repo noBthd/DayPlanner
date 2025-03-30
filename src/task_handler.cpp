@@ -1,7 +1,7 @@
 #include "task_handler.h"
 
-TaskHandler::TaskHandler(QQmlApplicationEngine* engine, PGconn* conn, QObject* parent) 
-    : m_conn(conn), m_engine(engine), QObject(parent)
+TaskHandler::TaskHandler(QQmlApplicationEngine* engine, PGconn* conn, QQuickWindow* win, QObject* parent) 
+    : m_conn(conn), m_engine(engine), m_tasksWin(win), QObject(parent)
 {
 }
 
@@ -19,15 +19,19 @@ void TaskHandler::openAdditionWin() {
 }
 
 void TaskHandler::closeAdditionWin() {
-    m_taskAddWin->close();
+    m_taskAddWin->hide();
 }
 
-void TaskHandler::addTask(QString task_name, QString task_text) {
-    
+void TaskHandler::addTask(const QString& task_name, const QString& task_text) {
 }
 
-void TaskHandler::delTask(int task_id) {
+void TaskHandler::delTask(const int& task_id) {
+    if (task_id == -1) {
+        qDebug() << "NO TASK CHOOSEN";
+        return;
+    }
 
+    qDebug() << task_id;
 }
 
 void TaskHandler::getAllUserTasks(int user_id) {

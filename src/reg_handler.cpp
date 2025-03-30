@@ -63,3 +63,5 @@ void RegHandler::logoutUser() {
 QString RegHandler::getQUsername() { return m_user == nullptr ? "" : QString::fromStdString(m_user->getUsername()); }
 
 User* RegHandler::getUser() { return m_user.get(); }
+
+QQuickWindow* RegHandler::getWin() { return m_profileWindow; };

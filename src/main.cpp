@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
     engine.rootContext()->setContextProperty("regHandler", &regHandler);
 
     // task handler
-    TaskHandler taskHandler(&engine, db->connection().get());
+    TaskHandler taskHandler(&engine, db->connection().get(), regHandler.getWin());
     engine.rootContext()->setContextProperty("taskHandler", &taskHandler);
 
 

@@ -13,9 +13,10 @@ class TaskHandler : public QObject {
     Q_OBJECT;
 
     public:
-        TaskHandler(
+        explicit TaskHandler(
             QQmlApplicationEngine* engine = nullptr,
             PGconn* conn = nullptr,
+            QQuickWindow* win = nullptr,
             QObject* parent = nullptr
         );
 
@@ -24,11 +25,11 @@ class TaskHandler : public QObject {
         Q_INVOKABLE void openAdditionWin();
         Q_INVOKABLE void closeAdditionWin();
 
-        void addTask(
-            QString task_name,
-            QString task_text
+        Q_INVOKABLE void addTask(
+            const QString& task_name,
+            const QString& task_text
         );
-        void delTask(int task_id);
+        Q_INVOKABLE void delTask(const int& task_id);
         void getAllUserTasks(int user_id);
 
     private: 
@@ -37,8 +38,9 @@ class TaskHandler : public QObject {
         std::vector<Task> m_tasks;
 
         PGconn* m_conn;
-        QQuickWindow* m_taskAddWin;
         QQmlApplicationEngine* m_engine;
+        QQuickWindow* m_tasksWin; // tasks.qml
+        QQuickWindow* m_taskAddWin; // taskAddition.qml
 };
 
 #endif

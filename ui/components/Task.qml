@@ -2,6 +2,8 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15 
 
+
+//! fix animation error
 Rectangle {
     id: task
     objectName: "task"
