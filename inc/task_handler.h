@@ -9,6 +9,9 @@
 #include <QQmlProperty>
 #include <QQmlApplicationEngine>
 #include <QQmlComponent>
+#include <QListView>
+#include <QAbstractListModel>
+#include <QVariant>
 
 class TaskHandler : public QObject {
     Q_OBJECT;
@@ -27,16 +30,16 @@ class TaskHandler : public QObject {
         Q_INVOKABLE void closeAdditionWin();
 
         Q_INVOKABLE void addTask(
-            const QString& task_name,
-            const QString& task_text
+            const QString&,
+            const QString&
         );
-        Q_INVOKABLE void delTask(const int& task_id);
-        void getAllUserTasks(int user_id);
+        Q_INVOKABLE void delTask(const int&);
+        void getAllUserTasks();
 
     private: 
-        int m_user_id;
+        User* m_user;
 
-        std::vector<Task> m_tasks;
+        std::vector<Task*> m_tasks;
 
         PGconn* m_conn;
         QQmlApplicationEngine* m_engine;

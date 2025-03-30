@@ -113,5 +113,5 @@ bool Query::isAdmin(std::string username) {
     std::string isAdmin = PQgetvalue(res, 0, 0);
     PQclear(res);
 
-    return (isAdmin == "true") ? true : false;
+    return (isAdmin == "t") ? true : false;
 }

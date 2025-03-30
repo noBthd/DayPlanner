@@ -20,12 +20,16 @@ class Task {
         bool getDone();
         bool getExpire();
         
+        void setID(int);
         void setTaskName(std::string);
         void setTaskText(std::string);
+        void setTime(std::string);
+        void setDone(bool);
+        void setExpired(bool);
+
         void done();
         void expired();
 
-        
         private:
         PGconn* m_conn;
         
@@ -33,11 +37,12 @@ class Task {
         int m_id;
         std::string* m_task_name;
         std::string* m_task_text;
+        std::string* m_time;
         
         // done/not 
         bool m_done = false; 
         // expired/not
-        bool m_expidred = false;
+        bool m_expired = false;
         
         void setNewId();
         int getPrevId();

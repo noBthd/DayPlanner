@@ -32,13 +32,16 @@ bool User::login() {
     }
 
     std::string storedHash = m_query->getUserPassword(m_username);
-    // qDebug() << "STORED HASH: " << storedHash << "\n";
-    // qDebug() << "PASSWORD HASH: " << m_password.hashed_password << "\n";
 
     if (m_password.hashed_password != storedHash) {
         qDebug() << "Password isn't right\n";
         return false;
     } 
+
+    m_admin = isAdmin();
+    if (m_admin) {
+        qDebug() << "\tUSER IS ADMIN";
+    }
 
     qDebug() << "User logged in\n";
     return true;
@@ -54,4 +57,8 @@ bool User::isAdmin() {
 
 std::string User::getUsername() {
     return m_username;
+}
+
+int User::getID() {
+    return m_id;
 }

@@ -14,10 +14,12 @@ class User {
         bool isAdmin();
         bool exists();
         bool login();
-        void getHash();
         bool regUser();
-        std::string getUsername();
 
+        void getHash();
+        std::string getUsername();
+        int getID();
+        
     private:
         Query* m_query;
 
