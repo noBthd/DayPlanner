@@ -2,6 +2,7 @@
 #define TASK_HANDLER_H
 
 #include "libpq-fe.h"
+#include "reg_handler.h"
 #include "task.h"
 #include <QObject>
 #include <QQuickView>
@@ -16,7 +17,7 @@ class TaskHandler : public QObject {
         explicit TaskHandler(
             QQmlApplicationEngine* engine = nullptr,
             PGconn* conn = nullptr,
-            QQuickWindow* win = nullptr,
+            RegHandler* rh = nullptr,
             QObject* parent = nullptr
         );
 
@@ -41,6 +42,7 @@ class TaskHandler : public QObject {
         QQmlApplicationEngine* m_engine;
         QQuickWindow* m_tasksWin; // tasks.qml
         QQuickWindow* m_taskAddWin; // taskAddition.qml
+        RegHandler* m_rh;
 };
 
 #endif

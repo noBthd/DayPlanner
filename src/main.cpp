@@ -33,9 +33,8 @@ int main(int argc, char *argv[]) {
     engine.rootContext()->setContextProperty("regHandler", &regHandler);
 
     // task handler
-    TaskHandler taskHandler(&engine, db->connection().get(), regHandler.getWin());
+    TaskHandler taskHandler(&engine, db->connection().get(), &regHandler);
     engine.rootContext()->setContextProperty("taskHandler", &taskHandler);
-
 
     engine.load(QUrl(QStringLiteral("qrc:/ui/login.qml"))); 
 

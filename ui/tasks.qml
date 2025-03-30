@@ -59,7 +59,7 @@ ApplicationWindow {
                     spacing: 10
 
                     snapMode: ListView.SnapOneItem
-                    property int taskIndex: -1
+                    property int tid: -1
 
                     delegate: Task {
                         width: ListView.view.width - 20
@@ -70,7 +70,7 @@ ApplicationWindow {
                         MouseArea {
                             anchors.fill: parent
                             onClicked: {
-                                lv.taskIndex = index
+                                lv.tid = index
                             }
                         }
                     }
@@ -113,7 +113,7 @@ ApplicationWindow {
                         anchors.fill: parent
 
                         onClicked: {
-                            taskHandler.delTask(lv.taskIndex)
+                            taskHandler.delTask(lv.tid)
                         } 
                     }
                 }

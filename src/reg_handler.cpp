@@ -34,10 +34,22 @@ void RegHandler::loginUser(const QString& login, const QString& password) {
         }
 
         QQmlComponent component(m_engine, QUrl(QStringLiteral("qrc:/ui/tasks.qml")));
+        if (component.status() != QQmlComponent::Ready) {
+            qDebug() << "COMPONENT LOAD ERR: " << component.errorString();
+            return;
+        }
+
         QObject* profileObject = component.create();
+        if (!profileObject) {
+            qDebug() << "FAILED TO CREATE COMPONENT";
+            return;
+        }
+
         m_profileWindow = qobject_cast<QQuickWindow*>(profileObject);
-        if (m_profileWindow) {
-            m_profileWindow->show(); 
+        if (!m_profileWindow) {
+            qDebug() << "COMPONENT ISN'T A WINDOW";
+            delete profileObject;
+            return;
         }
     }
 }
@@ -49,7 +61,7 @@ void RegHandler::logoutUser() {
         }
 
         QObject* rootObject = m_engine->rootObjects().first();
-        QQuickWindow* window = qobject_cast<QQuickWindow *>(rootObject);
+        QQuickWindow* window = qobject_cast<QQuickWindow*>(rootObject);
         if (window) {
             window->show();
         }
@@ -64,4 +76,6 @@ QString RegHandler::getQUsername() { return m_user == nullptr ? "" : QString::fr
 
 User* RegHandler::getUser() { return m_user.get(); }
 
-QQuickWindow* RegHandler::getWin() { return m_profileWindow; };
+QQuickWindow* RegHandler::getWin() { //? tmp
+    return m_profileWindow; 
+};
