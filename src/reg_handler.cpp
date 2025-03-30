@@ -3,10 +3,12 @@
 RegHandler::RegHandler(QQmlApplicationEngine* engine, PGconn* conn, QObject* parent) 
     : QObject(parent), m_engine(engine) {
     m_query = std::make_unique<Query>(conn);
+
 }
 
 RegHandler::~RegHandler() {}
 
+//! fix registration window open
 void RegHandler::regUser(const QString& login, const QString& password) {
     m_user = std::make_unique<User>(login.toStdString(), password.toStdString(), m_query.get());
 

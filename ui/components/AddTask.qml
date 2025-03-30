@@ -19,7 +19,7 @@ Rectangle {
         anchors.fill: parent
 
         onClicked: {
-            
+            taskHandler.openAdditionWin()
         } 
     }
 

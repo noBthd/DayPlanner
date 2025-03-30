@@ -3,6 +3,7 @@
         <!-- main -->
         <file>login.qml</file>
         <file>tasks.qml</file>
+        <file>taskAddition.qml</file>
 
         <!-- components -->
         <file>components/ProfileButton.qml</file>
@@ -15,6 +16,7 @@
         <file>components/TimeChoose.qml</file>
         <file>components/TextTimeInput.qml</file>
         <file>components/CompChoose.qml</file>
+        <file>components/NameInput.qml</file>
         
 
         <!-- ?assets -->

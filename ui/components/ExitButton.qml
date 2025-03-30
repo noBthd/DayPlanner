@@ -51,5 +51,9 @@ Rectangle {
 
     MouseArea {
         anchors.fill: parent
+
+        onClicked: {
+            taskHandler.closeAdditionWin()
+        }
     }
 }

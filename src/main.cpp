@@ -5,7 +5,7 @@
 
 #include "reg_handler.h"
 #include "sql/pgconn.h"
-#include "task.h"
+#include "task_handler.h"
 
 
 int main(int argc, char *argv[]) {
@@ -28,14 +28,14 @@ int main(int argc, char *argv[]) {
     }
 
 
-
+    // reg handler
     RegHandler regHandler(&engine, db->connection().get());
     engine.rootContext()->setContextProperty("regHandler", &regHandler);
 
-    // add task_hadeler
-    Task task(db->connection().get());
+    // task handler
+    TaskHandler taskHandler(&engine, db->connection().get());
+    engine.rootContext()->setContextProperty("taskHandler", &taskHandler);
 
-    // engine.rootContext()->setContextProperty("taskHandler", &taskHandler);
 
     engine.load(QUrl(QStringLiteral("qrc:/ui/login.qml"))); 
 
