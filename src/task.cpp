@@ -4,7 +4,7 @@
 Task::Task(PGconn* conn, std::string* name, std::string* text) 
     : m_conn(conn), m_task_name(name), m_task_text(text)
 {
-    setNewId();
+    // setNewId();
 }
 
 Task::~Task() {} 
@@ -46,7 +46,7 @@ int Task::getPrevId() {
 
     PGresult* res = PQexec(m_conn, query.c_str());
     if (PQresultStatus(res) != PGRES_TUPLES_OK) {
-        qDebug() << "Query failed: " << PQerrorMessage(m_conn) << "\n";
+        qDebug() << "\tFAILED TO GET PREV TASK ID: " << PQerrorMessage(m_conn) << "\n";
         PQclear(res);
         return 0;
     }

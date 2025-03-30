@@ -4,6 +4,7 @@
 #include "libpq-fe.h"
 #include "reg_handler.h"
 #include "task.h"
+#include <vector>
 #include <QObject>
 #include <QQuickView>
 #include <QQmlProperty>
@@ -38,10 +39,10 @@ class TaskHandler : public QObject {
 
     private: 
         User* m_user;
-
         std::vector<Task*> m_tasks;
-
+    
         PGconn* m_conn;
+    
         QQmlApplicationEngine* m_engine;
         QQuickWindow* m_tasksWin; // tasks.qml
         QQuickWindow* m_taskAddWin; // taskAddition.qml
