@@ -22,7 +22,7 @@ void User::getHash() {
 
 bool User::regUser() {
     m_query->createUser(m_username, m_password, m_admin);
-    return false;
+    return true;
 }
 
 bool User::login() {

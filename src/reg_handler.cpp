@@ -6,20 +6,38 @@ RegHandler::RegHandler(QQmlApplicationEngine* engine, PGconn* conn, QObject* par
 
 }
 
-RegHandler::~RegHandler() {}
+RegHandler::~RegHandler() {
+    delete m_engine;
+}
 
-//! fix registration window open
 void RegHandler::regUser(const QString& login, const QString& password) {
     m_user = std::make_unique<User>(login.toStdString(), password.toStdString(), m_query.get());
 
     if (m_user->regUser()) {
-        QObject *rootObject = m_engine->rootObjects().first();
-        QQuickWindow *window = qobject_cast<QQuickWindow *>(rootObject);
-
+        QObject* rootObject = m_engine->rootObjects().first();
+        QQuickWindow* window = qobject_cast<QQuickWindow *>(rootObject);
         if (window) {
-            window->close();
+            window->hide();
         }
-        m_engine->load(QUrl(QStringLiteral("qrc:/ui/tasks.qml")));
+
+        QQmlComponent component(m_engine, QUrl(QStringLiteral("qrc:/ui/tasks.qml")));
+        if (component.status() != QQmlComponent::Ready) {
+            qDebug() << "COMPONENT LOAD ERR: " << component.errorString();
+            return;
+        }
+
+        QObject* profileObject = component.create();
+        if (!profileObject) {
+            qDebug() << "FAILED TO CREATE COMPONENT";
+            return;
+        }
+
+        m_profileWindow = qobject_cast<QQuickWindow*>(profileObject);
+        if (!m_profileWindow) {
+            qDebug() << "COMPONENT ISN'T A WINDOW";
+            delete profileObject;
+            return;
+        }
     }
 }
 
