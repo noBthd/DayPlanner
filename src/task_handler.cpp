@@ -97,7 +97,7 @@ void TaskHandler::getAllUserTasks() {
         << "\n\tTASK TEXT: " << QString::fromUtf8(task.getTaskText()->c_str())
         << "\n\tTASK TIME" << QString::fromUtf8(task.getTime()->c_str())
         << "\n\tTASK DONE: " << task.getDone()
-        << "\n\tTASK EPIRED" << task.getExpire();
+        << "\n\tTASK EPIRED" << task.getExpire() << "\n";
     }
 
     PQclear(res);
