@@ -39,7 +39,7 @@ class TaskHandler : public QObject {
 
     private: 
         User* m_user;
-        std::vector<Task*> m_tasks;
+        std::vector<Task>* m_tasks;
     
         PGconn* m_conn;
     

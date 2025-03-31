@@ -15,15 +15,17 @@ class Task {
 
         ~Task();
 
-        std::string getTaskName();
-        std::string getTaskText();
+        int getID();
+        std::string* getTaskName();
+        std::string* getTaskText();
+        std::string* getTime();
         bool getDone();
         bool getExpire();
-        
+
         void setID(int);
-        void setTaskName(std::string);
-        void setTaskText(std::string);
-        void setTime(std::string);
+        void setTaskName(std::string*);
+        void setTaskText(std::string*);
+        void setTime(std::string*);
         void setDone(bool);
         void setExpired(bool);
 

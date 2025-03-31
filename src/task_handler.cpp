@@ -1,10 +1,13 @@
 #include "task_handler.h"
 #include "libpq-fe.h"
 #include "task.h"
+#include <string>
+#include <vector>
 
 TaskHandler::TaskHandler(QQmlApplicationEngine* engine, PGconn* conn, RegHandler* rh, QObject* parent) //? tmp
     : m_conn(conn), m_engine(engine), m_rh(rh), QObject(parent)
 {
+    m_tasks = new std::vector<Task>;
     //? user is null like in 35 row
     // qDebug() << "\n\t" << m_user << "\n\t" << m_conn;
 }
@@ -44,7 +47,6 @@ void TaskHandler::delTask(const int& task_id) {
     qDebug() << "\tTASK INDEX: " << task_id;
 }
 
-//! err segmetation fault
 void TaskHandler::getAllUserTasks() {
     std::string query = "SELECT * FROM tasks WHERE user_id = '" + std::to_string(m_user->getID()) + "';"; 
 
@@ -62,23 +64,42 @@ void TaskHandler::getAllUserTasks() {
     }
     
     int nRows = PQntuples(res);  
-    for (int row = 0; row < nRows; row++) {
-        //! fix segmentatiob fault
-        // Task task;
+    if (m_tasks)
+    {    
+        for (int row = 0; row < nRows; row++) {
+            Task task;
+            std::string* t_name = new std::string;
+            *t_name = std::string(PQgetvalue(res, row, 2));
+            std::string* t_text = new std::string;
+            *t_text = std::string(PQgetvalue(res, row, 3));
+            std::string* t_time = new std::string;
+            *t_time = std::string(PQgetvalue(res, row, 4));
 
-        // task.setID(std::stoi(PQgetvalue(res, row, 0)));
-        // task.setTaskName(PQgetvalue(res, row, 2));
-        // task.setTaskText(PQgetvalue(res, row, 3));
+            task.setID(std::stoi(PQgetvalue(res, row, 0)));
+            task.setTaskName(t_name); //! fix segmentatiob fault
+            task.setTaskText(t_text); //! fix segmentatiob fault
 
-        // task.setTime(PQgetvalue(res, row, 4));
-        // bool tmp = (std::string(PQgetvalue(res, row, 5)) == "t") ? true : false;
-        // task.setDone(tmp);
-        // tmp = (std::string(PQgetvalue(res, row, 6)) == "t") ? true : false;
-        // task.setExpired(tmp);
+            task.setTime(t_time); //! fix segmentatiob fault
+            bool tmp = (std::string(PQgetvalue(res, row, 5)) == "t") ? true : false;
+            task.setDone(tmp);
+            tmp = (std::string(PQgetvalue(res, row, 6)) == "t") ? true : false;
+            task.setExpired(tmp);
 
-        // m_tasks.push_back(&task);
+            m_tasks->push_back(task);
+        }
     }
-    
+
+    //TODO DEBUG
+    for (Task task : *m_tasks) {
+        // Task task = m_tasks->back();
+        qDebug() << "\tTASK ID: "<< task.getID() 
+        << "\n\tTASK NAME: " << QString::fromUtf8(task.getTaskName()->c_str())
+        << "\n\tTASK TEXT: " << QString::fromUtf8(task.getTaskText()->c_str())
+        << "\n\tTASK TIME" << QString::fromUtf8(task.getTime()->c_str())
+        << "\n\tTASK DONE: " << task.getDone()
+        << "\n\tTASK EPIRED" << task.getExpire();
+    }
+
     PQclear(res);
 }
 
