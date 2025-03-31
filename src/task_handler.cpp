@@ -8,8 +8,6 @@ TaskHandler::TaskHandler(QQmlApplicationEngine* engine, PGconn* conn, RegHandler
     : m_conn(conn), m_engine(engine), m_rh(rh), QObject(parent)
 {
     m_tasks = new std::vector<Task>;
-    //? user is null like in 35 row
-    // qDebug() << "\n\t" << m_user << "\n\t" << m_conn;
 }
 
 TaskHandler::~TaskHandler() {};
@@ -76,10 +74,10 @@ void TaskHandler::getAllUserTasks() {
             *t_time = std::string(PQgetvalue(res, row, 4));
 
             task.setID(std::stoi(PQgetvalue(res, row, 0)));
-            task.setTaskName(t_name); //! fix segmentatiob fault
-            task.setTaskText(t_text); //! fix segmentatiob fault
+            task.setTaskName(t_name);
+            task.setTaskText(t_text);
 
-            task.setTime(t_time); //! fix segmentatiob fault
+            task.setTime(t_time); 
             bool tmp = (std::string(PQgetvalue(res, row, 5)) == "t") ? true : false;
             task.setDone(tmp);
             tmp = (std::string(PQgetvalue(res, row, 6)) == "t") ? true : false;
