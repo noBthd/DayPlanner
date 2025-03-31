@@ -58,7 +58,7 @@ std::string Query::getUserPassword(std::string username) {
 
 //! fix query 
 PGresult* Query::getUserByID(int id) {
-    std::string query = "SELECT COUNT(*) FROM users WHERE id = '" + std::to_string(id) + "';";
+    std::string query = "SELECT * FROM users WHERE id = '" + std::to_string(id) + "';";
     
     PGresult* res = PQexec(m_conn, query.c_str());
     if (PQresultStatus(res) != PGRES_TUPLES_OK) {
