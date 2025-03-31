@@ -26,6 +26,7 @@ set(SOURCES
     src/reg_handler.cpp
     src/task_handler.cpp
     src/task.cpp
+    src/lv_tasks_model.cpp
 )
 
 set(INCLUDES
@@ -36,6 +37,7 @@ set(INCLUDES
     inc/reg_handler.h
     inc/task_handler.h
     inc/task.h
+    inc/lv_tasks_model.h
 )
 
 qt_add_resources(RESOURCES 
