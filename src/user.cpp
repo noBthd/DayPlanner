@@ -6,14 +6,15 @@
 
 User::User (std::string username, std::string str_password, Query* query) 
     :m_query(query), m_username(username), m_password(str_password) {
-
+    //! fix isn't necessary ->
     if (m_query->userExist(username)) {
         m_id    = std::stoi(m_query->getUserID(username));
         m_admin = m_query->isAdmin(username);
     } else {
-        m_id    = -1;
-        m_admin = false;
+        m_id    = -1;       //? just this
+        m_admin = false;    //? just this
     }
+    //! <-
 }
 
 void User::getHash() {
@@ -43,7 +44,8 @@ bool User::login() {
         qDebug() << "\tUSER IS ADMIN";
     }
 
-    qDebug() << "User logged in\n";
+    m_id = std::stoi(m_query->getUserID(m_username));
+    qDebug() << "\tUSER LOGGED IN AS " << m_username  << "\tUSER ID: " << std::stoi(m_query->getUserID(m_username)) << "\n";
     return true;
 }
 

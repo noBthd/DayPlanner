@@ -87,7 +87,7 @@ void TaskHandler::getAllUserTasks() {
         }
     }
 
-    //TODO DEBUG
+    //? DEBUG ?//
     for (Task task : *m_tasks) {
         // Task task = m_tasks->back();
         qDebug() << "\tTASK ID: "<< task.getID() 

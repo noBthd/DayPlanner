@@ -56,6 +56,7 @@ std::string Query::getUserPassword(std::string username) {
     return hash;
 }
 
+//! fix query 
 PGresult* Query::getUserByID(int id) {
     std::string query = "SELECT COUNT(*) FROM users WHERE id = '" + std::to_string(id) + "';";
     
@@ -70,7 +71,7 @@ PGresult* Query::getUserByID(int id) {
 }
 
 std::string Query::getUserID(std::string username) {
-    std::string query = "SELECT COUNT(*) FROM users WHERE username = '" + username + "';";
+    std::string query = "SELECT id FROM users WHERE username = '" + username + "';";
     
     PGresult* res = PQexec(m_conn, query.c_str());
     if (PQresultStatus(res) != PGRES_TUPLES_OK) {
