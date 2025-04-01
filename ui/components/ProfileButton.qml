@@ -96,6 +96,7 @@ Rectangle {
 
                     onClicked: {
                         regHandler.logoutUser()
+                        taskHandler.clearUser()
                         username: ""
                     }
                 }

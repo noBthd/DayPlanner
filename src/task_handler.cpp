@@ -20,7 +20,10 @@ void TaskHandler::setUser() {
 }
 
 //? user data clear on close
-
+void TaskHandler::clearUser() {
+    m_user = nullptr;
+    m_tasks->clear();
+}
 
 void TaskHandler::openAdditionWin() {
     if (!m_taskAddWin) {
