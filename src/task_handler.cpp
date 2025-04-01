@@ -44,7 +44,7 @@ void TaskHandler::closeAdditionWin() {
     m_taskAddWin->hide();
 }
 
-//! add inserting time done expired;
+//TODO: add inserting time done expired;
 //? db adding/removing task
 void TaskHandler::insertTask(const QString& task_name, const QString& task_text) {
     std::string id = std::to_string(m_user->getID());
@@ -63,7 +63,17 @@ void TaskHandler::insertTask(const QString& task_name, const QString& task_text)
 }
 
 void TaskHandler::removeTask(int task_id) {
+    std::string query = "DELETE FROM tasks WHERE task_id = " + std::to_string(task_id) + "";
 
+    PGresult* res = PQexec(m_conn, query.c_str());
+    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+        qDebug() << "\n\tFAILED TO DELETE THE TASK: " << PQerrorMessage(m_conn) << "\n";
+        PQclear(res);
+        return;
+    }
+
+    PQclear(res);
+    qDebug() << "TASK DELETED";
 }
 //? db adding/removing task
 
