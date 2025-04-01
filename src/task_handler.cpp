@@ -92,7 +92,7 @@ void TaskHandler::getAllUserTasks() {
     std::string query = "SELECT * FROM tasks WHERE user_id = '" + std::to_string(m_user->getID()) + "';"; 
 
     PGresult* res = PQexec(m_conn, query.c_str());
-    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+    if (PQresultStatus(res) != PGRES_COMMAND_OK) {
         qDebug() << "FAILED TO GET TASKS: " << PQerrorMessage(m_conn) << "\n";
         PQclear(res);
         return;

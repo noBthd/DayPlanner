@@ -37,7 +37,7 @@ class TaskHandler : public QObject {
             const QString&,
             const QString&
         );
-        void removeTask(int);
+        Q_INVOKABLE void removeTask(int);
 
         Q_INVOKABLE void delTask(const int&);
         void getAllUserTasks();
