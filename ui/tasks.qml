@@ -16,6 +16,10 @@ ApplicationWindow {
     visible: true
     color: "#0C121D"
 
+    Component.onCompleted: {
+        taskHandler.setUser()
+    }
+
     GridLayout {
         anchors.fill: parent  
         anchors.margins: 10

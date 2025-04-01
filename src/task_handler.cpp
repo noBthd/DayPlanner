@@ -12,10 +12,17 @@ TaskHandler::TaskHandler(QQmlApplicationEngine* engine, PGconn* conn, RegHandler
 
 TaskHandler::~TaskHandler() {};
 
-void TaskHandler::openAdditionWin() {
+//? SETTING USER ON LOAD
+void TaskHandler::setUser() { 
     m_user = m_rh->getUser();
+    qDebug() << "USER DATA LOADED: " << m_user->getID();
     getAllUserTasks();
+}
 
+//? user data clear on close
+
+
+void TaskHandler::openAdditionWin() {
     if (!m_taskAddWin) {
         QQmlComponent component(m_engine, QUrl(QStringLiteral("qrc:/ui/taskAddition.qml")));
         QObject* m_object = component.create();
@@ -24,15 +31,38 @@ void TaskHandler::openAdditionWin() {
     if (m_taskAddWin) {
         m_taskAddWin->show(); 
     }
+
+    std::string test1 = "test";
+    std::string test2 = "yesy dqdasdasd";
+    insertTask(QString::fromStdString(test1), QString::fromStdString(test1));
 }
 
 void TaskHandler::closeAdditionWin() {
     m_taskAddWin->hide();
 }
 
-void TaskHandler::addTask(const QString& task_name, const QString& task_text) {
+//! add inserting time done expired;
+//? db adding/removing task
+void TaskHandler::insertTask(const QString& task_name, const QString& task_text) {
+    std::string id = std::to_string(m_user->getID());
+    std::string query = "INSERT INTO tasks(user_id, task_name,task_text, expire_time, is_done, is_expired) VALUES (" 
+        + id + ", '" + task_name.toStdString() + "', '" + task_text.toStdString() + "', '00:00:00', 't', 'f')";
+    
+    PGresult* res = PQexec(m_conn, query.c_str());
+    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+        qDebug() << "\n\tFAILED TO INSERT TASK: " << PQerrorMessage(m_conn) << "\n";
+        PQclear(res);
+        return;
+    }
+
+    PQclear(res);
+    qDebug() << "\tTASK INSERTED\n";
+}
+
+void TaskHandler::removeTask(int task_id) {
 
 }
+//? db adding/removing task
 
 void TaskHandler::delTask(const int& task_id) {
     qDebug() << "\tREG HANDLER: " << m_rh->getWin();
@@ -42,7 +72,7 @@ void TaskHandler::delTask(const int& task_id) {
         qDebug() << "NO TASK CHOOSEN";
         return;
     }
-    qDebug() << "\tTASK INDEX: " << task_id;
+    qDebug() << "\tTASK INDEX: " << task_id; //? DEBUG
 }
 
 void TaskHandler::getAllUserTasks() {

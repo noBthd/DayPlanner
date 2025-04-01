@@ -27,13 +27,18 @@ class TaskHandler : public QObject {
 
         ~TaskHandler();
 
+        Q_INVOKABLE void setUser();
+        Q_INVOKABLE void clearUser();
+
         Q_INVOKABLE void openAdditionWin();
         Q_INVOKABLE void closeAdditionWin();
 
-        Q_INVOKABLE void addTask(
+        Q_INVOKABLE void insertTask(
             const QString&,
             const QString&
         );
+        void removeTask(int);
+
         Q_INVOKABLE void delTask(const int&);
         void getAllUserTasks();
 
