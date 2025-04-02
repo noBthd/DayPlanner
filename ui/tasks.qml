@@ -118,7 +118,7 @@ ApplicationWindow {
 
                         onClicked: {
                             taskHandler.delTask(lv.tid)
-                            taskHandler.removeTask(9)
+                            taskHandler.removeTask(14)
                         } 
                     }
                 }
