@@ -7,31 +7,31 @@ Query::Query(PGconn* conn) {
     m_conn = conn;
 };
 
-void Query::createUser(std::string username, Password password, bool admin) {
+bool Query::createUser(std::string username, Password password, bool admin) {
     std::string str_admin = admin ? "true" : "false";
     std::string query = "INSERT INTO users(username, password, is_admin) VALUES ('" + username + "', '" + password.hashed_password + "', '" + str_admin + "')";
 
     if (userExist(username)) {
         qDebug() << "User already exists";
-        return;
+        return false;
     }
 
     if (!password.isStrong()) {
         qDebug() << "Password isn't strong enough";
-        return;
+        return false;
     }
 
     PGresult* res = PQexec(m_conn, query.c_str());
     if (PQresultStatus(res) == PGRES_TUPLES_OK) {
         qDebug() << "Query failed: " << PQerrorMessage(m_conn);
         PQclear(res);
-        return;
+        return false;
     }
 
     qDebug() << "User created succesfully";
     PQclear(res);
 
-    return;
+    return true;
 }
 
 std::string Query::getUserPassword(std::string username) {

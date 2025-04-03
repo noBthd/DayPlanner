@@ -14,7 +14,7 @@ class Query {
         std::string getUserID(std::string);
         std::string getUserPassword(std::string);
         PGresult* getUserByID(int);
-        void createUser(std::string, Password, bool);
+        bool createUser(std::string, Password, bool);
         bool userExist(std::string);
         bool isAdmin(std::string);
     private:
