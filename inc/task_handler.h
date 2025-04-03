@@ -43,9 +43,9 @@ class TaskHandler : public QObject {
         void getAllUserTasks();
 
     private: 
-        User* m_user;
+        User* m_user; 
         std::vector<Task>* m_tasks;
-    
+        
         PGconn* m_conn;
     
         QQmlApplicationEngine* m_engine;

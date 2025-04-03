@@ -34,10 +34,6 @@ void TaskHandler::openAdditionWin() {
     if (m_taskAddWin) {
         m_taskAddWin->show(); 
     }
-
-    std::string test1 = "test";
-    std::string test2 = "yesy dqdasdasd";
-    insertTask(QString::fromStdString(test1), QString::fromStdString(test1));
 }
 
 void TaskHandler::closeAdditionWin() {
@@ -131,9 +127,10 @@ void TaskHandler::getAllUserTasks() {
     }
 
     //? DEBUG ?//
+    qDebug() << "\nTASKS:";
     for (Task task : *m_tasks) {
         // Task task = m_tasks->back();
-        qDebug() << "\tTASK ID: "<< task.getID() 
+        qDebug() << "\n\tTASK ID: "<< task.getID() 
         << "\n\tTASK NAME: " << QString::fromUtf8(task.getTaskName()->c_str())
         << "\n\tTASK TEXT: " << QString::fromUtf8(task.getTaskText()->c_str())
         << "\n\tTASK TIME" << QString::fromUtf8(task.getTime()->c_str())

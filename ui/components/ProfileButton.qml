@@ -78,7 +78,7 @@ Rectangle {
                 Behavior on scale {
                     NumberAnimation {
                         duration: 200
-                        easing: Easing.In
+                        easing.type: Easing.In
                     }
                 }
 

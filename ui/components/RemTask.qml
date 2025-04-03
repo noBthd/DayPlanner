@@ -5,8 +5,8 @@ Rectangle {
     id: remTask
     objectName: "remTask"
 
-    width: remTaskWidth
-    height: remTaskHeight
+    width: profileWidth
+    height: profileHeight
 
     color: "white"
 

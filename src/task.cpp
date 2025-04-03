@@ -23,8 +23,6 @@ bool Task::getDone() { return m_done; }
 
 bool Task::getExpire() { return m_expired; }
 
-
-
 //? GETTERS ?//
 
 //==========================//

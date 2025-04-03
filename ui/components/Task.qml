@@ -23,7 +23,7 @@ Rectangle {
     Behavior on scale {
         NumberAnimation {
             duration: 200
-            easing: Easing.InQuad
+            easing.type: Easing.OutQuad
         }
     }
     
@@ -35,14 +35,14 @@ Rectangle {
             property: "scale"
             to: 0.995
             duration: 100
-            easing: Easing.InQuad
+            easing.type: Easing.OutQuad
         }
         NumberAnimation {
             target: task
             property: "scale"
             to: 1.005
             duration: 100
-            easing: Easing.InQuad
+            easing.type: Easing.OutQuad
         }
     }
 

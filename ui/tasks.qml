@@ -43,8 +43,7 @@ ApplicationWindow {
             radius: 12.5
             color: "#222B3B"
 
-            
-
+            //! fix tid 
             Item {
                 id: ilv
                 anchors.centerIn: parent
