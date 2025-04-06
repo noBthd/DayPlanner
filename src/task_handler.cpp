@@ -142,4 +142,3 @@ void TaskHandler::getAllUserTasks() {
 }
 
 //! add setting task on loading ui
-
