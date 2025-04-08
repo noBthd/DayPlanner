@@ -16,10 +16,29 @@ Rectangle {
         anchors.margins: 10
         anchors.centerIn: parent
 
-        text: "completeness"
+        text: "status"
 
         font.bold: true
         font.pixelSize: 12
         color: "#ffffff"
     }
 }
+
+//!test text into width
+// Text {
+//     // anchors.margins: 10
+//     anchors.centerIn: parent
+
+//     text: "completeness"
+
+//     font.bold: true
+//     font.pixelSize: 12
+//     color: "#ffffff"
+
+//     Rectangle {
+//         anchors.fill: parent 
+
+//         color: "#2C2C2C"
+//         radius: 12.5
+//     }
+// }
