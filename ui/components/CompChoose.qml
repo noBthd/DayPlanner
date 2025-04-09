@@ -26,7 +26,7 @@ Rectangle {
 
 //!test text into width
 // Text {
-//     // anchors.margins: 10
+//     anchors.margins: 10
 //     anchors.centerIn: parent
 
 //     text: "completeness"
