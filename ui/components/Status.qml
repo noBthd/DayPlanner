@@ -12,7 +12,20 @@ Rectangle {
 
     property int sHeight: 20
 
-    property string sStatus: "in progress" //? done(green)/not(red)/in progress(blue)
+    property string sStatus: "def" //? default(gray)/done(green)/not(red)/in progress(orange)
+    
+    property string sColor: {
+        switch (sStatus) {
+        case "done":
+            return "green"
+        case "not done":
+            return "#9e0000"
+        case "in progress":
+            return "#ff9122"
+        default:
+            return "gray"
+        }
+    }
 
     radius: sHeight / 2
     color: "#222B3B"
@@ -42,11 +55,11 @@ Rectangle {
             width: sHeight - 4
             height: sHeight - 4
 
-            color: "green"
+            color: sColor
             radius: width / 2
             
             anchors.right: parent.right
-            anchors.rightMargin: 2
+            anchors.rightMargin: 1
             anchors.verticalCenter: parent.verticalCenter
         }
     }

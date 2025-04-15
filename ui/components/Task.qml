@@ -94,6 +94,7 @@ Rectangle {
             Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
 
             sHeight: 16
+            sStatus: "in progress"
         }
         // // status indicator
         // Rectangle {
