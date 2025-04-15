@@ -17,6 +17,7 @@
         <file>components/TextTimeInput.qml</file>
         <file>components/CompChoose.qml</file>
         <file>components/NameInput.qml</file>
+        <file>components/Status.qml</file>
         
 
         <!-- ?assets -->

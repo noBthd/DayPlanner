@@ -3,7 +3,6 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15 
 
 
-//! fix animation error
 Rectangle {
     id: task
     objectName: "task"
@@ -70,12 +69,14 @@ Rectangle {
         rows: 3
         columns: 2
 
+        columnSpacing: 10
+
         // task name
         Text {
             Layout.row: 0
             Layout.column: 0
 
-            Layout.preferredWidth: 50
+            Layout.preferredWidth: 20
             Layout.preferredHeight: 16
 
             text: taskName
@@ -85,6 +86,57 @@ Rectangle {
             font.bold: true
         } // task name
 
+
+        Status {
+            Layout.row: 0
+            Layout.column: 0
+
+            Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+
+            sHeight: 16
+        }
+        // // status indicator
+        // Rectangle {
+        //     Layout.row: 0
+        //     Layout.column: 0
+
+        //     Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+
+        //     Layout.preferredWidth: 60
+        //     Layout.preferredHeight: 16
+
+        //     color: "#222B3B"
+        //     radius: 8
+
+        //     RowLayout {       
+        //         anchors.margins: 2    
+
+        //         spacing: 4 
+        //         Text {
+        //             Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+
+        //             text: "done"
+        //             color: "#ffffff"
+
+        //             font.bold: true
+        //             font.pixelSize: 12
+        //         }
+
+        //         Item { Layout.fillWidth: true }
+
+        //         Rectangle {
+        //             Layout.preferredWidth: 12
+        //             Layout.preferredHeight: 12
+
+        //             Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+
+        //             radius: 6
+        //             color: "green"
+        //         }
+        //     }
+        // } // status indicator
+    
+        // splitter
         Rectangle {
             Layout.row: 1
             Layout.column: 0
@@ -92,7 +144,7 @@ Rectangle {
             Layout.preferredWidth: parent.width
             Layout.preferredHeight: 1
             color: "#999999"
-        }
+        } // splitter
 
         // task text
         Text {
