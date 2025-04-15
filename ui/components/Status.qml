@@ -5,7 +5,6 @@ import QtQuick.Layouts 2.15
 Rectangle {
     id: sroot
 
-
     width: sText.paintedWidth + sIcon.width + 2 + 4 + 2 + 6
     // 2 (левый отступ) + 4 (зазор между текстом и кружком) + 2 (правый отступ) + (нехватает потому что заезжает)
     height: sHeight

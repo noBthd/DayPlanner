@@ -68,14 +68,16 @@ Rectangle {
         anchors.margins: 10
 
         rows: 3
-        columns: 2
+        columns: 3
 
         columnSpacing: 10
 
-        // task name
+        // Task Name 
         Text {
             Layout.row: 0
             Layout.column: 0
+
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
 
             Layout.preferredWidth: 20
             Layout.preferredHeight: 16
@@ -85,43 +87,47 @@ Rectangle {
 
             font.pixelSize: 16
             font.bold: true
-        } // task name
+        } // Task Name 
 
-        //! fix grid layout error
-        // status indicator
+        // Status Indicator 
         Status {
             Layout.row: 0
-            Layout.column: 0
+            Layout.column: 2 
 
             Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
 
             sHeight: 16
             sStatus: taskStatus
-        } // status indicator
-    
-        // splitter
+        } // Status Indicator 
+
+        // Splitter 
         Rectangle {
             Layout.row: 1
             Layout.column: 0
 
+            Layout.columnSpan: 3 
+
             Layout.preferredWidth: parent.width
             Layout.preferredHeight: 1
-            color: "#999999"
-        } // splitter
 
-        // task text
+            color: "#999999"
+        } // Splitter 
+
+        // Task Text 
         Text {
             Layout.row: 2
             Layout.column: 0
+
+            Layout.columnSpan: 3 
 
             Layout.fillWidth: true
             Layout.fillHeight: true
 
             text: taskText
             color: "#555555"
+            
             wrapMode: Text.Wrap
-
             font.pixelSize: 14
-        } // task text
+        } // Task Text 
     }
 }
