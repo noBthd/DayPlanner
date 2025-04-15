@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15 
+import todo 0.1
 
 import "components"
 
@@ -55,7 +56,7 @@ ApplicationWindow {
                 ListView {
                     id: lv
                     objectName: "lv"
-                    model: 10 
+                    model: taskHandler.lvtask() 
 
                     anchors.fill: parent
                     anchors.bottomMargin: index == lv.model ? 0 : 10
@@ -65,6 +66,10 @@ ApplicationWindow {
                     property int tid: -1
 
                     delegate: Task {
+                        taskName: name
+                        taskText: text
+                        taskStatus: status
+
                         width: ListView.view.width - 20
                         height: 100
 

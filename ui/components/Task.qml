@@ -18,6 +18,7 @@ Rectangle {
 
     property string taskName: "Name"
     property string taskText: "Test textoviwy delo adasdasdasdjksl"
+    property string taskStatus: "def"
 
     Behavior on scale {
         NumberAnimation {
@@ -86,7 +87,8 @@ Rectangle {
             font.bold: true
         } // task name
 
-
+        //! fix grid layout error
+        // status indicator
         Status {
             Layout.row: 0
             Layout.column: 0
@@ -94,48 +96,8 @@ Rectangle {
             Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
 
             sHeight: 16
-            sStatus: "in progress"
-        }
-        // // status indicator
-        // Rectangle {
-        //     Layout.row: 0
-        //     Layout.column: 0
-
-        //     Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-
-        //     Layout.preferredWidth: 60
-        //     Layout.preferredHeight: 16
-
-        //     color: "#222B3B"
-        //     radius: 8
-
-        //     RowLayout {       
-        //         anchors.margins: 2    
-
-        //         spacing: 4 
-        //         Text {
-        //             Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
-
-        //             text: "done"
-        //             color: "#ffffff"
-
-        //             font.bold: true
-        //             font.pixelSize: 12
-        //         }
-
-        //         Item { Layout.fillWidth: true }
-
-        //         Rectangle {
-        //             Layout.preferredWidth: 12
-        //             Layout.preferredHeight: 12
-
-        //             Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-
-        //             radius: 6
-        //             color: "green"
-        //         }
-        //     }
-        // } // status indicator
+            sStatus: taskStatus
+        } // status indicator
     
         // splitter
         Rectangle {

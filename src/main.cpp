@@ -36,6 +36,8 @@ int main(int argc, char *argv[]) {
     TaskHandler taskHandler(&engine, db->connection().get(), &regHandler);
     engine.rootContext()->setContextProperty("taskHandler", &taskHandler);
 
+    qmlRegisterType<LVTask>("todo", 0, 1, "LVTask");
+
     engine.load(QUrl(QStringLiteral("qrc:/ui/login.qml"))); 
 
     return app.exec();

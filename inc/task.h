@@ -19,6 +19,7 @@ class Task {
         std::string* getTaskName();
         std::string* getTaskText();
         std::string* getTime();
+        std::string* getStatus();
         bool getDone();
         bool getExpire();
 
@@ -26,6 +27,7 @@ class Task {
         void setTaskName(std::string*);
         void setTaskText(std::string*);
         void setTime(std::string*);
+        void setStatus(std::string*);
         void setDone(bool);
         void setExpired(bool);
 
@@ -39,6 +41,7 @@ class Task {
         int m_id;
         std::string* m_task_name;
         std::string* m_task_text;
+        std::string* m_status;
         std::string* m_time;
         
         // done/not 

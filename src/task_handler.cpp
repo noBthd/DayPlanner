@@ -7,7 +7,9 @@
 TaskHandler::TaskHandler(QQmlApplicationEngine* engine, PGconn* conn, RegHandler* rh, QObject* parent) //? tmp
     : m_conn(conn), m_engine(engine), m_rh(rh), QObject(parent)
 {
-    m_tasks = new std::vector<Task>;
+    m_tasks = new std::vector<Task*>;
+    m_lvtask = new LVTask(this);
+    m_lvtask->clear();
 }
 
 TaskHandler::~TaskHandler() {};
@@ -23,6 +25,7 @@ void TaskHandler::setUser() {
 void TaskHandler::clearUser() {
     m_user = nullptr;
     m_tasks->clear();
+    m_lvtask->clear();
 }
 
 void TaskHandler::openAdditionWin() {
@@ -101,41 +104,46 @@ void TaskHandler::getAllUserTasks() {
     }
     
     int nRows = PQntuples(res);  
-    if (m_tasks)
-    {    
+    if (m_tasks) {    
         for (int row = 0; row < nRows; row++) {
-            Task task;
-            std::string* t_name = new std::string;
-            *t_name = std::string(PQgetvalue(res, row, 2));
-            std::string* t_text = new std::string;
-            *t_text = std::string(PQgetvalue(res, row, 3));
-            std::string* t_time = new std::string;
-            *t_time = std::string(PQgetvalue(res, row, 4));
-
-            task.setID(std::stoi(PQgetvalue(res, row, 0)));
-            task.setTaskName(t_name);
-            task.setTaskText(t_text);
-
-            task.setTime(t_time); 
-            bool tmp = (std::string(PQgetvalue(res, row, 5)) == "t") ? true : false;
-            task.setDone(tmp);
-            tmp = (std::string(PQgetvalue(res, row, 6)) == "t") ? true : false;
-            task.setExpired(tmp);
-
-            m_tasks->push_back(task);
+            Task* task = new Task(); // создаем на куче
+        
+            std::string* t_name = new std::string(PQgetvalue(res, row, 2));
+            std::string* t_text = new std::string(PQgetvalue(res, row, 3));
+            std::string* t_time = new std::string(PQgetvalue(res, row, 4));
+            std::string* t_status = new std::string(PQgetvalue(res, row, 7));
+        
+            task->setID(std::stoi(PQgetvalue(res, row, 0)));
+            task->setTaskName(t_name);
+            task->setTaskText(t_text);
+            task->setStatus(t_status);
+            task->setTime(t_time);
+        
+            bool tmp = (std::string(PQgetvalue(res, row, 5)) == "t");
+            task->setDone(tmp);
+            tmp = (std::string(PQgetvalue(res, row, 6)) == "t");
+            task->setExpired(tmp);
+        
+            m_tasks->push_back(task);  
+            if(m_lvtask) {
+                qDebug() << "OK";
+                m_lvtask->addTask(task);        
+            }
         }
+        
     }
 
     //? DEBUG ?//
     qDebug() << "\nTASKS:";
-    for (Task task : *m_tasks) {
+    for (Task* task : *m_tasks) {
         // Task task = m_tasks->back();
-        qDebug() << "\n\tTASK ID: "<< task.getID() 
-        << "\n\tTASK NAME: " << QString::fromUtf8(task.getTaskName()->c_str())
-        << "\n\tTASK TEXT: " << QString::fromUtf8(task.getTaskText()->c_str())
-        << "\n\tTASK TIME" << QString::fromUtf8(task.getTime()->c_str())
-        << "\n\tTASK DONE: " << task.getDone()
-        << "\n\tTASK EPIRED" << task.getExpire() << "\n";
+        qDebug() << "\n\tTASK ID: "<< task->getID() 
+        << "\n\tTASK NAME: " << QString::fromUtf8(task->getTaskName()->c_str())
+        << "\n\tTASK TEXT: " << QString::fromUtf8(task->getTaskText()->c_str())
+        << "\n\tTASK TIME" << QString::fromUtf8(task->getTime()->c_str())
+        << "\n\tTASK STATUS: " << QString::fromUtf8(task->getStatus()->c_str())
+        << "\n\tTASK DONE: " << task->getDone()
+        << "\n\tTASK EPIRED" << task->getExpire() << "\n";
     }
 
     PQclear(res);

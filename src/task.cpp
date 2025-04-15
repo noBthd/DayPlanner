@@ -17,7 +17,9 @@ std::string* Task::getTaskName() { return m_task_name; }
 
 std::string* Task::getTaskText() { return m_task_text; }
 
-std::string* Task::getTime() { return m_time;}
+std::string* Task::getTime() { return m_time; }
+
+std::string* Task::getStatus() { return m_status; }
 
 bool Task::getDone() { return m_done; }
 
@@ -36,6 +38,8 @@ void Task::setTaskName(std::string* name) { m_task_name = name; }
 void Task::setTaskText(std::string* text) { m_task_text = text; }
 
 void Task::setTime(std::string* time) { m_time = time; } 
+
+void Task::setStatus(std::string* status) { m_status = status; } 
 
 void Task::setDone(bool done) { m_done = done; }
 

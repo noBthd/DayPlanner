@@ -1,6 +1,7 @@
 #ifndef TASK_HANDLER_H
 #define TASK_HANDLER_H
 
+#include "lv_tasks_model.h"
 #include "libpq-fe.h"
 #include "reg_handler.h"
 #include "task.h"
@@ -42,9 +43,11 @@ class TaskHandler : public QObject {
         Q_INVOKABLE void delTask(const int&);
         void getAllUserTasks();
 
+        Q_INVOKABLE LVTask* lvtask() const { return m_lvtask; }
+
     private: 
         User* m_user; 
-        std::vector<Task>* m_tasks;
+        std::vector<Task*>* m_tasks;
         
         PGconn* m_conn;
     
@@ -52,6 +55,7 @@ class TaskHandler : public QObject {
         QQuickWindow* m_tasksWin; // tasks.qml
         QQuickWindow* m_taskAddWin; // taskAddition.qml
         RegHandler* m_rh;
+        LVTask* m_lvtask;
 };
 
 #endif
