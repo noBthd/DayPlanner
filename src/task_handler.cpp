@@ -24,6 +24,7 @@ void TaskHandler::setUser() {
 //? user data clear on close
 void TaskHandler::clearUser() {
     m_user = nullptr;
+
     m_tasks->clear();
     m_lvtask->clear();
 }
@@ -47,8 +48,8 @@ void TaskHandler::closeAdditionWin() {
 //? db adding/removing task
 void TaskHandler::insertTask(const QString& task_name, const QString& task_text) {
     std::string id = std::to_string(m_user->getID());
-    std::string query = "INSERT INTO tasks(user_id, task_name,task_text, expire_time, is_done, is_expired) VALUES (" 
-        + id + ", '" + task_name.toStdString() + "', '" + task_text.toStdString() + "', '00:00:00', 't', 'f')";
+    std::string query = "INSERT INTO tasks(user_id, task_name,task_text, expire_time, is_expired) VALUES (" 
+        + id + ", '" + task_name.toStdString() + "', '" + task_text.toStdString() + "', '00:00:00', 'f')";
     
     PGresult* res = PQexec(m_conn, query.c_str());
     if (PQresultStatus(res) != PGRES_COMMAND_OK) {
@@ -106,22 +107,20 @@ void TaskHandler::getAllUserTasks() {
     int nRows = PQntuples(res);  
     if (m_tasks) {    
         for (int row = 0; row < nRows; row++) {
-            Task* task = new Task(); // создаем на куче
+            Task* task = new Task(); 
         
             std::string* t_name = new std::string(PQgetvalue(res, row, 2));
             std::string* t_text = new std::string(PQgetvalue(res, row, 3));
             std::string* t_time = new std::string(PQgetvalue(res, row, 4));
-            std::string* t_status = new std::string(PQgetvalue(res, row, 7));
+            std::string* t_status = new std::string(PQgetvalue(res, row, 6));
         
             task->setID(std::stoi(PQgetvalue(res, row, 0)));
             task->setTaskName(t_name);
             task->setTaskText(t_text);
             task->setStatus(t_status);
             task->setTime(t_time);
-        
+
             bool tmp = (std::string(PQgetvalue(res, row, 5)) == "t");
-            task->setDone(tmp);
-            tmp = (std::string(PQgetvalue(res, row, 6)) == "t");
             task->setExpired(tmp);
         
             m_tasks->push_back(task);  
@@ -130,7 +129,6 @@ void TaskHandler::getAllUserTasks() {
                 m_lvtask->addTask(task);        
             }
         }
-        
     }
 
     //? DEBUG ?//
@@ -142,12 +140,8 @@ void TaskHandler::getAllUserTasks() {
         << "\n\tTASK TEXT: " << QString::fromUtf8(task->getTaskText()->c_str())
         << "\n\tTASK TIME" << QString::fromUtf8(task->getTime()->c_str())
         << "\n\tTASK STATUS: " << QString::fromUtf8(task->getStatus()->c_str())
-        << "\n\tTASK DONE: " << task->getDone()
         << "\n\tTASK EPIRED" << task->getExpire() << "\n";
     }
 
     PQclear(res);
 }
-
-//! add setting task on loading ui
-

@@ -6,9 +6,7 @@ RegHandler::RegHandler(QQmlApplicationEngine* engine, PGconn* conn, QObject* par
 
 }
 
-RegHandler::~RegHandler() {
-    delete m_engine;
-}
+RegHandler::~RegHandler() {}
 
 void RegHandler::regUser(const QString& login, const QString& password) {
     m_user = std::make_unique<User>(login.toStdString(), password.toStdString(), m_query.get());
