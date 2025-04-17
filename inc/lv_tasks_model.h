@@ -23,6 +23,7 @@ class LVTask : public QAbstractListModel {
         QHash<int, QByteArray> roleNames() const override;
     
         void addTask(Task* task);
+        void removeTask(int task_id);
         void clear();
 
     private:

@@ -48,6 +48,14 @@ void LVTask::addTask(Task* task) {
     endInsertRows();
 }
 
+void LVTask::removeTask(int task_id) {
+    beginRemoveRows(QModelIndex(), task_id, task_id);
+    delete m_tasks.takeAt(task_id); 
+    endRemoveRows();
+
+    qDebug() << "\n\tTASK REMOVED FROM QLIST: " << task_id;
+}
+
 void LVTask::clear() {
     beginResetModel();
     m_tasks.clear();

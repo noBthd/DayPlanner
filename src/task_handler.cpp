@@ -62,7 +62,7 @@ void TaskHandler::insertTask(const QString& task_name, const QString& task_text)
     qDebug() << "\tTASK INSERTED\n";
 }
 
-void TaskHandler::removeTask(int task_id) {
+void TaskHandler::removeDBTask(int task_id) {
     std::string query = "DELETE FROM tasks WHERE task_id = " + std::to_string(task_id) + "";
 
     PGresult* res = PQexec(m_conn, query.c_str());
@@ -73,7 +73,7 @@ void TaskHandler::removeTask(int task_id) {
     }
 
     PQclear(res);
-    qDebug() << "TASK DELETED";
+    qDebug() << "\n\tTASK DELETED FROM DB";
 }
 //? db adding/removing task
 
@@ -82,10 +82,16 @@ void TaskHandler::delTask(const int& task_id) {
     m_tasksWin = m_rh->getWin();
 
     if (task_id == -1) {
-        qDebug() << "NO TASK CHOOSEN";
+        qDebug() << "\nNO TASK CHOOSEN";
         return;
     }
-    qDebug() << "\tTASK INDEX: " << task_id; //? DEBUG
+
+    //? DEBUG ?//
+    qDebug() << "\tTASK INDEX: " << task_id << "\n"; 
+    qDebug() << "\tTASK DB_INDEX: " << m_tasks->at(task_id)->getID();
+
+    removeDBTask(m_tasks->at(task_id)->getID());
+    m_lvtask->removeTask(task_id);
 }
 
 void TaskHandler::getAllUserTasks() {
@@ -93,7 +99,7 @@ void TaskHandler::getAllUserTasks() {
 
     PGresult* res = PQexec(m_conn, query.c_str());
     if (PQresultStatus(res) != PGRES_TUPLES_OK) {
-        qDebug() << "FAILED TO GET TASKS: " << PQerrorMessage(m_conn) << "\n";
+        qDebug() << "\nFAILED TO GET TASKS: " << PQerrorMessage(m_conn) << "\n";
         PQclear(res);
         return;
     }
@@ -125,7 +131,7 @@ void TaskHandler::getAllUserTasks() {
         
             m_tasks->push_back(task);  
             if(m_lvtask) {
-                qDebug() << "OK";
+                qDebug() << "M_LVTASK ADDED: " << task;
                 m_lvtask->addTask(task);        
             }
         }
