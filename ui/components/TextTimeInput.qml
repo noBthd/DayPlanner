@@ -33,7 +33,7 @@ Rectangle {
             Layout.row: 0
             Layout.column: 0
 
-            Layout.columnSpan: 3
+            // Layout.columnSpan: 3 //! err cell
 
             Layout.fillWidth: true
 
@@ -41,7 +41,7 @@ Rectangle {
             font.bold: true
             font.pixelSize: 24
 
-            color: black
+            color: "black"
         } // Header
 
         // Time Date

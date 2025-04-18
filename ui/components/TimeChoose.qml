@@ -23,30 +23,19 @@ Rectangle {
         spacing: 10
 
         // Date 
-        Text {
+        Item {
             Layout.fillWidth: true
+            Layout.preferredHeight: parent.height
 
-            anchors.verticalCenter: parent.verticalCenter
+            Text {
+                anchors.centerIn: parent
 
-            text: tcDate
-            font.bold: true
-            font.pixelSize: 12
-
-            color: "#000000"
+                text: tcDate
+                font.bold: true
+                font.pixelSize: 12
+                color: "#000000"
+            }
         } // Date 
-
-        // Time
-        Text {
-            Layout.fillWidth: true
-
-            anchors.verticalCenter: parent.verticalCenter
-
-            text: tcTime
-            font.bold: true
-            font.pixelSize: 12
-
-            color: "#000000"
-        } // Time
     }
     // date Text
 } // Background

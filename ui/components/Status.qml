@@ -20,7 +20,8 @@ Rectangle {
         case "not done":
             return "#9e0000"
         case "in progress":
-            return "#ff9122"
+            // return "#ff9122"
+            return "#da7d20"
         default:
             return "gray"
         }

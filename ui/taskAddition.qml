@@ -40,11 +40,6 @@ ApplicationWindow {
             color: "#ffffff"
         } // just text
 
-        NameInput {
-            Layout.row: 1
-            Layout.column: 0
-        }
-
         SaveButton {
             Layout.row: 0
             Layout.column: 1
@@ -57,6 +52,11 @@ ApplicationWindow {
             Layout.column: 2
             
             Layout.rowSpan: 2
+        }
+
+        NameInput {
+            Layout.row: 1
+            Layout.column: 0
         }
 
         // splitter
