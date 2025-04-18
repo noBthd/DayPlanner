@@ -33,8 +33,6 @@ Rectangle {
             Layout.row: 0
             Layout.column: 0
 
-            // Layout.columnSpan: 3 //! err cell
-
             Layout.fillWidth: true
 
             text: "Text"
@@ -49,7 +47,6 @@ Rectangle {
             Layout.row: 0
             Layout.column: 1
 
-            tcWidth: 193
             tcHeight: 29
         } // Time Date
 
@@ -58,7 +55,6 @@ Rectangle {
             Layout.row: 0
             Layout.column: 2
 
-            ccWidth: 104
             ccHeight: 29
         } // Comp
 
