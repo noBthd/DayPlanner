@@ -8,6 +8,7 @@ Rectangle {
 
     property int niWidth: 160
     property int niHeight: 21 
+    property string niText: ti.text
 
     color: "#ffffff"
     radius: 12.5
@@ -33,6 +34,8 @@ Rectangle {
 
 
         TextInput {
+            id: ti
+
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.alignment: Qt.AlignVCenter

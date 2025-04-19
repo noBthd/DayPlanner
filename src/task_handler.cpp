@@ -94,6 +94,10 @@ void TaskHandler::delTask(const int& task_id) {
     m_lvtask->removeTask(task_id);
 }
 
+void TaskHandler::addTask(const QString& t_name, const QString& t_status, const QString& t_text) {
+
+}
+
 void TaskHandler::getAllUserTasks() {
     std::string query = "SELECT * FROM tasks WHERE user_id = '" + std::to_string(m_user->getID()) + "';"; 
 
@@ -140,7 +144,6 @@ void TaskHandler::getAllUserTasks() {
     //? DEBUG ?//
     qDebug() << "\nTASKS:";
     for (Task* task : *m_tasks) {
-        // Task task = m_tasks->back();
         qDebug() << "\n\tTASK ID: "<< task->getID() 
         << "\n\tTASK NAME: " << QString::fromUtf8(task->getTaskName()->c_str())
         << "\n\tTASK TEXT: " << QString::fromUtf8(task->getTaskText()->c_str())

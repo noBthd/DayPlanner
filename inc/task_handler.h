@@ -41,6 +41,7 @@ class TaskHandler : public QObject {
         Q_INVOKABLE void removeDBTask(int);
 
         Q_INVOKABLE void delTask(const int&);
+        Q_INVOKABLE void addTask(const QString&, const QString&, const QString&);
         void getAllUserTasks();
 
         Q_INVOKABLE LVTask* lvtask() const { return m_lvtask; }

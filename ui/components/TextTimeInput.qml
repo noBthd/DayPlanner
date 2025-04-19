@@ -13,6 +13,9 @@ Rectangle {
     property real ttWidth: 580
     property real ttHeight: 400
 
+    property string ttStatus: cc.ccStatus
+    property string ttString: ti.text
+
     color: "#D9D9D9"
     radius: 12.5
 
@@ -44,16 +47,25 @@ Rectangle {
 
         // Time Date
         TimeChoose {
+            id: tc
+
             Layout.row: 0
             Layout.column: 1
+
+            anchors.right: cc.left
+            anchors.rightMargin: 10
 
             tcHeight: 29
         } // Time Date
 
         // Comp
         CompChoose {
+            id: cc
+
             Layout.row: 0
             Layout.column: 2
+
+            anchors.right: parent.right
 
             ccHeight: 29
         } // Comp

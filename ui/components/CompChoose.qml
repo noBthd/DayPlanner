@@ -48,7 +48,10 @@ Rectangle {
         anchors.fill: parent
 
         onClicked: {
-            if (ccStatus === "not done") {
+            if (ccStatus === "status") {
+                ccStatus = "not done"
+                ccColor = "#9e0000"
+            } else if (ccStatus === "not done") {
                 ccStatus = "in progress"
                 ccColor = "#da7d20"
             } else if (ccStatus === "in progress") {
@@ -56,7 +59,7 @@ Rectangle {
                 ccColor = "green"
             } else {
                 ccStatus = "not done"
-                ccColor = "#9e0000" 
+                ccColor = "#9e0000"
             }
         }
     }

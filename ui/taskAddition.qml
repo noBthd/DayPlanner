@@ -45,6 +45,17 @@ ApplicationWindow {
             Layout.column: 1
 
             Layout.rowSpan: 2
+
+            MouseArea {
+                anchors.fill: parent
+
+                onClicked: {
+                    console.log("  NAME: ", ni.niText) 
+                    console.log("STATUS: ", tti.ttStatus)
+                    console.log("  TEXT: ", tti.ttString)
+
+                }
+            }
         }
 
         ExitButton {
@@ -55,6 +66,8 @@ ApplicationWindow {
         }
 
         NameInput {
+            id: ni
+
             Layout.row: 1
             Layout.column: 0
         }
@@ -71,6 +84,8 @@ ApplicationWindow {
         } // splitter
 
         TextTimeInput {
+            id: tti
+
             Layout.row: 3
             Layout.column: 0
 
