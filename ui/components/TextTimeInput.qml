@@ -83,7 +83,7 @@ Rectangle {
             color: "#000000"
         } // splitter
 
-        // text input
+       // text input
         Rectangle { 
             Layout.row: 2
             Layout.column: 0
@@ -93,39 +93,71 @@ Rectangle {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
+            clip: true
             color: "#ffffff"
             radius: 12.5
 
-            //! fix text scroll
+            // scroll area
             Flickable {
-                anchors.fill: parent
-                contentWidth: width
-                contentHeight: height
+                id: flick
 
-                flickableDirection: Flickable.VerticalFlick
-                // task text input
-                TextInput {
+                anchors.fill: parent
+                anchors.margins: 10
+
+                contentWidth: width
+                contentHeight: ti.implicitHeight
+
+                // scrollbar
+                ScrollBar.vertical: ScrollBar {
+                    id: scrollBar
+                    width: 10
+                    policy: ScrollBar.AlwaysOn
+
+                    background: Rectangle {
+                        color: "transparent"
+                    }
+
+                    contentItem: Rectangle {
+                        implicitWidth: 10
+
+                        color: "#D9D9D9" 
+                        radius: 5
+                        opacity: 0.7
+
+                        states: State {
+                            name: "hovered"
+                            when: scrollBar.hovered
+
+                            PropertyChanges {
+                                target: scrollBar.contentItem
+                                opacity: 0.9
+                            }
+                        }
+
+                        Behavior on opacity { NumberAnimation { duration: 150 } }
+                    }
+                } // scrollbar
+
+                // input area
+                TextArea { 
                     id: ti
 
-                    anchors.margins: 10
-                    anchors.fill: parent
+                    width: flick.width - scrollBar.width
+                    height: Math.max(implicitHeight, flick.height)
 
-                    clip: true
-                    readOnly: false
+                    anchors.rightMargin: 15
+
+                    color: "#484f54"
+                    font.bold: true
+                    font.pixelSize: 12
+
+                    background: null
                     wrapMode: TextArea.Wrap
 
-                    // placehodler
-                    property string placeholderText: "..."
-                    Text {
-                        font.pixelSize: 12
-                        font.bold: true 
-                        color: "#484f54"
-
-                        text: ti.placeholderText
-                        visible: !ti.text
-                    } // placehodler
-                } // task text input
-            }
+                    placeholderText: ". . ."
+                    placeholderTextColor: "#484f54"
+                } // input area
+            } // scroll area
         } // text input
     }
 }
