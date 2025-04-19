@@ -53,7 +53,8 @@ ApplicationWindow {
                     console.log("  NAME: ", ni.niText) 
                     console.log("STATUS: ", tti.ttStatus)
                     console.log("  TEXT: ", tti.ttString)
-
+                    taskHandler.addTask(ni.niText, tti.ttStatus, tti.ttString)
+                    taskHandler.closeAdditionWin()
                 }
             }
         }

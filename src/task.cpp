@@ -78,5 +78,3 @@ int Task::getPrevId() {
 
     return last_id;
 }
-
-//! add task uopdating

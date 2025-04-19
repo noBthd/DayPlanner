@@ -128,6 +128,8 @@ Rectangle {
             
             wrapMode: Text.Wrap
             font.pixelSize: 14
+
+            clip: true
         } // Task Text 
     }
 }

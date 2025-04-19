@@ -21,7 +21,7 @@ Rectangle {
 
         anchors.centerIn: parent
 
-        //! user icon
+        // user icon
         Item {
             width: 40
             height: 40
@@ -50,7 +50,7 @@ Rectangle {
 
         Column {
             leftPadding: 10
-            //! username
+            // username
             Item {
                 id: userItem
 
@@ -70,7 +70,7 @@ Rectangle {
                 }
             }
 
-            //! logout button
+            // logout button
             Item {
                 width: 80
                 height: 25

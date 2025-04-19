@@ -34,18 +34,28 @@ class TaskHandler : public QObject {
         Q_INVOKABLE void openAdditionWin();
         Q_INVOKABLE void closeAdditionWin();
 
-        Q_INVOKABLE void insertTask(
-            const QString&,
-            const QString&
+        void insertDBTask(
+            std::string,
+            std::string,
+            std::string
         );
-        Q_INVOKABLE void removeDBTask(int);
+        void removeDBTask(int);
 
         Q_INVOKABLE void delTask(const int&);
-        Q_INVOKABLE void addTask(const QString&, const QString&, const QString&);
+        Q_INVOKABLE void addTask(
+            const QString&, 
+            const QString&, 
+            const QString&
+        );
         void getAllUserTasks();
 
         Q_INVOKABLE LVTask* lvtask() const { return m_lvtask; }
 
+        //? test
+        // Q_INVOKABLE void setPickedID(const int&);
+        // Q_INVOKABLE int getPickedID() { return m_id; }
+
+        int m_id;
     private: 
         User* m_user; 
         std::vector<Task*>* m_tasks;

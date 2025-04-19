@@ -46,10 +46,10 @@ void TaskHandler::closeAdditionWin() {
 
 //TODO: add inserting time done expired;
 //? db adding/removing task
-void TaskHandler::insertTask(const QString& task_name, const QString& task_text) {
+void TaskHandler::insertDBTask(std::string task_name, std::string task_text, std::string task_status) {
     std::string id = std::to_string(m_user->getID());
-    std::string query = "INSERT INTO tasks(user_id, task_name,task_text, expire_time, is_expired) VALUES (" 
-        + id + ", '" + task_name.toStdString() + "', '" + task_text.toStdString() + "', '00:00:00', 'f')";
+
+    std::string query = "INSERT INTO tasks(user_id, task_name, task_text, expire_time, is_expired, status) VALUES (" + id + ", '" + task_name + "', '" + task_text + "', '13:13:13', 't', '" + task_status + "')";
     
     PGresult* res = PQexec(m_conn, query.c_str());
     if (PQresultStatus(res) != PGRES_COMMAND_OK) {
@@ -75,8 +75,11 @@ void TaskHandler::removeDBTask(int task_id) {
     PQclear(res);
     qDebug() << "\n\tTASK DELETED FROM DB";
 }
-//? db adding/removing task
 
+//? qml adding/removing 
+//TODO fix (if task plate outside of the view u'll get error:)
+//! libc++abi: terminating due to uncaught exception of type std::out_of_range: vector
+//! [1]    89411 abort      ./DayPlanner
 void TaskHandler::delTask(const int& task_id) {
     qDebug() << "\tREG HANDLER: " << m_rh->getWin();
     m_tasksWin = m_rh->getWin();
@@ -86,16 +89,34 @@ void TaskHandler::delTask(const int& task_id) {
         return;
     }
 
+    if (task_id >= m_lvtask->rowCount() || task_id < 0 || task_id >= m_tasks->size()) {
+        qDebug() << "\nNO TASK CHOOSEN (out of index)";
+        return;
+    }
+
     //? DEBUG ?//
     qDebug() << "\tTASK INDEX: " << task_id << "\n"; 
     qDebug() << "\tTASK DB_INDEX: " << m_tasks->at(task_id)->getID();
+    qDebug() << "\tROWS: " << m_lvtask->rowCount();
 
     removeDBTask(m_tasks->at(task_id)->getID());
     m_lvtask->removeTask(task_id);
 }
 
-void TaskHandler::addTask(const QString& t_name, const QString& t_status, const QString& t_text) {
+void TaskHandler::addTask(const QString& t_qname, const QString& t_qstatus, const QString& t_qtext) {
+    std::string* t_name = new std::string(t_qname.toStdString());
+    std::string* t_text = new std::string(t_qtext.toStdString());
+    std::string* t_status = new std::string(t_qstatus.toStdString());
 
+    insertDBTask(*t_name, *t_text, *t_status);
+
+    Task* task = new Task();
+    task->setTaskName(t_name);
+    task->setTaskText(t_text);
+    task->setStatus(t_status);
+
+    m_lvtask->addTask(task);
+    qDebug() << "\n\tTASK ADDED FOR USER: " << m_user->getID();
 }
 
 void TaskHandler::getAllUserTasks() {
@@ -154,3 +175,9 @@ void TaskHandler::getAllUserTasks() {
 
     PQclear(res);
 }
+
+//? test
+// void TaskHandler::setPickedID(const int& id) {
+//     m_id = id;
+//     qDebug() << "ID SETTED: " << m_id;
+// }

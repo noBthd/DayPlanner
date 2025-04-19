@@ -6,7 +6,7 @@
 
 User::User (std::string username, std::string str_password, Query* query) 
     :m_query(query), m_username(username), m_password(str_password) {
-    //! fix isn't necessary ->
+    //TODO fix isn't necessary ->
     if (m_query->userExist(username)) {
         m_id    = std::stoi(m_query->getUserID(username));
         m_admin = m_query->isAdmin(username);
@@ -14,7 +14,7 @@ User::User (std::string username, std::string str_password, Query* query)
         m_id    = -1;       //? just this
         m_admin = false;    //? just this
     }
-    //! <-
+    //TODO <-
 }
 
 void User::getHash() {

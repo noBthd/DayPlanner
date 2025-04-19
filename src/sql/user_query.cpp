@@ -56,7 +56,7 @@ std::string Query::getUserPassword(std::string username) {
     return hash;
 }
 
-//! fix query 
+//TODO fix query 
 PGresult* Query::getUserByID(int id) {
     std::string query = "SELECT * FROM users WHERE id = '" + std::to_string(id) + "';";
     
