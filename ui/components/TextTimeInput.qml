@@ -15,6 +15,8 @@ Rectangle {
 
     property string ttStatus: cc.ccStatus
     property string ttString: ti.text
+    
+    property alias textInput: ti
 
     color: "#D9D9D9"
     radius: 12.5

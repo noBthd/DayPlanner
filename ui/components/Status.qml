@@ -11,7 +11,7 @@ Rectangle {
 
     property int sHeight: 20
 
-    property string sStatus: "def" //? default(gray)/done(green)/not(red)/in progress(orange)
+    property string sStatus: "def" //? default(gray)/done(green)/not(red)/in progress(orange) 
     
     property string sColor: {
         switch (sStatus) {

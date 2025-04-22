@@ -50,11 +50,15 @@ ApplicationWindow {
                 anchors.fill: parent
 
                 onClicked: {
-                    console.log("  NAME: ", ni.niText) 
+                    console.log("  NAME: ", ni.textInput.text) 
                     console.log("STATUS: ", tti.ttStatus)
                     console.log("  TEXT: ", tti.ttString)
                     taskHandler.addTask(ni.niText, tti.ttStatus, tti.ttString)
                     taskHandler.closeAdditionWin()
+
+                    ni.textInput.text = ""
+                    // tti.statusInput.text = "status"
+                    tti.textInput.text = ""
                 }
             }
         }

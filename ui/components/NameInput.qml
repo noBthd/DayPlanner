@@ -9,6 +9,7 @@ Rectangle {
     property int niWidth: 160
     property int niHeight: 21 
     property string niText: ti.text
+    property alias textInput: ti
 
     color: "#ffffff"
     radius: 12.5
