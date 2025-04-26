@@ -11,8 +11,8 @@ User::User (std::string username, std::string str_password, Query* query)
         m_id    = std::stoi(m_query->getUserID(username));
         m_admin = m_query->isAdmin(username);
     } else {
-        m_id    = -1;       //? just this
-        m_admin = false;    //? just this
+        m_id    = m_query->getLastID() + 1;     
+        m_admin = false;                        
     }
     //TODO <-
 }

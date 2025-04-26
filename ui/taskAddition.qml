@@ -57,7 +57,7 @@ ApplicationWindow {
                     taskHandler.closeAdditionWin()
 
                     ni.textInput.text = ""
-                    // tti.statusInput.text = "status"
+                    tti.ttStatus.text = "status"
                     tti.textInput.text = ""
                 }
             }

@@ -17,7 +17,9 @@ class Query {
         bool createUser(std::string, Password, bool);
         bool userExist(std::string);
         bool isAdmin(std::string);
+        int getLastID();
     private:
+        PGresult* execQuery(std::string, ExecStatusType);
         PGconn* m_conn;
 };
 

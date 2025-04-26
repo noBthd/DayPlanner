@@ -37,17 +37,13 @@ bool Query::createUser(std::string username, Password password, bool admin) {
 std::string Query::getUserPassword(std::string username) {
     std::string query = "SELECT password FROM users WHERE username = '" + username + "';";
 
-    PGresult* res = PQexec(m_conn, query.c_str());
-    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
-        qDebug() << "Query failed: " << PQerrorMessage(m_conn) << "\n";
-        PQclear(res);
-        return NULL;
-    }
+    PGresult* res = execQuery(query, PGRES_TUPLES_OK);
+    if(!res) return "";
 
     if (PQntuples(res) == 0) {
         qDebug() << "No user found with username: " << username.c_str();
         PQclear(res);
-        return NULL;
+        return "";
     }
 
     std::string hash = PQgetvalue(res, 0, 0);
@@ -59,26 +55,18 @@ std::string Query::getUserPassword(std::string username) {
 //TODO fix query 
 PGresult* Query::getUserByID(int id) {
     std::string query = "SELECT * FROM users WHERE id = '" + std::to_string(id) + "';";
-    
-    PGresult* res = PQexec(m_conn, query.c_str());
-    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
-        qDebug() << "Query failed: " << PQerrorMessage(m_conn) << "\n";
-        PQclear(res);
-        return nullptr;
-    }
+
+    PGresult* res = execQuery(query, PGRES_TUPLES_OK);
+    if(!res) return nullptr;
 
     return res;
 }
 
 std::string Query::getUserID(std::string username) {
     std::string query = "SELECT id FROM users WHERE username = '" + username + "';";
-    
-    PGresult* res = PQexec(m_conn, query.c_str());
-    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
-        qDebug() << "Query failed: " << PQerrorMessage(m_conn) << "\n";
-        PQclear(res);
-        return "";
-    }
+
+    PGresult* res = execQuery(query, PGRES_TUPLES_OK);
+    if(!res) return "";
 
     std::string id = PQgetvalue(res, 0, 0);
 
@@ -88,12 +76,8 @@ std::string Query::getUserID(std::string username) {
 bool Query::userExist(std::string username) {  
     std::string query = "SELECT COUNT(*) FROM users WHERE username = '" + username + "';";
 
-    PGresult* res = PQexec(m_conn, query.c_str());
-    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
-        qDebug() << "Query failed: " << PQerrorMessage(m_conn) << "\n";
-        PQclear(res);
-        return true;
-    }
+    PGresult* res = execQuery(query, PGRES_TUPLES_OK);
+    if(!res) return true;
     
     std::string count = PQgetvalue(res, 0, 0);
     PQclear(res);
@@ -104,15 +88,29 @@ bool Query::userExist(std::string username) {
 bool Query::isAdmin(std::string username) {
     std::string query = "SELECT is_admin FROM users WHERE username = '" + username + "';";
 
-    PGresult* res = PQexec(m_conn, query.c_str());
-    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
-        qDebug() << "Query failed: " << PQerrorMessage(m_conn) << "\n";
-        PQclear(res);
-        return false;
-    }
+    PGresult* res = execQuery(query, PGRES_TUPLES_OK);
+    if(!res) return false;
 
     std::string isAdmin = PQgetvalue(res, 0, 0);
     PQclear(res);
 
     return (isAdmin == "t") ? true : false;
 }
+
+int Query::getLastID() {
+    std::string query = "SELECT MAX(users.id) from users";
+    PGresult* res = execQuery(query, PGRES_TUPLES_OK);
+    
+    return std::stoi(PQgetvalue(res, 0, 0));
+}
+
+PGresult* Query::execQuery(std::string query, ExecStatusType expectedStatus) {
+    PGresult* res = PQexec(m_conn, query.c_str());
+    if (PQresultStatus(res) != expectedStatus) {
+        qDebug() << "Query failed:" << PQerrorMessage(m_conn);
+        PQclear(res);
+        return nullptr;
+    }
+    return res;
+}
+
