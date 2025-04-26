@@ -7,7 +7,7 @@ Query::Query(PGconn* conn) {
     m_conn = conn;
 };
 
-bool Query::createUser(std::string username, Password password, bool admin) {
+bool Query::createUser(const std::string& username, Password password, bool admin) {
     std::string str_admin = admin ? "true" : "false";
     std::string query = "INSERT INTO users(username, password, is_admin) VALUES ('" + username + "', '" + password.hashed_password + "', '" + str_admin + "')";
 
@@ -34,7 +34,7 @@ bool Query::createUser(std::string username, Password password, bool admin) {
     return true;
 }
 
-std::string Query::getUserPassword(std::string username) {
+std::string Query::getUserPassword(const std::string& username) {
     std::string query = "SELECT password FROM users WHERE username = '" + username + "';";
 
     PGresult* res = execQuery(query, PGRES_TUPLES_OK);
@@ -62,7 +62,7 @@ PGresult* Query::getUserByID(int id) {
     return res;
 }
 
-std::string Query::getUserID(std::string username) {
+std::string Query::getUserID(const std::string& username) {
     std::string query = "SELECT id FROM users WHERE username = '" + username + "';";
 
     PGresult* res = execQuery(query, PGRES_TUPLES_OK);
@@ -73,7 +73,7 @@ std::string Query::getUserID(std::string username) {
     return id;
 }
 
-bool Query::userExist(std::string username) {  
+bool Query::userExist(const std::string& username) {  
     std::string query = "SELECT COUNT(*) FROM users WHERE username = '" + username + "';";
 
     PGresult* res = execQuery(query, PGRES_TUPLES_OK);
@@ -85,7 +85,7 @@ bool Query::userExist(std::string username) {
     return count != "0";
 }
 
-bool Query::isAdmin(std::string username) {
+bool Query::isAdmin(const std::string& username) {
     std::string query = "SELECT is_admin FROM users WHERE username = '" + username + "';";
 
     PGresult* res = execQuery(query, PGRES_TUPLES_OK);
@@ -100,11 +100,11 @@ bool Query::isAdmin(std::string username) {
 int Query::getLastID() {
     std::string query = "SELECT MAX(users.id) from users";
     PGresult* res = execQuery(query, PGRES_TUPLES_OK);
-    
+
     return std::stoi(PQgetvalue(res, 0, 0));
 }
 
-PGresult* Query::execQuery(std::string query, ExecStatusType expectedStatus) {
+PGresult* Query::execQuery(const std::string& query, ExecStatusType expectedStatus) {
     PGresult* res = PQexec(m_conn, query.c_str());
     if (PQresultStatus(res) != expectedStatus) {
         qDebug() << "Query failed:" << PQerrorMessage(m_conn);

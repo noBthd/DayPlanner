@@ -11,15 +11,15 @@ class Query {
     public:
         Query(PGconn*);
 
-        std::string getUserID(std::string);
-        std::string getUserPassword(std::string);
+        std::string getUserID(const std::string&);
+        std::string getUserPassword(const std::string&);
         PGresult* getUserByID(int);
-        bool createUser(std::string, Password, bool);
-        bool userExist(std::string);
-        bool isAdmin(std::string);
+        bool createUser(const std::string&, Password, bool);
+        bool userExist(const std::string&);
+        bool isAdmin(const std::string&);
         int getLastID();
     private:
-        PGresult* execQuery(std::string, ExecStatusType);
+        PGresult* execQuery(const std::string&, ExecStatusType);
         PGconn* m_conn;
 };
 
