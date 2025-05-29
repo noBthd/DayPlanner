@@ -1,5 +1,5 @@
 #include "lv_tasks_model.h"
-#include <cstddef>
+// #include <cstddef>
 
 LVTask::LVTask(QObject* parent)
     : QAbstractListModel(parent)
@@ -60,5 +60,20 @@ void LVTask::removeTask(int task_id) {
 void LVTask::clear() {
     beginResetModel();
     m_tasks.clear();
+    endResetModel();
+}
+
+void LVTask::sortByStatus() {
+    beginResetModel();
+    std::sort(m_tasks.begin(), m_tasks.end(), [](Task* a, Task* b) {
+        auto getStatusPriority = [](const std::string& status) {
+            if (status == "done") return 0;
+            if (status == "in progress") return 1;
+            if (status == "not done") return 2;
+            return 3; // если вдруг какой-то другой статус
+        };
+
+        return getStatusPriority(*(a->getStatus())) < getStatusPriority(*(b->getStatus()));
+    });
     endResetModel();
 }

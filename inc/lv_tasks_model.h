@@ -25,6 +25,8 @@ class LVTask : public QAbstractListModel {
         void addTask(Task* task);
         void removeTask(int task_id);
         void clear();
+        
+        void sortByStatus();
 
     private:
         QList<Task*> m_tasks;

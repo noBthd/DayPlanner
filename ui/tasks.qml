@@ -90,20 +90,6 @@ ApplicationWindow {
             }
         } // tasks background   
         
-        // ProfileButton {
-        //     Layout.row: 0
-        //     Layout.column: 1
-
-        //     Layout.alignment: Qt.AlignTop
-        // } // profile button
-
-        // SortByComp {
-        //     Layout.row: 1
-        //     Layout.column: 1
-
-        //     Layout.alignment: Qt.AlignTop
-        // }
-
         ColumnLayout {
             Layout.row: 0
             Layout.column: 1
@@ -111,14 +97,8 @@ ApplicationWindow {
             Layout.alignment: Qt.AlignTop
             spacing: 10
 
-            ProfileButton {
-            } // profile button
-
-            SortByComp {
-                // Layout.row: 1
-
-                // Layout.alignment: Qt.AlignTop
-            }
+            ProfileButton {} 
+            SortByComp {}
         }
 
         

@@ -2,6 +2,7 @@
 #include "libpq-fe.h"
 #include "task.h"
 #include <string>
+#include <algorithm>
 #include <vector>
 
 TaskHandler::TaskHandler(QQmlApplicationEngine* engine, PGconn* conn, RegHandler* rh, QObject* parent) //? tmp
@@ -182,3 +183,7 @@ void TaskHandler::getAllUserTasks() {
 //     qDebug() << "ID SETTED: " << m_id;
 // }
 // TEST
+
+void TaskHandler::sortByTaksStatus() {
+    m_lvtask->sortByStatus();
+}

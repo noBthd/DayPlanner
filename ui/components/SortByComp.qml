@@ -14,6 +14,7 @@ Rectangle {
 
         onClicked: {
             console.log("button clicked")
+            taskHandler.sortByTaksStatus()
         }
     }
 

@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
     } catch (const std::exception& e) {
         qDebug() << "Exception: " << e.what();
     }
-
+    
 
     // reg handler
     RegHandler regHandler(&engine, db->connection().get());
@@ -42,3 +42,5 @@ int main(int argc, char *argv[]) {
 
     return app.exec();
 }
+
+

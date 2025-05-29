@@ -55,6 +55,8 @@ class TaskHandler : public QObject {
         // Q_INVOKABLE void setPickedID(const int&);
         // Q_INVOKABLE int getPickedID() { return m_id; }
 
+        Q_INVOKABLE void sortByTaksStatus();
+
         int m_id;
     private: 
         User* m_user; 
