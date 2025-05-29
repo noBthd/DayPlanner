@@ -25,7 +25,7 @@ ApplicationWindow {
         anchors.fill: parent  
         anchors.margins: 10
 
-        rows: 2
+        rows: 3
         columns: 2
 
         rowSpacing: 10
@@ -40,6 +40,8 @@ ApplicationWindow {
 
             Layout.fillWidth: true
             Layout.fillHeight: true
+
+            // Layout.rowSpan: 2
 
             radius: 12.5
             color: "#222B3B"
@@ -87,14 +89,39 @@ ApplicationWindow {
                 }
             }
         } // tasks background   
+        
+        // ProfileButton {
+        //     Layout.row: 0
+        //     Layout.column: 1
 
-        // profile button
-        ProfileButton {
+        //     Layout.alignment: Qt.AlignTop
+        // } // profile button
+
+        // SortByComp {
+        //     Layout.row: 1
+        //     Layout.column: 1
+
+        //     Layout.alignment: Qt.AlignTop
+        // }
+
+        ColumnLayout {
             Layout.row: 0
             Layout.column: 1
 
             Layout.alignment: Qt.AlignTop
-        } // profile button
+            spacing: 10
+
+            ProfileButton {
+            } // profile button
+
+            SortByComp {
+                // Layout.row: 1
+
+                // Layout.alignment: Qt.AlignTop
+            }
+        }
+
+        
 
         // task managment buttons
         Rectangle {

@@ -1,4 +1,5 @@
 #include "lv_tasks_model.h"
+#include <cstddef>
 
 LVTask::LVTask(QObject* parent)
     : QAbstractListModel(parent)

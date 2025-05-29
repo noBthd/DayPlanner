@@ -18,6 +18,7 @@
         <file>components/CompChoose.qml</file>
         <file>components/NameInput.qml</file>
         <file>components/Status.qml</file>
+        <file>components/SortByComp.qml</file>
         
 
         <!-- ?assets -->
