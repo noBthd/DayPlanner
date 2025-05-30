@@ -151,5 +151,18 @@ ApplicationWindow {
                 }
             }
         } // task managment buttons
+
+        AdminButton {
+            Layout.row: 1
+            Layout.column: 1
+
+            MouseArea {
+                anchors.fill: parent
+
+                onClicked: {
+                    taskHandler.openAdminWin()
+                }
+            }
+        }
     }
 }

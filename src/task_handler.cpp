@@ -29,6 +29,11 @@ void TaskHandler::clearUser() {
     m_lvtask->clear();
 }
 
+/* 
+? WINDOW OPENERS
+* adminWin.qml
+* tasks.qml
+* taskAdditon.qml */
 void TaskHandler::openAdditionWin() {
     if (!m_taskAddWin) {
         QQmlComponent component(m_engine, QUrl(QStringLiteral("qrc:/ui/taskAddition.qml")));
@@ -53,6 +58,17 @@ void TaskHandler::openEditorWin(const int& t_qid) {
     m_id = t_qid;
 }
 
+void TaskHandler::openAdminWin() {
+    if (!m_adminWin) {
+        QQmlComponent component(m_engine, QUrl(QStringLiteral("qrc:/ui/adminPannel.qml")));
+        QObject* m_object = component.create();
+        m_adminWin = qobject_cast<QQuickWindow*>(m_object);
+    }
+    if (m_adminWin) {
+        m_adminWin->show(); 
+    }
+}
+
 void TaskHandler::closeAdditionWin() {
     m_taskAddWin->hide();
 }
@@ -60,6 +76,11 @@ void TaskHandler::closeAdditionWin() {
 void TaskHandler::closeEditorWin() {
     m_taskEditorWin->hide();
 }
+
+void TaskHandler::closeAdminWin() {
+    m_adminWin->hide();
+}
+//? END OF WINDOW OPENERS
 
 //TODO: add inserting time done expired;
 //? db adding/removing task

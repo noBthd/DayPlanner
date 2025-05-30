@@ -35,6 +35,8 @@ class TaskHandler : public QObject {
         Q_INVOKABLE void closeAdditionWin();
         Q_INVOKABLE void openEditorWin(const int&);
         Q_INVOKABLE void closeEditorWin();
+        Q_INVOKABLE void openAdminWin();
+        Q_INVOKABLE void closeAdminWin();
 
         void insertDBTask(
             std::string,
@@ -76,6 +78,7 @@ class TaskHandler : public QObject {
         QQuickWindow* m_tasksWin; // tasks.qml
         QQuickWindow* m_taskAddWin; // taskAddition.qml
         QQuickWindow* m_taskEditorWin; // taskEditor.qml
+        QQuickWindow* m_adminWin; // adminPanel.qml
         RegHandler* m_rh;
         LVTask* m_lvtask;
 };
