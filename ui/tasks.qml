@@ -149,6 +149,11 @@ ApplicationWindow {
                         } 
                     }
                 }
+
+                AddPhoto {
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: parent.height
+                }
             }
         } // task managment buttons
 

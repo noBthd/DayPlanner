@@ -23,6 +23,7 @@
         <file>components/SortByComp.qml</file>
         <file>components/RedTask.qml</file>
         <file>components/AdminButton.qml</file>
+        <file>components/AddPhoto.qml</file>
 
         <!-- ?assets -->
         <!-- images -->
