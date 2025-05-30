@@ -156,6 +156,8 @@ ApplicationWindow {
             Layout.row: 1
             Layout.column: 1
 
+            visible: isAdmin
+
             MouseArea {
                 anchors.fill: parent
 

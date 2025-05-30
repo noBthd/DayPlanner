@@ -67,6 +67,8 @@ void RegHandler::loginUser(const QString& login, const QString& password) {
             delete profileObject;
             return;
         }
+
+        m_engine->rootContext()->setContextProperty("isAdmin", m_user->isAdmin());
     }
 }
 

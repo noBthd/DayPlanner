@@ -67,7 +67,8 @@ ApplicationWindow {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    console.log("Rectangle clicked!")                   
+                    console.log("Rectangle clicked!")  
+                    console.log("TEXT: ", textField.text)                 
                 }
             }
         }
