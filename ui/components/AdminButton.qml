@@ -32,8 +32,8 @@ Rectangle {
             font.pixelSize: 12
             font.bold: true
 
-            anchors.margins: 10
-            anchors.leftMargin: 25
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
         }
     }
 }
