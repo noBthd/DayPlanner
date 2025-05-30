@@ -38,6 +38,7 @@ class TaskHandler : public QObject {
         Q_INVOKABLE void openAdminWin();
         Q_INVOKABLE void closeAdminWin();
 
+        //? DB FUNCTIONS
         void insertDBTask(
             std::string,
             std::string,
@@ -48,7 +49,10 @@ class TaskHandler : public QObject {
             Task,
             int
         );
-
+        Q_INVOKABLE void deleteDBUser(const int&); 
+        void getAllUserTasks();
+        
+        //? QML FUNCTIONS
         Q_INVOKABLE void delTask(const int&);
         Q_INVOKABLE void addTask(
             const QString&, 
@@ -59,13 +63,11 @@ class TaskHandler : public QObject {
             const QString&,
             const QString&,
             const QString&
-            // const int&
         );
-        void getAllUserTasks();
-
-        Q_INVOKABLE LVTask* lvtask() const { return m_lvtask; }
 
         Q_INVOKABLE void sortByTaksStatus();
+        Q_INVOKABLE LVTask* lvtask() const { return m_lvtask; }
+
 
         int m_id;
     private: 

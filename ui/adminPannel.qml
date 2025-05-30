@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.15 
+import QtQuick.Layouts 1.15
+import todo 0.1 
 
 ApplicationWindow {
     id: win
@@ -68,7 +69,8 @@ ApplicationWindow {
                 anchors.fill: parent
                 onClicked: {
                     console.log("Rectangle clicked!")  
-                    console.log("TEXT: ", textField.text)                 
+                    console.log("TEXT: ", textField.text)
+                    taskHandler.deleteDBUser(textField.text)                 
                 }
             }
         }

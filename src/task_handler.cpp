@@ -281,3 +281,16 @@ void TaskHandler::sortByTaksStatus() {
     m_lvtask->sortByStatus();
 }
 
+void TaskHandler::deleteDBUser(const int& user_id) {
+    std::string query = "DELETE FROM users WHERE id = '" + std::to_string(user_id) + "';";
+    
+    PGresult* res = PQexec(m_conn, query.c_str());
+    if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+        qDebug() << "\n\tFAILED TO DELETE USER: " << PQerrorMessage(m_conn) << "\n";
+        PQclear(res);
+        return;
+    }
+
+    PQclear(res);
+    qDebug() << "\tUSER DELETED\n";
+}
