@@ -2,7 +2,6 @@
 #include "libpq-fe.h"
 #include "task.h"
 #include <string>
-#include <algorithm>
 #include <vector>
 
 TaskHandler::TaskHandler(QQmlApplicationEngine* engine, PGconn* conn, RegHandler* rh, QObject* parent) //? tmp
@@ -41,8 +40,25 @@ void TaskHandler::openAdditionWin() {
     }
 }
 
+void TaskHandler::openEditorWin(const int& t_qid) {
+    if (!m_taskAddWin) {
+        QQmlComponent component(m_engine, QUrl(QStringLiteral("qrc:/ui/taskEditor.qml")));
+        QObject* m_object = component.create();
+        m_taskEditorWin = qobject_cast<QQuickWindow*>(m_object);
+    }
+    if (m_taskEditorWin) {
+        m_taskEditorWin->show(); 
+    }
+
+    m_id = t_qid;
+}
+
 void TaskHandler::closeAdditionWin() {
     m_taskAddWin->hide();
+}
+
+void TaskHandler::closeEditorWin() {
+    m_taskEditorWin->hide();
 }
 
 //TODO: add inserting time done expired;
@@ -51,6 +67,29 @@ void TaskHandler::insertDBTask(std::string task_name, std::string task_text, std
     std::string id = std::to_string(m_user->getID());
 
     std::string query = "INSERT INTO tasks(user_id, task_name, task_text, expire_time, is_expired, status) VALUES (" + id + ", '" + task_name + "', '" + task_text + "', '13:13:13', 't', '" + task_status + "')";
+    
+    PGresult* res = PQexec(m_conn, query.c_str());
+    if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+        qDebug() << "\n\tFAILED TO INSERT THE TASK: " << PQerrorMessage(m_conn) << "\n";
+        PQclear(res);
+        return;
+    }
+
+    PQclear(res);
+    qDebug() << "\tTASK INSERTED\n";
+}
+
+void TaskHandler::editDBTask(Task task, int task_id) {
+    std::string id = std::to_string(m_user->getID());
+
+    std::string query = "UPDATE tasks SET "
+                    "user_id = " + id + ", "
+                    "task_name = '" + *task.getTaskName() + "', "
+                    "task_text = '" + *task.getTaskText() + "', "
+                    "expire_time = '13:13:13', "
+                    "is_expired = 't', "
+                    "status = '" + *task.getStatus() + "' "
+                    "WHERE id = " + std::to_string(task_id) + ";";
     
     PGresult* res = PQexec(m_conn, query.c_str());
     if (PQresultStatus(res) != PGRES_COMMAND_OK) {
@@ -104,7 +143,11 @@ void TaskHandler::delTask(const int& task_id) {
     m_lvtask->removeTask(task_id);
 }
 
-void TaskHandler::addTask(const QString& t_qname, const QString& t_qstatus, const QString& t_qtext) {
+void TaskHandler::addTask(
+    const QString& t_qname, 
+    const QString& t_qstatus, 
+    const QString& t_qtext
+) {
     std::string* t_name = new std::string(t_qname.toStdString());
     std::string* t_text = new std::string(t_qtext.toStdString());
     std::string* t_status = new std::string(t_qstatus.toStdString());
@@ -118,6 +161,42 @@ void TaskHandler::addTask(const QString& t_qname, const QString& t_qstatus, cons
 
     m_lvtask->addTask(task);
     qDebug() << "\n\tTASK ADDED FOR USER: " << m_user->getID();
+}
+
+void TaskHandler::editTask(
+    const QString& t_qname, 
+    const QString& t_qstatus, 
+    const QString& t_qtext
+    // const int& t_qid
+) {
+    std::string* t_name = new std::string(t_qname.toStdString());
+    std::string* t_text = new std::string(t_qtext.toStdString());
+    std::string* t_status = new std::string(t_qstatus.toStdString());
+    
+
+    if (m_id == -1) {
+        qDebug() << "\nNO TASK CHOOSEN";
+        return;
+    }
+
+    if (m_id >= m_lvtask->rowCount() || m_id < 0 || m_id >= m_tasks->size()) {
+        qDebug() << "\nNO TASK CHOOSEN (out of index)";
+        return;
+    }
+
+    Task* task = new Task();
+    task->setTaskName(t_name);
+    task->setTaskText(t_text);
+    task->setStatus(t_status);
+
+    // DATABASE TASK CHANGE 
+    editDBTask(
+        *task,
+        m_tasks->at(m_id)->getID()
+    );
+
+    // M_LVTASKS TASK REPLACMENT
+    m_lvtask->editTask(task, m_id);
 }
 
 void TaskHandler::getAllUserTasks() {
@@ -177,13 +256,7 @@ void TaskHandler::getAllUserTasks() {
     PQclear(res);
 }
 
-//? test
-// void TaskHandler::setPickedID(const int& id) {
-//     m_id = id;
-//     qDebug() << "ID SETTED: " << m_id;
-// }
-// TEST
-
 void TaskHandler::sortByTaksStatus() {
     m_lvtask->sortByStatus();
 }
+

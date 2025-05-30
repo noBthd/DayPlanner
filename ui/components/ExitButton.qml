@@ -41,12 +41,4 @@ Rectangle {
             color: "#000000"
         } // Exit Text
     }
-
-    MouseArea {
-        anchors.fill: parent
-
-        onClicked: {
-            taskHandler.closeAdditionWin()
-        }
-    }
 }

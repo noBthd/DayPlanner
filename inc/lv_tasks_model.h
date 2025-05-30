@@ -22,8 +22,9 @@ class LVTask : public QAbstractListModel {
         QVariant data(const QModelIndex& index, int role) const override;
         QHash<int, QByteArray> roleNames() const override;
     
-        void addTask(Task* task);
-        void removeTask(int task_id);
+        void addTask(Task*);
+        void removeTask(int);
+        void editTask(Task*, int);
         void clear();
         
         void sortByStatus();

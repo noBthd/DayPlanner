@@ -33,6 +33,8 @@ class TaskHandler : public QObject {
 
         Q_INVOKABLE void openAdditionWin();
         Q_INVOKABLE void closeAdditionWin();
+        Q_INVOKABLE void openEditorWin(const int&);
+        Q_INVOKABLE void closeEditorWin();
 
         void insertDBTask(
             std::string,
@@ -40,6 +42,10 @@ class TaskHandler : public QObject {
             std::string
         );
         void removeDBTask(int);
+        void editDBTask(
+            Task,
+            int
+        );
 
         Q_INVOKABLE void delTask(const int&);
         Q_INVOKABLE void addTask(
@@ -47,13 +53,15 @@ class TaskHandler : public QObject {
             const QString&, 
             const QString&
         );
+        Q_INVOKABLE void editTask(
+            const QString&,
+            const QString&,
+            const QString&
+            // const int&
+        );
         void getAllUserTasks();
 
         Q_INVOKABLE LVTask* lvtask() const { return m_lvtask; }
-
-        //? test
-        // Q_INVOKABLE void setPickedID(const int&);
-        // Q_INVOKABLE int getPickedID() { return m_id; }
 
         Q_INVOKABLE void sortByTaksStatus();
 
@@ -67,6 +75,7 @@ class TaskHandler : public QObject {
         QQmlApplicationEngine* m_engine;
         QQuickWindow* m_tasksWin; // tasks.qml
         QQuickWindow* m_taskAddWin; // taskAddition.qml
+        QQuickWindow* m_taskEditorWin; // taskEditor.qml
         RegHandler* m_rh;
         LVTask* m_lvtask;
 };

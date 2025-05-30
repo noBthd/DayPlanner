@@ -101,8 +101,6 @@ ApplicationWindow {
             SortByComp {}
         }
 
-        
-
         // task managment buttons
         Rectangle {
             Layout.row: 1
@@ -120,6 +118,19 @@ ApplicationWindow {
                 AddTask {
                     Layout.fillWidth: true
                     Layout.preferredHeight: parent.height
+                }
+
+                RedTask {
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: parent.height
+
+                    MouseArea {
+                        anchors.fill: parent
+
+                        onClicked: {
+                            taskHandler.openEditorWin(lv.tid)
+                        }
+                    }
                 }
 
                 RemTask {

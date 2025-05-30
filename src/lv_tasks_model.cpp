@@ -63,6 +63,12 @@ void LVTask::clear() {
     endResetModel();
 }
 
+void LVTask::editTask(Task* new_task, int task_id) {
+    beginResetModel();
+    m_tasks.replace(task_id, new_task);
+    endResetModel();
+}
+
 void LVTask::sortByStatus() {
     beginResetModel();
     std::sort(m_tasks.begin(), m_tasks.end(), [](Task* a, Task* b) {
@@ -70,7 +76,7 @@ void LVTask::sortByStatus() {
             if (status == "done") return 0;
             if (status == "in progress") return 1;
             if (status == "not done") return 2;
-            return 3; // если вдруг какой-то другой статус
+            return 3; 
         };
 
         return getStatusPriority(*(a->getStatus())) < getStatusPriority(*(b->getStatus()));

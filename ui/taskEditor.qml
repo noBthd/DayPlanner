@@ -16,6 +16,8 @@ ApplicationWindow {
     visible: true
     color: "#0C121D"
 
+    property int t_qid
+
     GridLayout {
         anchors.fill: parent
         anchors.margins: 10
@@ -53,8 +55,8 @@ ApplicationWindow {
                     console.log("  NAME: ", ni.textInput.text) 
                     console.log("STATUS: ", tti.ttStatus)
                     console.log("  TEXT: ", tti.ttString)
-                    taskHandler.addTask(ni.niText, tti.ttStatus, tti.ttString)
-                    taskHandler.closeAdditionWin()
+                    taskHandler.editTask(ni.niText, tti.ttStatus, tti.ttString, t_qid)
+                    taskHandler.closeEditorWin()
 
                     ni.textInput.text = ""
                     tti.ttStatus.text = "status"
@@ -69,12 +71,11 @@ ApplicationWindow {
             
             Layout.rowSpan: 2
 
-
             MouseArea {
                 anchors.fill: parent
 
                 onClicked: {
-                    taskHandler.closeAdditionWin()
+                    taskHandler.closeEditorWin()
                 }
             }
         }

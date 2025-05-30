@@ -23,7 +23,7 @@ Rectangle {
         anchors.centerIn: parent
 
         Text {
-            text: "sort by done"
+            text: "sort by status"
             anchors.fill: parent
             anchors.centerIn: parent
 

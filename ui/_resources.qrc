@@ -4,6 +4,7 @@
         <file>login.qml</file>
         <file>tasks.qml</file>
         <file>taskAddition.qml</file>
+        <file>taskEditor.qml</file>
 
         <!-- components -->
         <file>components/ProfileButton.qml</file>
@@ -19,7 +20,7 @@
         <file>components/NameInput.qml</file>
         <file>components/Status.qml</file>
         <file>components/SortByComp.qml</file>
-        
+        <file>components/RedTask.qml</file>
 
         <!-- ?assets -->
         <!-- images -->
@@ -29,6 +30,7 @@
         <file>assets/images/backspace.png</file>
         <file>assets/images/deleteTask.png</file>
         <file>assets/images/saveTask.png</file>
+        <file>assets/images/write.png</file>
 
         <!-- icons -->
         <file>assets/icons/to-do.png</file>
