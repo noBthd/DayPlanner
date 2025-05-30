@@ -57,7 +57,11 @@ ApplicationWindow {
             Text {
                 anchors.fill: parent
 
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+
                 text: qsTr("delete user")
+                color: "#ffffff"
             }
 
             MouseArea {
