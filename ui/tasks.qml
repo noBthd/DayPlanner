@@ -77,6 +77,8 @@ ApplicationWindow {
 
                         anchors.horizontalCenter: parent.horizontalCenter
 
+                        tqid: index
+
                         MouseArea {
                             anchors.fill: parent
                             onClicked: {
@@ -99,6 +101,16 @@ ApplicationWindow {
 
             ProfileButton {} 
             SortByComp {}
+            OpenPhoto {
+                MouseArea {
+                    anchors.fill: parent
+
+                    onClicked: {
+                        console.log("button clicked")
+                        taskHandler.writeFileData(lv.tid)
+                    }
+                }
+            }
         }
 
         // task managment buttons

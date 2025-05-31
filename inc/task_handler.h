@@ -14,7 +14,6 @@
 #include <QListView>
 #include <QAbstractListModel>
 #include <QVariant>
-#include <fstream>
 
 class TaskHandler : public QObject {
     Q_OBJECT;
@@ -52,6 +51,7 @@ class TaskHandler : public QObject {
         );
         Q_INVOKABLE void deleteDBUser(const int&); 
         void getAllUserTasks();
+        QByteArray getPhotoFile(int);
         
         //? QML FUNCTIONS
         Q_INVOKABLE void delTask(const int&);
@@ -72,6 +72,7 @@ class TaskHandler : public QObject {
 
         Q_INVOKABLE void sortByTaksStatus();
         Q_INVOKABLE LVTask* lvtask() const { return m_lvtask; }
+        Q_INVOKABLE void writeFileData(const int&);
 
 
         int m_id;

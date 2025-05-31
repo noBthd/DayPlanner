@@ -3,6 +3,8 @@
 #include "task.h"
 #include <string>
 #include <vector>
+#include <fstream>
+#include <QFile>
 
 TaskHandler::TaskHandler(QQmlApplicationEngine* engine, PGconn* conn, RegHandler* rh, QObject* parent) //? tmp
     : m_conn(conn), m_engine(engine), m_rh(rh), QObject(parent)
@@ -350,4 +352,39 @@ void TaskHandler::addPhoto(const QString& fpath, const int& tid) {
 
     PQclear(res);
     qDebug() << "PHOTO SUCCESSFULY UPLOADED";
+}
+
+QByteArray TaskHandler::getPhotoFile(int task_id) {
+    QByteArray result;
+    std::string query = "SELECT file FROM tasks WHERE task_id = '" + std::to_string(m_tasks->at(task_id)->getID()) + "';";
+
+    PGresult* res = PQexec(m_conn, query.c_str());
+    if (PQresultStatus(res) == PGRES_TUPLES_OK && PQntuples(res) > 0) {
+        size_t unescapedLength;
+        unsigned char* unescapedData = PQunescapeBytea(
+            reinterpret_cast<const unsigned char*>(PQgetvalue(res, 0, 0)),
+            &unescapedLength
+        );
+
+        result = QByteArray(reinterpret_cast<const char*>(unescapedData), unescapedLength);
+
+        PQfreemem(unescapedData);
+    }
+    PQclear(res);
+    return result;
+}
+
+void TaskHandler::writeFileData(const int& task_id) {
+    QByteArray imageData = getPhotoFile(task_id);
+    qDebug() << "IMAGE DATA SIZE:" << imageData.size();
+    
+    if(imageData.size() == 0) {
+        qDebug() << "NO PHOTO TO BE LOADED";
+        return;
+    }
+
+    QFile file("../tmp/tmp_image.jpg");
+    file.open(QIODevice::WriteOnly);
+    file.write(imageData);
+    file.close();
 }

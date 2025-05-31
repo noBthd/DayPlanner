@@ -19,6 +19,7 @@ Rectangle {
     property string taskName: "Name"
     property string taskText: "Test textoviwy delo adasdasdasdjksl"
     property string taskStatus: "def"
+    property int tqid: -1
 
     Behavior on scale {
         NumberAnimation {

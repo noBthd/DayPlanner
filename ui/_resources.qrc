@@ -24,6 +24,7 @@
         <file>components/RedTask.qml</file>
         <file>components/AdminButton.qml</file>
         <file>components/AddPhoto.qml</file>
+        <file>components/OpenPhoto.qml</file>
 
         <!-- ?assets -->
         <!-- images -->
@@ -34,6 +35,8 @@
         <file>assets/images/deleteTask.png</file>
         <file>assets/images/saveTask.png</file>
         <file>assets/images/write.png</file>
+        <file>assets/images/add-photo.png</file>
+        <file>assets/images/clip.png</file>
 
         <!-- icons -->
         <file>assets/icons/to-do.png</file>

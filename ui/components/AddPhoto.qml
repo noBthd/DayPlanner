@@ -19,9 +19,6 @@ Rectangle {
 
     property int task_id: -1
 
-    //TODO: fix photo path error
-    //TODO: add func that takes task id and uploads photo into a db
-    //! qrc:/ui/components/AddPhoto.qml:25: Error: Cannot assign [undefined] to QString
     FileDialog {
         id: fileDialog
         title: "Select a file"
@@ -48,6 +45,6 @@ Rectangle {
         height: parent.height
 
         fillMode: Image.PreserveAspectFit
-        source: "qrc:/ui/assets/images/note.png"
+        source: "qrc:/ui/assets/images/add-photo.png"
     }
 }
