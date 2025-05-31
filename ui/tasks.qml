@@ -153,6 +153,8 @@ ApplicationWindow {
                 AddPhoto {
                     Layout.fillWidth: true
                     Layout.preferredHeight: parent.height
+
+                    task_id: lv.tid
                 }
             }
         } // task managment buttons

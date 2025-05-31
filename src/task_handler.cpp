@@ -294,3 +294,60 @@ void TaskHandler::deleteDBUser(const int& user_id) {
     PQclear(res);
     qDebug() << "\tUSER DELETED\n";
 }
+
+std::vector<char> TaskHandler::readFile(const std::string& path) {
+    std::ifstream file(path, std::ios::binary);
+
+    if (!file) {
+        throw std::runtime_error("Cannot open file: " + path);
+    }
+
+    return std::vector<char>((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+}
+
+void TaskHandler::addPhoto(const QString& fpath, const int& tid) {
+    if(tid < 0) {
+        qDebug() << "TASK NOT SELECTED";
+        return;
+    }
+    qDebug() << "CHOOSEN TASK ID: " << tid;
+    qDebug() << "CHOOSEN TASK ID IN DB: " << m_tasks->at(tid)->getID();
+
+    QString localPath = QUrl(fpath).toLocalFile();
+    std::string filePath = localPath.toStdString();
+
+    std::vector<char> fileData = readFile(filePath);
+
+    const char* paramValues[2];
+    int paramLengths[2];
+    int paramFormats[2] = {1, 0}; 
+
+    paramValues[0] = fileData.data();
+    paramLengths[0] = static_cast<int>(fileData.size());
+
+    std::string taskIdStr = std::to_string(m_tasks->at(tid)->getID());
+    paramValues[1] = taskIdStr.c_str();
+    paramLengths[1] = static_cast<int>(taskIdStr.length());
+
+    const char* query = "UPDATE tasks SET file = $1 WHERE task_id = $2";
+
+    PGresult* res = PQexecParams(
+        m_conn,
+        query,
+        2,
+        nullptr,
+        paramValues,
+        paramLengths,
+        paramFormats,
+        0
+    );
+
+    if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+        qDebug() << "FAILED TO UPLOAD PHOTO: " << PQerrorMessage(m_conn);
+        PQclear(res);
+        return;
+    }
+
+    PQclear(res);
+    qDebug() << "PHOTO SUCCESSFULY UPLOADED";
+}

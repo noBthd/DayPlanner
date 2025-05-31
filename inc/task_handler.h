@@ -14,6 +14,7 @@
 #include <QListView>
 #include <QAbstractListModel>
 #include <QVariant>
+#include <fstream>
 
 class TaskHandler : public QObject {
     Q_OBJECT;
@@ -64,6 +65,10 @@ class TaskHandler : public QObject {
             const QString&,
             const QString&
         );
+        Q_INVOKABLE void addPhoto(
+            const QString&,
+            const int&
+        );
 
         Q_INVOKABLE void sortByTaksStatus();
         Q_INVOKABLE LVTask* lvtask() const { return m_lvtask; }
@@ -71,6 +76,8 @@ class TaskHandler : public QObject {
 
         int m_id;
     private: 
+        std::vector<char> readFile(const std::string&);
+
         User* m_user; 
         std::vector<Task*>* m_tasks;
         
