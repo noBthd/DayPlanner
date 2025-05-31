@@ -102,12 +102,23 @@ ApplicationWindow {
             ProfileButton {} 
             SortByComp {}
             OpenPhoto {
+                id: root
+                
                 MouseArea {
                     anchors.fill: parent
 
                     onClicked: {
                         console.log("button clicked")
                         taskHandler.writeFileData(lv.tid)
+
+                        var component = Qt.createComponent("photoWin.qml")
+                        if (component.status === Component.Ready) {
+                            var win = component.createObject()
+                            win.imagePath = taskHandler.getFilePath() + "?" + Date.now()
+                            win.visible = true
+                        } else {
+                            console.error("Failed to load photoWin.qml")
+                        }
                     }
                 }
             }

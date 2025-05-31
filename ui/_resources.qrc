@@ -6,6 +6,7 @@
         <file>taskAddition.qml</file>
         <file>taskEditor.qml</file>
         <file>adminPannel.qml</file>
+        <file>photoWin.qml</file>
 
         <!-- components -->
         <file>components/ProfileButton.qml</file>

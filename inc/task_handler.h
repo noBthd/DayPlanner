@@ -31,12 +31,15 @@ class TaskHandler : public QObject {
         Q_INVOKABLE void setUser();
         Q_INVOKABLE void clearUser();
 
+        //? WINDOW HANDLERS
         Q_INVOKABLE void openAdditionWin();
         Q_INVOKABLE void closeAdditionWin();
         Q_INVOKABLE void openEditorWin(const int&);
         Q_INVOKABLE void closeEditorWin();
         Q_INVOKABLE void openAdminWin();
         Q_INVOKABLE void closeAdminWin();
+        Q_INVOKABLE void openPhotoWin();
+        Q_INVOKABLE void closePhotoWin();
 
         //? DB FUNCTIONS
         void insertDBTask(
@@ -73,7 +76,7 @@ class TaskHandler : public QObject {
         Q_INVOKABLE void sortByTaksStatus();
         Q_INVOKABLE LVTask* lvtask() const { return m_lvtask; }
         Q_INVOKABLE void writeFileData(const int&);
-
+        Q_INVOKABLE QString getFilePath();
 
         int m_id;
     private: 
@@ -89,6 +92,7 @@ class TaskHandler : public QObject {
         QQuickWindow* m_taskAddWin; // taskAddition.qml
         QQuickWindow* m_taskEditorWin; // taskEditor.qml
         QQuickWindow* m_adminWin; // adminPanel.qml
+        QQuickWindow* m_photoWin; // photoWin.qml
         RegHandler* m_rh;
         LVTask* m_lvtask;
 };

@@ -1,10 +1,12 @@
 #include "task_handler.h"
 #include "libpq-fe.h"
 #include "task.h"
+#include <cstdlib>
 #include <string>
 #include <vector>
 #include <fstream>
 #include <QFile>
+#include <QDir>
 
 TaskHandler::TaskHandler(QQmlApplicationEngine* engine, PGconn* conn, RegHandler* rh, QObject* parent) //? tmp
     : m_conn(conn), m_engine(engine), m_rh(rh), QObject(parent)
@@ -71,6 +73,17 @@ void TaskHandler::openAdminWin() {
     }
 }
 
+void TaskHandler::openPhotoWin() {
+    if (!m_photoWin) {
+        QQmlComponent component(m_engine, QUrl(QStringLiteral("qrc:/ui/photoWin.qml")));
+        QObject* m_object = component.create();
+        m_photoWin = qobject_cast<QQuickWindow*>(m_object);
+    }
+    if (m_photoWin) {
+        m_photoWin->show(); 
+    }
+}
+
 void TaskHandler::closeAdditionWin() {
     m_taskAddWin->hide();
 }
@@ -81,6 +94,11 @@ void TaskHandler::closeEditorWin() {
 
 void TaskHandler::closeAdminWin() {
     m_adminWin->hide();
+}
+
+void TaskHandler::closePhotoWin() {
+    m_photoWin->hide();
+    // free(m_photoWin);
 }
 //? END OF WINDOW OPENERS
 
@@ -377,7 +395,7 @@ QByteArray TaskHandler::getPhotoFile(int task_id) {
 void TaskHandler::writeFileData(const int& task_id) {
     QByteArray imageData = getPhotoFile(task_id);
     qDebug() << "IMAGE DATA SIZE:" << imageData.size();
-    
+
     if(imageData.size() == 0) {
         qDebug() << "NO PHOTO TO BE LOADED";
         return;
@@ -387,4 +405,11 @@ void TaskHandler::writeFileData(const int& task_id) {
     file.open(QIODevice::WriteOnly);
     file.write(imageData);
     file.close();
+}
+
+QString TaskHandler::getFilePath() {
+    QString filePath = QDir::currentPath() + "/../tmp/tmp_image.jpg";
+    QString fileUrl = QUrl::fromLocalFile(filePath).toString();
+
+    return fileUrl;
 }
