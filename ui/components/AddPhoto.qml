@@ -17,14 +17,15 @@ Rectangle {
     radius: Math.min(width, height) / 4
 
     //TODO: fix photo path error
+    //TODO: add func that takes task id and uploads photo into a db
     //! qrc:/ui/components/AddPhoto.qml:25: Error: Cannot assign [undefined] to QString
     FileDialog {
         id: fileDialog
         title: "Select a file"
         nameFilters: ["Images (*.png *.jpg *.jpeg *.bmp)", "All files (*)"]
         onAccepted: {
-            console.log("Selected file:", fileDialog.fileUrl)
-            selectedFilePath = fileDialog.fileUrl
+            console.log("Selected file:", fileDialog.selectedFile)
+            selectedFilePath = fileDialog.selectedFile
         }
     }
 
