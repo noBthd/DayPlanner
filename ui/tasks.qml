@@ -21,11 +21,6 @@ ApplicationWindow {
         taskHandler.setUser()
     }
 
-    function reloadContent() {
-        contentLoader.source = ""
-        contentLoader.source = "tasks.qml"
-    }
-
     GridLayout {
         anchors.fill: parent  
         anchors.margins: 10
@@ -182,14 +177,6 @@ ApplicationWindow {
                     Layout.preferredHeight: parent.height
 
                     task_id: lv.tid
-
-                    MouseArea {
-                        anchors.fill: parent
-
-                        onClicked: {
-                            win.reloadContent()
-                        }
-                    }
                 }
             }
         } // task managment buttons

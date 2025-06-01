@@ -27,6 +27,7 @@ class RegHandler : public QObject {
         Q_INVOKABLE QString getQUsername();
         User* getUser();
         QQuickWindow* getWin();
+        Q_INVOKABLE void reloadWindow();
         
     private:
         QQmlApplicationEngine* m_engine;

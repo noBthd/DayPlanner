@@ -97,3 +97,11 @@ User* RegHandler::getUser() { return m_user.get(); }
 QQuickWindow* RegHandler::getWin() { //? tmp
     return m_profileWindow; 
 };
+
+void RegHandler::reloadWindow() {
+    if (m_profileWindow) {
+        m_profileWindow->close();
+        m_profileWindow->show();
+        qDebug() << "-=-=-<=WINDOW RELOADED=>-=-=-";
+    }
+}

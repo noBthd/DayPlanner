@@ -83,7 +83,7 @@ class TaskHandler : public QObject {
         int m_id;
     private: 
         std::vector<char> readFile(const std::string&);
-        void reloadWindow();
+        void reloadTasks();
 
         User* m_user; 
         std::vector<Task*>* m_tasks;

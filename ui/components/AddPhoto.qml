@@ -18,6 +18,7 @@ Rectangle {
     radius: Math.min(width, height) / 4
 
     property int task_id: -1
+    
 
     FileDialog {
         id: fileDialog
@@ -27,6 +28,7 @@ Rectangle {
             console.log("Selected file:", fileDialog.selectedFile)
             selectedFilePath = fileDialog.selectedFile
             taskHandler.addPhoto(selectedFile, task_id)
+            regHandler.reloadWindow()
         }
     }
 

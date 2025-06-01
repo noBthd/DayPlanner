@@ -171,7 +171,13 @@ void TaskHandler::delTask(const int& task_id) {
     }
 
     if (task_id >= m_lvtask->rowCount() || task_id < 0 || task_id >= m_tasks->size()) {
-        qDebug() << "\nNO TASK CHOOSEN (out of index)";
+        qDebug() << "\nNO TASK CHOOSEN (out of index)" << task_id << m_tasks->size();
+        qDebug() << "\nTASK AT 0 POS: " << m_tasks->at(0)->getID();
+
+        for (auto task : *m_tasks) {
+            qDebug() << task->getID() << "\n";
+            qDebug() << task->getTaskName() << "\n";
+        }
         return;
     }
 
@@ -203,7 +209,7 @@ void TaskHandler::addTask(
     m_lvtask->addTask(task);
     qDebug() << "\n\tTASK ADDED FOR USER: " << m_user->getID();
 
-    
+    reloadTasks();
 }
 
 void TaskHandler::editTask(
@@ -240,6 +246,7 @@ void TaskHandler::editTask(
 
     // M_LVTASKS TASK REPLACMENT
     m_lvtask->editTask(task, m_id);
+    reloadTasks();
 }
 
 void TaskHandler::getAllUserTasks() {
@@ -380,6 +387,8 @@ void TaskHandler::addPhoto(const QString& fpath, const int& tid) {
 
     PQclear(res);
     qDebug() << "PHOTO SUCCESSFULY UPLOADED";
+
+    reloadTasks();
 }
 
 QByteArray TaskHandler::getPhotoFile(int task_id) {
@@ -443,19 +452,8 @@ bool TaskHandler::hasDBPhoto(int id) {
     return hasPhoto;
 }
 
-void TaskHandler::reloadWindow() {
-    if(!m_tasksWin) {
-        qDebug() << m_tasksWin << "<=====THIS IS M_TASKSWIN";
-        return;
-    }
-    m_tasksWin->hide();
-
-    if (!m_tasksWin) {
-        QQmlComponent component(m_engine, QUrl(QStringLiteral("qrc:/ui/tasks.qml")));
-        QObject* m_object = component.create();
-        m_tasksWin = qobject_cast<QQuickWindow*>(m_object);
-    }
-    if (m_tasksWin) {
-        m_tasksWin->show(); 
-    }
+void TaskHandler::reloadTasks() {
+    m_tasks->clear();
+    m_lvtask->clear();
+    getAllUserTasks();
 }
