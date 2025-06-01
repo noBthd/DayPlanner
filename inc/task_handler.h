@@ -61,6 +61,7 @@ class TaskHandler : public QObject {
         void getDeletedTasks();
         QByteArray getPhotoFile(int);
         bool hasDBPhoto(int);
+        void writeDeletedTask(int);
         
         //? QML FUNCTIONS
         Q_INVOKABLE void delTask(const int&);
@@ -84,7 +85,7 @@ class TaskHandler : public QObject {
         Q_INVOKABLE LVTask* lvdeltask() const { return m_lvdeltask; }
         Q_INVOKABLE void writeFileData(const int&);
         Q_INVOKABLE QString getFilePath();
-
+        Q_INVOKABLE void reloadDelTasks();
 
         int m_id;
     private: 

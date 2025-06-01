@@ -215,15 +215,17 @@ void TaskHandler::delTask(const int& task_id) {
         }
         return;
     }
-
+    
     //? DEBUG ?//
     qDebug() << "\tTASK INDEX: " << task_id << "\n"; 
     qDebug() << "\tTASK DB_INDEX: " << m_tasks->at(task_id)->getID();
     qDebug() << "\tROWS: " << m_lvtask->rowCount();
 
+    writeDeletedTask(task_id);
     removeDBTask(m_tasks->at(task_id)->getID());
     m_lvtask->removeTask(task_id);
     reloadTasks();
+    reloadDelTasks();
 }
 
 void TaskHandler::addTask(
@@ -493,6 +495,12 @@ void TaskHandler::reloadTasks() {
     getAllUserTasks();
 }
 
+void TaskHandler::reloadDelTasks() {
+    m_deltasks->clear();
+    m_lvdeltask->clear();
+    setDeletedTasks();
+}
+
 void TaskHandler::getDeletedTasks() {
     std::string query = "SELECT * FROM history WHERE user_id = '" + std::to_string(m_user->getID()) + "';"; 
 
@@ -560,4 +568,26 @@ void TaskHandler::setDeletedTasks() {
 void TaskHandler::clearDeletedTasks() {
     m_deltasks->clear();
     m_lvdeltask->clear();
+}
+
+void TaskHandler::writeDeletedTask(int id) {
+    std::string task_id = std::to_string(m_tasks->at(id)->getID());
+    std::string user_id = std::to_string(m_user->getID());
+    std::string* task_name = m_tasks->at(id)->getTaskName();
+    std::string* task_text = m_tasks->at(id)->getTaskText();
+    std::string* task_status = m_tasks->at(id)->getStatus();
+
+    qDebug() << task_name << "\n" << task_text << "\n" << task_status;
+
+    std::string query = "INSERT INTO history(task_id, user_id, task_name, task_text, expire_time, is_expired, status) VALUES (" + task_id + ", '" + user_id + "', '" + *task_name + "', '" + *task_text + "', '13:13:13', 't', '" + *task_status + "')";
+    
+    PGresult* res = PQexec(m_conn, query.c_str());
+    if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+        qDebug() << "\n\tFAILED TO INSERT THE TASK: " << PQerrorMessage(m_conn) << "\n";
+        PQclear(res);
+        return;
+    }
+
+    PQclear(res);
+    qDebug() << "\tTASK INSERTED\n";
 }
