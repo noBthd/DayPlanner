@@ -202,13 +202,14 @@ void TaskHandler::addTask(
 
     m_lvtask->addTask(task);
     qDebug() << "\n\tTASK ADDED FOR USER: " << m_user->getID();
+
+    
 }
 
 void TaskHandler::editTask(
     const QString& t_qname, 
     const QString& t_qstatus, 
     const QString& t_qtext
-    // const int& t_qid
 ) {
     std::string* t_name = new std::string(t_qname.toStdString());
     std::string* t_text = new std::string(t_qtext.toStdString());
@@ -229,6 +230,7 @@ void TaskHandler::editTask(
     task->setTaskName(t_name);
     task->setTaskText(t_text);
     task->setStatus(t_status);
+    task->setPhoto(m_tasks->at(m_id)->hasPhoto());
 
     // DATABASE TASK CHANGE 
     editDBTask(
@@ -302,11 +304,6 @@ void TaskHandler::getAllUserTasks() {
 
 void TaskHandler::sortByTaksStatus() {
     m_lvtask->sortByStatus();
-    if (m_tasksWin) {
-        m_tasksWin->update();
-    } else {
-        qDebug() << "m_window is nullptr!";
-    }
 }
 
 void TaskHandler::deleteDBUser(const int& user_id) {
@@ -427,15 +424,6 @@ QString TaskHandler::getFilePath() {
     return fileUrl;
 }
 
-bool TaskHandler::hasPhoto(const int& id) {
-    if (id < 0 || id >= m_tasks->size()) {
-        qDebug() << "TASK ID ERROR";
-        return false;
-    }
-    
-    return m_tasks->at(id)->hasPhoto();
-}
-
 bool TaskHandler::hasDBPhoto(int id) {
     std::string query = "SELECT (file IS NOT NULL AND length(file) > 0) AS file_bool FROM tasks WHERE task_id = " + std::to_string(id) + "";
     PGresult* res = PQexec(m_conn, query.c_str());
@@ -453,4 +441,21 @@ bool TaskHandler::hasDBPhoto(int id) {
 
     PQclear(res);
     return hasPhoto;
+}
+
+void TaskHandler::reloadWindow() {
+    if(!m_tasksWin) {
+        qDebug() << m_tasksWin << "<=====THIS IS M_TASKSWIN";
+        return;
+    }
+    m_tasksWin->hide();
+
+    if (!m_tasksWin) {
+        QQmlComponent component(m_engine, QUrl(QStringLiteral("qrc:/ui/tasks.qml")));
+        QObject* m_object = component.create();
+        m_tasksWin = qobject_cast<QQuickWindow*>(m_object);
+    }
+    if (m_tasksWin) {
+        m_tasksWin->show(); 
+    }
 }

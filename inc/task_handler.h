@@ -78,11 +78,12 @@ class TaskHandler : public QObject {
         Q_INVOKABLE LVTask* lvtask() const { return m_lvtask; }
         Q_INVOKABLE void writeFileData(const int&);
         Q_INVOKABLE QString getFilePath();
-        Q_INVOKABLE bool hasPhoto(const int&);
+
 
         int m_id;
     private: 
         std::vector<char> readFile(const std::string&);
+        void reloadWindow();
 
         User* m_user; 
         std::vector<Task*>* m_tasks;
