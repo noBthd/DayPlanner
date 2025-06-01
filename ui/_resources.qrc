@@ -7,6 +7,7 @@
         <file>taskEditor.qml</file>
         <file>adminPannel.qml</file>
         <file>photoWin.qml</file>
+        <file>deletedTasks.qml</file>
 
         <!-- components -->
         <file>components/ProfileButton.qml</file>
@@ -26,6 +27,7 @@
         <file>components/AdminButton.qml</file>
         <file>components/AddPhoto.qml</file>
         <file>components/OpenPhoto.qml</file>
+        <file>components/DelTasksButton.qml</file>
 
         <!-- ?assets -->
         <!-- images -->

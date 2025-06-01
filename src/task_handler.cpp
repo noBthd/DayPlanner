@@ -13,7 +13,10 @@ TaskHandler::TaskHandler(QQmlApplicationEngine* engine, PGconn* conn, RegHandler
 {
     m_tasks = new std::vector<Task*>;
     m_lvtask = new LVTask(this);
+    m_deltasks = new std::vector<Task*>;
+    m_lvdeltask = new LVTask(this);
     m_lvtask->clear();
+    m_deltasks->clear();
 }
 
 TaskHandler::~TaskHandler() {};
@@ -31,6 +34,14 @@ void TaskHandler::clearUser() {
 
     m_tasks->clear();
     m_lvtask->clear();
+    m_deltasks->clear();
+    m_lvdeltask->clear();
+
+    closeDeletedTasksWin();
+    closeAdditionWin();
+    closeAdminWin();
+    closeEditorWin();
+    closePhotoWin();
 }
 
 /* 
@@ -84,21 +95,45 @@ void TaskHandler::openPhotoWin() {
     }
 }
 
+void TaskHandler::openDeletedTasksWin() {
+    if (!m_deletedTasksWin) {
+        QQmlComponent component(m_engine, QUrl(QStringLiteral("qrc:/ui/deletedTasks.qml")));
+        QObject* m_object = component.create();
+        m_deletedTasksWin = qobject_cast<QQuickWindow*>(m_object);
+    }
+    if (m_deletedTasksWin) {
+        m_deletedTasksWin->show(); 
+    }
+}
+
 void TaskHandler::closeAdditionWin() {
-    m_taskAddWin->hide();
+    if(m_taskAddWin) {
+        m_taskAddWin->hide();
+    }
 }
 
 void TaskHandler::closeEditorWin() {
-    m_taskEditorWin->hide();
+    if(m_taskEditorWin) {
+        m_taskEditorWin->hide();
+    }
 }
 
 void TaskHandler::closeAdminWin() {
-    m_adminWin->hide();
+    if(m_adminWin) {
+        m_adminWin->hide();
+    }
 }
 
 void TaskHandler::closePhotoWin() {
-    m_photoWin->hide();
+    if(m_photoWin) {
+        m_photoWin->hide();
+    }
+}
 
+void TaskHandler::closeDeletedTasksWin() {
+    if(m_deletedTasksWin) {
+        m_deletedTasksWin->hide();
+    }
 }
 //? END OF WINDOW OPENERS
 
@@ -456,4 +491,73 @@ void TaskHandler::reloadTasks() {
     m_tasks->clear();
     m_lvtask->clear();
     getAllUserTasks();
+}
+
+void TaskHandler::getDeletedTasks() {
+    std::string query = "SELECT * FROM history WHERE user_id = '" + std::to_string(m_user->getID()) + "';"; 
+
+    PGresult* res = PQexec(m_conn, query.c_str());
+    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+        qDebug() << "\nFAILED TO GET TASKS: " << PQerrorMessage(m_conn) << "\n";
+        PQclear(res);
+        return;
+    }
+
+    if (PQntuples(res) == 0) {
+        qDebug() << "No user tasks found\n\t USER: " << m_rh->getQUsername();
+        PQclear(res);
+        return;
+    }
+    
+    int nRows = PQntuples(res);  
+    if (m_deltasks) {    
+        for (int row = 0; row < nRows; row++) {
+            Task* task = new Task(); 
+        
+            std::string* t_name = new std::string(PQgetvalue(res, row, 2));
+            std::string* t_text = new std::string(PQgetvalue(res, row, 3));
+            std::string* t_time = new std::string(PQgetvalue(res, row, 4));
+            std::string* t_status = new std::string(PQgetvalue(res, row, 6));
+        
+            task->setID(std::stoi(PQgetvalue(res, row, 0)));
+            task->setTaskName(t_name);
+            task->setTaskText(t_text);
+            task->setStatus(t_status);
+            task->setTime(t_time);
+
+            bool tmp = (std::string(PQgetvalue(res, row, 5)) == "t");
+            task->setExpired(tmp);
+        
+            m_deltasks->push_back(task);  
+            if(m_lvdeltask) {
+                qDebug() << "M_LVTASK ADDED: " << task;
+                m_lvdeltask->addTask(task);        
+            }
+        }
+    }
+
+    //? DEBUG ?//
+    qDebug() << "\nTASKS:";
+    for (Task* task : *m_deltasks) {
+        qDebug() << "\n\tTASK ID: "<< task->getID() 
+        << "\n\tTASK NAME: " << QString::fromUtf8(task->getTaskName()->c_str())
+        << "\n\tTASK TEXT: " << QString::fromUtf8(task->getTaskText()->c_str())
+        << "\n\tTASK TIME" << QString::fromUtf8(task->getTime()->c_str())
+        << "\n\tTASK STATUS: " << QString::fromUtf8(task->getStatus()->c_str())
+        << "\n\tTASK EPIRED: " << task->getExpire()
+        << "\n\tHAS PHOTO: " <<  task->hasPhoto() << "\n";
+    }
+
+    PQclear(res);
+}
+
+void TaskHandler::setDeletedTasks() { 
+    clearDeletedTasks();
+    getDeletedTasks();
+}
+
+//? user data clear on close
+void TaskHandler::clearDeletedTasks() {
+    m_deltasks->clear();
+    m_lvdeltask->clear();
 }

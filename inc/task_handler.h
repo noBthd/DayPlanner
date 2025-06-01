@@ -30,6 +30,8 @@ class TaskHandler : public QObject {
 
         Q_INVOKABLE void setUser();
         Q_INVOKABLE void clearUser();
+        Q_INVOKABLE void setDeletedTasks();
+        Q_INVOKABLE void clearDeletedTasks();
 
         //? WINDOW HANDLERS
         Q_INVOKABLE void openAdditionWin();
@@ -40,6 +42,8 @@ class TaskHandler : public QObject {
         Q_INVOKABLE void closeAdminWin();
         Q_INVOKABLE void openPhotoWin();
         Q_INVOKABLE void closePhotoWin();
+        Q_INVOKABLE void openDeletedTasksWin();
+        Q_INVOKABLE void closeDeletedTasksWin();
 
         //? DB FUNCTIONS
         void insertDBTask(
@@ -54,6 +58,7 @@ class TaskHandler : public QObject {
         );
         Q_INVOKABLE void deleteDBUser(const int&); 
         void getAllUserTasks();
+        void getDeletedTasks();
         QByteArray getPhotoFile(int);
         bool hasDBPhoto(int);
         
@@ -76,6 +81,7 @@ class TaskHandler : public QObject {
 
         Q_INVOKABLE void sortByTaksStatus();
         Q_INVOKABLE LVTask* lvtask() const { return m_lvtask; }
+        Q_INVOKABLE LVTask* lvdeltask() const { return m_lvdeltask; }
         Q_INVOKABLE void writeFileData(const int&);
         Q_INVOKABLE QString getFilePath();
 
@@ -96,8 +102,13 @@ class TaskHandler : public QObject {
         QQuickWindow* m_taskEditorWin;  // taskEditor.qml
         QQuickWindow* m_adminWin;       // adminPanel.qml
         QQuickWindow* m_photoWin;       // photoWin.qml
+        QQuickWindow* m_deletedTasksWin;// deletedTasks.qml
         RegHandler* m_rh;
         LVTask* m_lvtask;
+
+        LVTask* m_lvdeltask;
+        std::vector<Task*>* m_deltasks;
+
 };
 
 #endif

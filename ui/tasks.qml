@@ -102,8 +102,6 @@ ApplicationWindow {
             ProfileButton {} 
             SortByComp {}
             OpenPhoto {
-                id: root
-                
                 MouseArea {            
                     anchors.fill: parent
 
@@ -121,6 +119,15 @@ ApplicationWindow {
                                 console.error("Failed to load photoWin.qml")
                             }
                         }
+                    }
+                }
+            }
+            DelTasksButton {
+                MouseArea {
+                    anchors.fill: parent
+
+                    onClicked: {
+                        taskHandler.openDeletedTasksWin()
                     }
                 }
             }
