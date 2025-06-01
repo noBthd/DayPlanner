@@ -247,7 +247,6 @@ void TaskHandler::editTask(
 
     // M_LVTASKS TASK REPLACMENT
     m_lvtask->editTask(task, m_id);
-    reloadTasks();
 }
 
 void TaskHandler::getAllUserTasks() {

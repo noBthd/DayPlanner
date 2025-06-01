@@ -55,7 +55,7 @@ ApplicationWindow {
                     console.log("  NAME: ", ni.textInput.text) 
                     console.log("STATUS: ", tti.ttStatus)
                     console.log("  TEXT: ", tti.ttString)
-                    taskHandler.editTask(ni.niText, tti.ttStatus, tti.ttString, t_qid)
+                    taskHandler.editTask(ni.niText, tti.ttStatus, tti.ttString)
                     taskHandler.closeEditorWin()
 
                     ni.textInput.text = ""
