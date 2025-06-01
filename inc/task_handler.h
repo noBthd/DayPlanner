@@ -77,6 +77,7 @@ class TaskHandler : public QObject {
         Q_INVOKABLE LVTask* lvtask() const { return m_lvtask; }
         Q_INVOKABLE void writeFileData(const int&);
         Q_INVOKABLE QString getFilePath();
+        Q_INVOKABLE bool hasPhoto(const int&);
 
         int m_id;
     private: 
@@ -88,11 +89,11 @@ class TaskHandler : public QObject {
         PGconn* m_conn;
     
         QQmlApplicationEngine* m_engine;
-        QQuickWindow* m_tasksWin; // tasks.qml
-        QQuickWindow* m_taskAddWin; // taskAddition.qml
-        QQuickWindow* m_taskEditorWin; // taskEditor.qml
-        QQuickWindow* m_adminWin; // adminPanel.qml
-        QQuickWindow* m_photoWin; // photoWin.qml
+        QQuickWindow* m_tasksWin;       // tasks.qml
+        QQuickWindow* m_taskAddWin;     // taskAddition.qml
+        QQuickWindow* m_taskEditorWin;  // taskEditor.qml
+        QQuickWindow* m_adminWin;       // adminPanel.qml
+        QQuickWindow* m_photoWin;       // photoWin.qml
         RegHandler* m_rh;
         LVTask* m_lvtask;
 };

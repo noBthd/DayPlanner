@@ -88,7 +88,27 @@ Rectangle {
 
             font.pixelSize: 16
             font.bold: true
-        } // Task Name 
+        } // Task Name
+
+        Rectangle {
+            Layout.row: 0
+            Layout.column: 1
+
+            width: 16
+            height: 16
+
+            radius: 8
+            color: "transparent"
+            visible: taskHandler.hasPhoto(tqid)
+
+            Image {
+                id: iconImage
+                anchors.fill: parent
+
+                source: "qrc:/ui/assets/images/clip.png"
+                fillMode: Image.PreserveAspectFit
+            }
+        } 
 
         // Status Indicator 
         Status {

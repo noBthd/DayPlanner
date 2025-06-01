@@ -98,7 +98,7 @@ void TaskHandler::closeAdminWin() {
 
 void TaskHandler::closePhotoWin() {
     m_photoWin->hide();
-    // free(m_photoWin);
+
 }
 //? END OF WINDOW OPENERS
 
@@ -412,4 +412,23 @@ QString TaskHandler::getFilePath() {
     QString fileUrl = QUrl::fromLocalFile(filePath).toString();
 
     return fileUrl;
+}
+
+bool TaskHandler::hasPhoto(const int& id) {
+    std::string query = "SELECT (file IS NOT NULL AND length(file) > 0) AS file_bool FROM tasks WHERE task_id = " + std::to_string(m_tasks->at(id)->getID()) + "";
+    PGresult* res = PQexec(m_conn, query.c_str());
+
+    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+        qDebug() << "FAILED: " << PQerrorMessage(m_conn);
+        PQclear(res);
+        return false;
+    }
+
+    int rows = PQntuples(res);
+    std::string result = PQgetvalue(res, 0, 0);
+    bool hasPhoto = result == "t" ? true : false;
+    qDebug() << "=========HAS_PHOTO========>" << hasPhoto << "<========ID========>" << m_tasks->at(id)->getID();
+
+    PQclear(res);
+    return hasPhoto;
 }

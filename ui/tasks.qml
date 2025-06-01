@@ -41,12 +41,9 @@ ApplicationWindow {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            // Layout.rowSpan: 2
-
             radius: 12.5
             color: "#222B3B"
 
-            //TODO fix tid 
             Item {
                 id: ilv
                 anchors.centerIn: parent
@@ -83,8 +80,6 @@ ApplicationWindow {
                             anchors.fill: parent
                             onClicked: {
                                 lv.tid = index
-                                //? test
-                                // taskHandler.setPickedID(index)
                             }
                         }
                     }
@@ -104,21 +99,24 @@ ApplicationWindow {
             OpenPhoto {
                 id: root
                 
-                MouseArea {
+                MouseArea {            
                     anchors.fill: parent
 
                     onClicked: {
-                        console.log("button clicked")
-                        taskHandler.writeFileData(lv.tid)
+                        if(taskHandler.hasPhoto(lv.tid)) {
+                            console.log("button clicked")
+                            taskHandler.writeFileData(lv.tid)
 
-                        var component = Qt.createComponent("photoWin.qml")
-                        if (component.status === Component.Ready) {
-                            var win = component.createObject()
-                            win.imagePath = taskHandler.getFilePath() + "?" + Date.now()
-                            win.visible = true
-                        } else {
-                            console.error("Failed to load photoWin.qml")
+                            var component = Qt.createComponent("photoWin.qml")
+                            if (component.status === Component.Ready) {
+                                var win = component.createObject()
+                                win.imagePath = taskHandler.getFilePath() + "?" + Date.now()
+                                win.visible = true
+                            } else {
+                                console.error("Failed to load photoWin.qml")
+                            }
                         }
+
                     }
                 }
             }
@@ -166,9 +164,6 @@ ApplicationWindow {
                         onClicked: {
                             taskHandler.delTask(lv.tid)
                             lv.tid = -1
-                            //? test
-                            // taskHandler.delTask(taskHandler.getPickedID())
-                            // taskHandler.setPickedID(-1)
                         } 
                     }
                 }
