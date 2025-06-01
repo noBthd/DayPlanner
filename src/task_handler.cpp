@@ -188,6 +188,7 @@ void TaskHandler::delTask(const int& task_id) {
 
     removeDBTask(m_tasks->at(task_id)->getID());
     m_lvtask->removeTask(task_id);
+    reloadTasks();
 }
 
 void TaskHandler::addTask(
