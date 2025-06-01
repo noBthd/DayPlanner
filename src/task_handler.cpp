@@ -274,6 +274,8 @@ void TaskHandler::getAllUserTasks() {
 
             bool tmp = (std::string(PQgetvalue(res, row, 5)) == "t");
             task->setExpired(tmp);
+
+            task->setPhoto(hasDBPhoto(task->getID()));
         
             m_tasks->push_back(task);  
             if(m_lvtask) {
@@ -291,7 +293,8 @@ void TaskHandler::getAllUserTasks() {
         << "\n\tTASK TEXT: " << QString::fromUtf8(task->getTaskText()->c_str())
         << "\n\tTASK TIME" << QString::fromUtf8(task->getTime()->c_str())
         << "\n\tTASK STATUS: " << QString::fromUtf8(task->getStatus()->c_str())
-        << "\n\tTASK EPIRED" << task->getExpire() << "\n";
+        << "\n\tTASK EPIRED: " << task->getExpire()
+        << "\n\tHAS PHOTO: " <<  task->hasPhoto() << "\n";
     }
 
     PQclear(res);
@@ -299,6 +302,11 @@ void TaskHandler::getAllUserTasks() {
 
 void TaskHandler::sortByTaksStatus() {
     m_lvtask->sortByStatus();
+    if (m_tasksWin) {
+        m_tasksWin->update();
+    } else {
+        qDebug() << "m_window is nullptr!";
+    }
 }
 
 void TaskHandler::deleteDBUser(const int& user_id) {
@@ -326,6 +334,11 @@ std::vector<char> TaskHandler::readFile(const std::string& path) {
 }
 
 void TaskHandler::addPhoto(const QString& fpath, const int& tid) {
+    if (tid < 0 || tid >= m_tasks->size()) {
+        qDebug() << "TASK ID ERROR";
+        return;
+    }
+
     if(tid < 0) {
         qDebug() << "TASK NOT SELECTED";
         return;
@@ -415,7 +428,16 @@ QString TaskHandler::getFilePath() {
 }
 
 bool TaskHandler::hasPhoto(const int& id) {
-    std::string query = "SELECT (file IS NOT NULL AND length(file) > 0) AS file_bool FROM tasks WHERE task_id = " + std::to_string(m_tasks->at(id)->getID()) + "";
+    if (id < 0 || id >= m_tasks->size()) {
+        qDebug() << "TASK ID ERROR";
+        return false;
+    }
+    
+    return m_tasks->at(id)->hasPhoto();
+}
+
+bool TaskHandler::hasDBPhoto(int id) {
+    std::string query = "SELECT (file IS NOT NULL AND length(file) > 0) AS file_bool FROM tasks WHERE task_id = " + std::to_string(id) + "";
     PGresult* res = PQexec(m_conn, query.c_str());
 
     if (PQresultStatus(res) != PGRES_TUPLES_OK) {
@@ -427,7 +449,7 @@ bool TaskHandler::hasPhoto(const int& id) {
     int rows = PQntuples(res);
     std::string result = PQgetvalue(res, 0, 0);
     bool hasPhoto = result == "t" ? true : false;
-    qDebug() << "=========HAS_PHOTO========>" << hasPhoto << "<========ID========>" << m_tasks->at(id)->getID();
+    qDebug() << "=========HAS_PHOTO========>" << hasPhoto << "<========ID========>" << id;
 
     PQclear(res);
     return hasPhoto;

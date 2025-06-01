@@ -22,6 +22,7 @@ class Task {
         std::string* getStatus();
         bool getDone();
         bool getExpire();
+        bool hasPhoto();
 
         void setID(int);
         void setTaskName(std::string*);
@@ -30,6 +31,7 @@ class Task {
         void setStatus(std::string*);
         void setDone(bool);
         void setExpired(bool);
+        void setPhoto(bool);
 
         void done();
         void expired();
@@ -48,6 +50,8 @@ class Task {
         bool m_done = false; 
         // expired/not
         bool m_expired = false;
+        
+        bool m_hasPhoto = false;
         
         void setNewId();
         int getPrevId();

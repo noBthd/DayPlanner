@@ -13,7 +13,8 @@ class LVTask : public QAbstractListModel {
             IdRole = Qt::UserRole + 1,
             NameRole,
             TextRole, 
-            StatusRole
+            StatusRole,
+            photoRole
         };
 
         explicit LVTask(QObject* parent = nullptr); 

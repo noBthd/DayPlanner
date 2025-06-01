@@ -62,12 +62,15 @@ ApplicationWindow {
                     spacing: 10
 
                     snapMode: ListView.SnapOneItem
+
                     property int tid: -1
+                    property bool hasPhotoForSelected: false
 
                     delegate: Task {
                         taskName: name
                         taskText: text
                         taskStatus: status
+                        hasPhoto: model.hasPhoto
 
                         width: ListView.view.width - 20
                         height: 100
@@ -80,12 +83,14 @@ ApplicationWindow {
                             anchors.fill: parent
                             onClicked: {
                                 lv.tid = index
+                                lv.hasPhotoForSelected = hasPhoto
+                                console.log("======= HAS PHOTO =======++++", hasPhoto);
                             }
                         }
                     }
                 }
             }
-        } // tasks background   
+        } // taks background   
         
         ColumnLayout {
             Layout.row: 0
@@ -103,7 +108,7 @@ ApplicationWindow {
                     anchors.fill: parent
 
                     onClicked: {
-                        if(taskHandler.hasPhoto(lv.tid)) {
+                        if (lv.hasPhotoForSelected) {
                             console.log("button clicked")
                             taskHandler.writeFileData(lv.tid)
 
@@ -116,7 +121,6 @@ ApplicationWindow {
                                 console.error("Failed to load photoWin.qml")
                             }
                         }
-
                     }
                 }
             }

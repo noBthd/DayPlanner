@@ -19,6 +19,7 @@ Rectangle {
     property string taskName: "Name"
     property string taskText: "Test textoviwy delo adasdasdasdjksl"
     property string taskStatus: "def"
+    property bool hasPhoto: false
     property int tqid: -1
 
     Behavior on scale {
@@ -99,7 +100,7 @@ Rectangle {
 
             radius: 8
             color: "transparent"
-            visible: taskHandler.hasPhoto(tqid)
+            visible: hasPhoto
 
             Image {
                 id: iconImage

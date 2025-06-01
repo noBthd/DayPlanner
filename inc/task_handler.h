@@ -55,6 +55,7 @@ class TaskHandler : public QObject {
         Q_INVOKABLE void deleteDBUser(const int&); 
         void getAllUserTasks();
         QByteArray getPhotoFile(int);
+        bool hasDBPhoto(int);
         
         //? QML FUNCTIONS
         Q_INVOKABLE void delTask(const int&);

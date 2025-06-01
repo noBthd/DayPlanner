@@ -78,3 +78,11 @@ int Task::getPrevId() {
 
     return last_id;
 }
+
+bool Task::hasPhoto() {
+    return m_hasPhoto;
+}
+
+void Task::setPhoto(bool hasPhoto) {
+    m_hasPhoto = hasPhoto;
+}

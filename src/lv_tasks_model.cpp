@@ -4,13 +4,13 @@
 LVTask::LVTask(QObject* parent)
     : QAbstractListModel(parent)
 {
-    Task* task123 = new Task();
+    Task* task = new Task();
     std::string test = "test";   
-    task123->setTaskName(&test); 
-    task123->setTaskText(&test); 
-    task123->setStatus(&test); 
+    task->setTaskName(&test); 
+    task->setTaskText(&test); 
+    task->setStatus(&test); 
 
-    m_tasks.append(task123);
+    m_tasks.append(task);
 }
 
 int LVTask::rowCount(const QModelIndex& parent) const {
@@ -30,6 +30,7 @@ QVariant LVTask::data(const QModelIndex& index, int role) const {
         case NameRole: return QString::fromStdString(*task->getTaskName());
         case TextRole: return QString::fromStdString(*task->getTaskText());
         case StatusRole: return QString::fromStdString(*task->getStatus());
+        case photoRole: return task->hasPhoto();
         default: return {};
     }
 }
@@ -39,7 +40,8 @@ QHash<int, QByteArray> LVTask::roleNames() const {
         { IdRole, "id" },
         { NameRole, "name" },
         { TextRole, "text" },
-        { StatusRole, "status"}
+        { StatusRole, "status"},
+        { photoRole, "hasPhoto"},
     };
 }
 
